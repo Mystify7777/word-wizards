@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
       redirect(next);
     } else {
       // redirect the user to an error page with some instructions
-      redirect(`/auth/error?error=${error?.message}`);
+      redirect(`/auth/error?error=${encodeURIComponent(error?.message ?? "Unknown error")}`);
     }
   }
 

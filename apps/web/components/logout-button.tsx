@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 
@@ -9,7 +10,11 @@ export function LogoutButton() {
 
   const logout = async () => {
     const supabase = createClient();
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error("Couldn't log out — please try again.");
+      return;
+    }
     router.push("/auth/login");
   };
 

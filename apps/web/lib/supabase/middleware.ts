@@ -1,6 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
+// (e.g. /learner, /author, /admin per PRD — not yet implemented)
+const PROTECTED_PATH_PREFIXES = ["/protected"];
+
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
@@ -32,17 +35,13 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth") &&
-    // the OAuth consent route sends unauthenticated visitors to the login page
-    // itself, so that it can preserve the authorization in the `next` parameter
-    request.nextUrl.pathname !== "/oauth/consent"
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
+  const isProtectedPath = PROTECTED_PATH_PREFIXES.some((prefix) => request.nextUrl.pathname.startsWith(prefix));
+
+  if (!user && isProtectedPath) {
+    // no user, redirect to login and remember where they were headed
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
+    url.searchParams.set("next", request.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
 

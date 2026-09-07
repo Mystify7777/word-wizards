@@ -1,7 +1,7 @@
 export const safeNextPath = (path: unknown, fallback = "/", origin?: string) => {
   if (typeof path !== "string" || !path.startsWith("/")) return fallback;
 
-  const currentOrigin = origin ?? window.location.origin;
+  const currentOrigin = origin ?? (typeof window !== "undefined" ? window.location.origin : "/");
 
   try {
     const url = new URL(path, currentOrigin);
