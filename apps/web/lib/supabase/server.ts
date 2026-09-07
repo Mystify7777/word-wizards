@@ -6,6 +6,7 @@ import "@/envConfig";
  * If using Fluid compute: Don't put this client in a global variable. Always create a new client within each
  * function when using it.
  */
+//console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
 export async function createClient() {
   const cookieStore = await cookies();
 
