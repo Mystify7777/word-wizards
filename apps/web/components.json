@@ -10,7 +10,9 @@
   "iconLibrary": "phosphor",
   "menuAccent": "subtle",
   "menuColor": "default-translucent",
-  "registries": {},
+  "registries": {
+    "@supabase": "https://supabase.com/ui/r/{name}.json"
+  },
   "rsc": true,
   "rtl": false,
   "style": "base-sera",
