@@ -11,8 +11,6 @@
     "lint:fix": "biome check --fix",
     "start": "next start"
   },
-
-
   "dependencies": {
     "@base-ui/react": "^1.7.0",
     "@phosphor-icons/react": "^2.1.10",
@@ -44,5 +42,4 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   }
-
 }
