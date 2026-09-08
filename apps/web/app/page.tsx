@@ -1,5 +1,6 @@
 import { testExport } from "@repo/types/index";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -17,7 +18,9 @@ export default function Home() {
           width={100}
         />
         <div className="flex min-h-svh items-center justify-center">
-          <Button>Click me</Button>
+          <Button>
+            <Link href="auth/login">Log in</Link>
+          </Button>
         </div>
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl leading-10 font-semibold tracking-tight text-black dark:text-zinc-50">
