@@ -3,10 +3,12 @@ import { NextResponse } from "next/server";
 import { safeNextPath } from "@/lib/safe-next-path";
 import { createClient } from "@/lib/supabase/server";
 
+const DEFAULT_LEARNER_ROUTE = "/protected/learner";
+
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = safeNextPath(searchParams.get("next"), "/protected", origin);
+  const next = safeNextPath(searchParams.get("next"), DEFAULT_LEARNER_ROUTE, origin);
 
   if (code) {
     const supabase = await createClient();
