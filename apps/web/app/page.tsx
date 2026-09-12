@@ -1,79 +1,51 @@
-import { testExport } from "@repo/types/index";
-import Image from "next/image";
+import { ArrowRight, ChatCircleDots, TextAa, TextT } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+
+const learningAreas = [
+  { description: "Build a practical foundation with vocabulary and everyday words.", icon: TextAa, title: "Letters & Words" },
+  { description: "Connect words into useful phrases and complete sentences.", icon: TextT, title: "Phrases & Sentences" },
+  { description: "Put what you learn into natural, useful conversations.", icon: ChatCircleDots, title: "Conversations" },
+];
 
 export default function Home() {
-  console.log(testExport);
-
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-        <Image
-          alt="Next.js logo"
-          className="h-5 w-[100px] dark:invert"
-          height={20}
-          priority
-          src="/next.svg"
-          width={100}
-        />
-        <div className="flex min-h-svh items-center justify-center">
-          <Button>
-            <Link href="auth/login">Log in</Link>
-          </Button>
+    <main className="flex min-h-svh flex-col">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6 sm:px-8">
+        <Link className="font-heading text-xl font-bold tracking-wider uppercase" href="/">Word Wizards</Link>
+        <Link className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" href="/auth/login">Continue</Link>
+      </header>
+      <div className="flex flex-1 items-center">
+        <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-20">
+          <section className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <div className="max-w-2xl space-y-7">
+              <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Interactive language learning</p>
+              <div className="space-y-4">
+                <h1 className="font-heading text-4xl leading-tight font-bold tracking-tight sm:text-6xl">Learn language by using it.</h1>
+                <p className="max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl">Word Wizards helps you build language skills through structured practice, active recall, and useful learning steps that move from words to real conversations.</p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Link className="inline-flex h-11 items-center justify-center gap-2 bg-primary px-8 text-sm font-semibold tracking-widest text-primary-foreground uppercase transition-all hover:bg-primary/80 focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none" href="/auth/sign-up">Get Started <ArrowRight size={17} /></Link>
+                <Link className="inline-flex h-11 items-center justify-center border border-border px-8 text-sm font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none" href="/auth/login">Continue</Link>
+              </div>
+            </div>
+            <section aria-labelledby="learning-approach" className="border border-border bg-card p-6 sm:p-8">
+              <div className="space-y-2">
+                <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">How learning works</p>
+                <h2 className="font-heading text-2xl font-semibold" id="learning-approach">Start small. Build naturally.</h2>
+                <p className="text-sm leading-relaxed text-muted-foreground">Practice actively, get immediate feedback, and reinforce what you need before moving forward.</p>
+              </div>
+              <div className="mt-7 space-y-3">
+                {learningAreas.map(({ description, icon: Icon, title }) => (
+                  <div className="flex gap-4 border-t border-border pt-4" key={title}>
+                    <Icon className="mt-0.5 shrink-0 text-primary" size={21} weight="duotone" />
+                    <div className="space-y-1"><h3 className="font-medium">{title}</h3><p className="text-sm leading-relaxed text-muted-foreground">{description}</p></div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </section>
         </div>
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl leading-10 font-semibold tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <Image
-              alt="Vercel logomark"
-              className="h-[14px] w-4 dark:invert"
-              height={14}
-              src="/vercel.svg"
-              width={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
