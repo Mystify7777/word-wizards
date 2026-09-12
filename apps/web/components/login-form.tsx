@@ -11,6 +11,8 @@ import { safeNextPath } from "@/lib/safe-next-path";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
+const DEFAULT_LEARNER_ROUTE = "/protected/learner";
+
 export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,9 +33,9 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
         password,
       });
       if (error) throw error;
-      // Update this route to redirect to an authenticated route. The user already has an active session.
+
       const next = new URLSearchParams(window.location.search).get("next");
-      router.push(safeNextPath(next, "/protected"));
+      router.push(safeNextPath(next, DEFAULT_LEARNER_ROUTE));
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -47,8 +49,9 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
     setError(null);
 
     try {
-      const next = new URLSearchParams(window.location.search).get("next") ?? "/protected";
-      const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
+      const next = new URLSearchParams(window.location.search).get("next");
+      const safeNext = safeNextPath(next, DEFAULT_LEARNER_ROUTE);
+      const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(safeNext)}`;
 
       const { error } = await supabase.auth.signInWithOAuth({
         options: {
