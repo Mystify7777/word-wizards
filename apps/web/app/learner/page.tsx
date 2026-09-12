@@ -1,14 +1,12 @@
 import { ArrowRight, Check, LockKey } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getLearnerOverview } from "@/lib/learner/service";
 
 export default async function LearnerOverviewPage() {
   const overview = await getLearnerOverview();
   const todayPercent = Math.round((overview.today.completedExercises / overview.today.goal) * 100);
-  const weeklyPercent = Math.round((overview.weekly.completedDays / overview.weekly.targetDays) * 100);
 
   return (
     <div className="mx-auto max-w-5xl space-y-8">
@@ -27,20 +25,18 @@ export default async function LearnerOverviewPage() {
             <CardDescription>{overview.currentLearning.lesson}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
-            <div className="space-y-2" aria-label={`${overview.currentLearning.progress}% complete`}>
+            <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span>Lesson progress</span>
                 <span className="font-medium">{overview.currentLearning.progress}%</span>
               </div>
-              <div className="h-2 bg-muted" role="progressbar" aria-valuemax={100} aria-valuemin={0} aria-valuenow={overview.currentLearning.progress}>
+              <div aria-label={`${overview.currentLearning.progress}% complete`} aria-valuemax={100} aria-valuemin={0} aria-valuenow={overview.currentLearning.progress} className="h-2 bg-muted" role="progressbar">
                 <div className="h-full bg-primary" style={{ width: `${overview.currentLearning.progress}%` }} />
               </div>
             </div>
-            <Button asChild>
-              <Link href="/learner">
-                Continue <ArrowRight data-icon="inline-end" size={16} />
-              </Link>
-            </Button>
+            <Link className="inline-flex h-10 items-center justify-center gap-1.5 bg-primary px-6 text-xs font-semibold tracking-widest text-primary-foreground uppercase transition-all hover:bg-primary/80 focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none" href="/learner">
+              Continue <ArrowRight size={16} />
+            </Link>
           </CardContent>
         </Card>
       </section>
@@ -65,13 +61,8 @@ export default async function LearnerOverviewPage() {
             <CardDescription>Keep a steady learning rhythm.</CardDescription>
           </CardHeader>
           <CardContent className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <Check size={18} weight="bold" />
-            </div>
-            <div>
-              <p className="font-medium">{overview.today.goal} exercises</p>
-              <p className="text-sm text-muted-foreground">Daily practice target</p>
-            </div>
+            <div className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary"><Check size={18} weight="bold" /></div>
+            <div><p className="font-medium">{overview.today.goal} exercises</p><p className="text-sm text-muted-foreground">Daily practice target</p></div>
           </CardContent>
         </Card>
 
@@ -81,33 +72,20 @@ export default async function LearnerOverviewPage() {
             <CardDescription>{overview.weekly.completedDays} of {overview.weekly.targetDays} practice days</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
-            <div className="flex items-center justify-between text-sm">
-              <span>{overview.weekly.streak}-day streak</span>
-              <span>{weeklyPercent}%</span>
-            </div>
+            <div className="flex items-center justify-between text-sm"><span>{overview.weekly.streak}-day streak</span><span>{overview.weekly.completedDays}/{overview.weekly.targetDays}</span></div>
             <div className="flex gap-2" aria-label={`${overview.weekly.completedDays} of ${overview.weekly.targetDays} practice days completed`}>
               {Array.from({ length: overview.weekly.targetDays }, (_, index) => (
-                <span aria-hidden="true" className="h-2 flex-1 bg-muted" key={index}>
-                  <span className="block h-full bg-primary" style={{ width: index < overview.weekly.completedDays ? "100%" : "0%" }} />
-                </span>
+                <span aria-hidden="true" className="h-2 flex-1 bg-muted" key={index}><span className="block h-full bg-primary" style={{ width: index < overview.weekly.completedDays ? "100%" : "0%" }} /></span>
               ))}
             </div>
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader>
-            <CardTitle>Next Unlock</CardTitle>
-            <CardDescription>What you&apos;re working toward</CardDescription>
-          </CardHeader>
+          <CardHeader><CardTitle>Next Unlock</CardTitle><CardDescription>What you&apos;re working toward</CardDescription></CardHeader>
           <CardContent className="flex items-start gap-3">
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
-              <LockKey size={18} weight="duotone" />
-            </div>
-            <div>
-              <p className="font-medium">{overview.nextUnlock.title}</p>
-              <p className="text-sm text-muted-foreground">{overview.nextUnlock.requirement}</p>
-            </div>
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground"><LockKey size={18} weight="duotone" /></div>
+            <div><p className="font-medium">{overview.nextUnlock.title}</p><p className="text-sm text-muted-foreground">{overview.nextUnlock.requirement}</p></div>
           </CardContent>
         </Card>
       </div>
