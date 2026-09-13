@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
+const DEFAULT_LEARNER_ROUTE = "/protected/learner";
+
 export function SignUpForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,15 +34,20 @@ export function SignUpForm({ className, ...props }: React.ComponentPropsWithoutR
     }
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         options: {
-          emailRedirectTo: `${window.location.origin}/protected`,
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(DEFAULT_LEARNER_ROUTE)}`,
         },
         password,
       });
       if (error) throw error;
-      router.push("/auth/sign-up-success");
+
+      if (data.session) {
+        router.push(DEFAULT_LEARNER_ROUTE);
+      } else {
+        router.push("/auth/sign-up-success");
+      }
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -54,7 +61,7 @@ export function SignUpForm({ className, ...props }: React.ComponentPropsWithoutR
     setError(null);
 
     try {
-      const redirectTo = `${window.location.origin}/auth/callback?next=/protected`;
+      const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(DEFAULT_LEARNER_ROUTE)}`;
 
       const { error } = await supabase.auth.signInWithOAuth({
         options: {
