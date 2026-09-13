@@ -1,15 +1,15 @@
-import { BookOpen, ChartLineUp, Gear, Trophy } from "@phosphor-icons/react/dist/ssr";
+import { BookOpenIcon, ChartLineUpIcon, GearIcon, TrophyIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { LogoutButton } from "@/components/logout-button";
 import type { LearnerNavItem } from "@/lib/learner/types";
 
-const navigation: Array<LearnerNavItem & { icon: typeof BookOpen }> = [
-  { label: "Overview", href: "/protected/learner", icon: BookOpen },
-  { label: "Progress", href: "/protected/learner/progress", icon: ChartLineUp },
-  { label: "Achievements", href: "/protected/learner/achievements", icon: Trophy },
-  { label: "Settings", href: "/protected/learner/settings", icon: Gear },
+const navigation: Array<LearnerNavItem & { icon: typeof BookOpenIcon }> = [
+  { href: "/protected/learner", icon: BookOpenIcon, label: "Overview" },
+  { href: "/protected/learner/progress", icon: ChartLineUpIcon, label: "Progress" },
+  { href: "/protected/learner/achievements", icon: TrophyIcon, label: "Achievements" },
+  { href: "/protected/learner/settings", icon: GearIcon, label: "Settings" },
 ];
 
 export function LearnerShell({ children }: { children: ReactNode }) {
