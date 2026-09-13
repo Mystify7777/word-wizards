@@ -1,4 +1,4 @@
-import { BookOpenIcon, ChartLineUpIcon, GearIcon, TrophyIcon } from "@phosphor-icons/react/dist/ssr";
+import { BookOpenIcon, BooksIcon, ChartLineUpIcon, GearIcon, TrophyIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -7,6 +7,7 @@ import type { LearnerNavItem } from "@/lib/learner/types";
 
 const navigation: Array<LearnerNavItem & { icon: typeof BookOpenIcon }> = [
   { href: "/protected/learner", icon: BookOpenIcon, label: "Overview" },
+  { href: "/protected/learner/catalogue", icon: BooksIcon, label: "Catalogue" },
   { href: "/protected/learner/progress", icon: ChartLineUpIcon, label: "Progress" },
   { href: "/protected/learner/achievements", icon: TrophyIcon, label: "Achievements" },
   { href: "/protected/learner/settings", icon: GearIcon, label: "Settings" },
@@ -32,7 +33,7 @@ export function LearnerShell({ children }: { children: ReactNode }) {
           <div className="flex gap-1 overflow-x-auto px-4 py-3 sm:sticky sm:top-0 sm:flex-col sm:gap-2 sm:px-3 sm:py-6">
             {navigation.map(({ href, icon: Icon, label }) => (
               <Link
-                className="flex shrink-0 items-center gap-3 px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="flex shrink-0 items-center gap-3 px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
                 href={href}
                 key={href}
               >

@@ -1,4 +1,4 @@
-import { ArrowRight, Check, LockKey } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon, CheckIcon, LockKeyIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +14,21 @@ export default async function LearnerOverviewPage() {
         <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Your learning space</p>
         <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">Keep learning, {overview.learnerName}.</h1>
         <p className="max-w-2xl text-muted-foreground">Build your language skills step by step through words, sentences, and conversations.</p>
+      </section>
+
+      <section aria-labelledby="catalogue-heading" className="space-y-3">
+        <h2 className="font-heading text-xl font-semibold" id="catalogue-heading">Explore learning</h2>
+        <Card>
+          <CardHeader>
+            <CardTitle>Browse the catalogue</CardTitle>
+            <CardDescription>Explore Letters &amp; Words, Phrases &amp; Sentences, and Conversations, then choose a theme to study.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link className="inline-flex h-10 items-center justify-center gap-1.5 bg-primary px-6 text-xs font-semibold tracking-widest text-primary-foreground uppercase transition-all hover:bg-primary/80 focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none" href="/protected/learner/catalogue">
+              Explore catalogues <ArrowRightIcon size={16} />
+            </Link>
+          </CardContent>
+        </Card>
       </section>
 
       <section aria-labelledby="continue-learning" className="space-y-3">
@@ -35,7 +50,7 @@ export default async function LearnerOverviewPage() {
               </div>
             </div>
             <Link className="inline-flex h-10 items-center justify-center gap-1.5 bg-primary px-6 text-xs font-semibold tracking-widest text-primary-foreground uppercase transition-all hover:bg-primary/80 focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none" href="/protected/learner">
-              Continue <ArrowRight size={16} />
+              Continue <ArrowRightIcon size={16} />
             </Link>
           </CardContent>
         </Card>
@@ -61,7 +76,7 @@ export default async function LearnerOverviewPage() {
             <CardDescription>Keep a steady learning rhythm.</CardDescription>
           </CardHeader>
           <CardContent className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary"><Check size={18} weight="bold" /></div>
+            <div className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary"><CheckIcon size={18} weight="bold" /></div>
             <div><p className="font-medium">{overview.today.goal} exercises</p><p className="text-sm text-muted-foreground">Daily practice target</p></div>
           </CardContent>
         </Card>
@@ -84,7 +99,7 @@ export default async function LearnerOverviewPage() {
         <Card>
           <CardHeader><CardTitle>Next Unlock</CardTitle><CardDescription>What you&apos;re working toward</CardDescription></CardHeader>
           <CardContent className="flex items-start gap-3">
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground"><LockKey size={18} weight="duotone" /></div>
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground"><LockKeyIcon size={18} weight="duotone" /></div>
             <div><p className="font-medium">{overview.nextUnlock.title}</p><p className="text-sm text-muted-foreground">{overview.nextUnlock.requirement}</p></div>
           </CardContent>
         </Card>
