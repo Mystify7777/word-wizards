@@ -3,9 +3,11 @@ import type { LearnerOverview } from "./types";
 export const mockLearnerOverview: LearnerOverview = {
   currentLearning: {
     catalogue: "Letters & Words",
+    catalogueId: "letters-and-words",
     lesson: "Common Animal Words",
     progress: 60,
     theme: "Everyday Animals",
+    themeId: "everyday-animals",
   },
   learnerName: "Learner",
   nextUnlock: {
