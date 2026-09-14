@@ -7,9 +7,9 @@ export default function Loading() {
         <div className="h-5 w-full max-w-2xl animate-pulse bg-muted" />
       </div>
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 3 }, (_, index) => (
-          <div className="h-56 animate-pulse bg-muted" key={index} />
-        ))}
+        <div className="h-56 animate-pulse bg-muted" />
+        <div className="h-56 animate-pulse bg-muted" />
+        <div className="h-56 animate-pulse bg-muted" />
       </div>
       <span className="sr-only">Loading catalogues</span>
     </div>

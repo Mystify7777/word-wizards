@@ -10,9 +10,7 @@ export async function getCatalogueById(id: string): Promise<Catalogue | null> {
 }
 
 export async function getThemesByCatalogueId(catalogueId: string): Promise<Theme[]> {
-  return mockThemes
-    .filter((theme) => theme.catalogueId === catalogueId)
-    .sort((a, b) => a.order - b.order);
+  return mockThemes.filter((theme) => theme.catalogueId === catalogueId).sort((a, b) => a.order - b.order);
 }
 
 export async function getThemeById(catalogueId: string, themeId: string): Promise<Theme | null> {

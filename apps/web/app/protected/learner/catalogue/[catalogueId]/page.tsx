@@ -19,7 +19,10 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
   return (
     <div className="mx-auto max-w-5xl space-y-8">
       <section className="space-y-3">
-        <Link className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground" href="/protected/learner/catalogue">
+        <Link
+          className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground"
+          href="/protected/learner/catalogue"
+        >
           <ArrowRightIcon className="rotate-180" size={14} />
           All catalogues
         </Link>
@@ -29,7 +32,10 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
             <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">{catalogue.name}</h1>
             <p className="max-w-2xl text-muted-foreground">{catalogue.description}</p>
           </div>
-          <div aria-hidden="true" className="flex size-16 shrink-0 items-center justify-center border border-border bg-muted font-heading text-xl font-bold text-primary">
+          <div
+            aria-hidden="true"
+            className="flex size-16 shrink-0 items-center justify-center border border-border bg-muted font-heading text-xl font-bold text-primary"
+          >
             {catalogue.visual}
           </div>
         </div>
@@ -38,7 +44,9 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
       <section aria-labelledby="themes-heading" className="space-y-4">
         <div>
           <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Choose a theme</p>
-          <h2 className="font-heading text-2xl font-semibold" id="themes-heading">Themes</h2>
+          <h2 className="font-heading text-2xl font-semibold" id="themes-heading">
+            Themes
+          </h2>
         </div>
         <ThemeList catalogueId={catalogue.id} themes={themes} />
       </section>
@@ -47,11 +55,17 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
         <section aria-labelledby="other-catalogues-heading" className="space-y-4 border-t border-border pt-8">
           <div>
             <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Keep exploring</p>
-            <h2 className="font-heading text-2xl font-semibold" id="other-catalogues-heading">Other catalogues</h2>
+            <h2 className="font-heading text-2xl font-semibold" id="other-catalogues-heading">
+              Other catalogues
+            </h2>
           </div>
           <div className="flex flex-wrap gap-2">
             {otherCatalogues.map((item) => (
-              <Link className="border border-border px-4 py-2.5 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none" href={`/protected/learner/catalogue/${item.id}`} key={item.id}>
+              <Link
+                className="border border-border px-4 py-2.5 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+                href={`/protected/learner/catalogue/${item.id}`}
+                key={item.id}
+              >
                 {item.name}
               </Link>
             ))}

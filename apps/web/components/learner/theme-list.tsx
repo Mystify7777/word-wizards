@@ -45,7 +45,10 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
             <Card aria-disabled="true" className="h-full opacity-70" key={theme.id}>
               <CardHeader>
                 <div className="flex items-start justify-between gap-4">
-                  <div aria-hidden="true" className="flex size-14 shrink-0 items-center justify-center border border-border bg-muted text-2xl grayscale">
+                  <div
+                    aria-hidden="true"
+                    className="flex size-14 shrink-0 items-center justify-center border border-border bg-muted text-2xl grayscale"
+                  >
                     {theme.visual}
                   </div>
                   <span className="inline-flex items-center gap-1 border border-border px-2.5 py-1 text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
@@ -65,11 +68,18 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
         }
 
         return (
-          <Link className="group block h-full focus-visible:outline-none" href={`/protected/learner/catalogue/${catalogueId}/theme/${theme.id}`} key={theme.id}>
+          <Link
+            className="group block h-full focus-visible:outline-none"
+            href={`/protected/learner/catalogue/${catalogueId}/theme/${theme.id}`}
+            key={theme.id}
+          >
             <Card className="h-full transition-transform group-hover:-translate-y-1 group-focus-visible:ring-2 group-focus-visible:ring-ring/40">
               <CardHeader>
                 <div className="flex items-start justify-between gap-4">
-                  <div aria-hidden="true" className="flex size-14 shrink-0 items-center justify-center border border-border bg-muted text-2xl">
+                  <div
+                    aria-hidden="true"
+                    className="flex size-14 shrink-0 items-center justify-center border border-border bg-muted text-2xl"
+                  >
                     {theme.visual}
                   </div>
                   <span className="border border-primary/30 bg-primary/5 px-2.5 py-1 text-[10px] font-semibold tracking-widest text-primary uppercase">

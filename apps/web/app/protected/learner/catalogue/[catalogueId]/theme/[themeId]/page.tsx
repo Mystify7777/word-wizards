@@ -20,7 +20,10 @@ export default async function ThemePage({
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       <section className="space-y-3">
-        <Link className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground" href={`/protected/learner/catalogue/${catalogue.id}`}>
+        <Link
+          className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground"
+          href={`/protected/learner/catalogue/${catalogue.id}`}
+        >
           <ArrowRightIcon className="rotate-180" size={14} />
           {catalogue.name}
         </Link>
@@ -33,7 +36,10 @@ export default async function ThemePage({
 
       <Card>
         <CardHeader>
-          <div aria-hidden="true" className="flex size-20 items-center justify-center border border-border bg-muted text-3xl">
+          <div
+            aria-hidden="true"
+            className="flex size-20 items-center justify-center border border-border bg-muted text-3xl"
+          >
             {theme.visual}
           </div>
           <CardTitle className="mt-2">{isAvailable ? "Ready to learn" : "Theme unavailable"}</CardTitle>
@@ -64,7 +70,9 @@ export default async function ThemePage({
           {isAvailable ? (
             <div className="border border-dashed border-border bg-muted/40 p-5">
               <p className="text-sm font-medium">Lesson player coming next.</p>
-              <p className="mt-1 text-sm text-muted-foreground">For this issue, selecting a theme ends at this learner-facing placeholder.</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                For this issue, selecting a theme ends at this learner-facing placeholder.
+              </p>
             </div>
           ) : (
             <div className="flex items-center gap-3 border border-border p-5 text-sm text-muted-foreground">
@@ -73,7 +81,10 @@ export default async function ThemePage({
             </div>
           )}
 
-          <Link className="inline-flex h-10 items-center justify-center gap-1.5 border border-border px-6 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none" href={`/protected/learner/catalogue/${catalogue.id}`}>
+          <Link
+            className="inline-flex h-10 items-center justify-center gap-1.5 border border-border px-6 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+            href={`/protected/learner/catalogue/${catalogue.id}`}
+          >
             Back to themes
             <ArrowRightIcon className="rotate-180" size={15} />
           </Link>
