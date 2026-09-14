@@ -19,7 +19,7 @@ export default async function CataloguePage() {
         </Link>
         <div className="space-y-2">
           <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Learning catalogue</p>
-          <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">Choose where to learn next.</h1>
+          <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">Choose what to learn next.</h1>
           <p className="max-w-2xl text-muted-foreground">
             Explore the learning areas available to you, then choose a theme to continue or start practising.
           </p>
