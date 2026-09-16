@@ -25,19 +25,49 @@ function ProgressBar({ progress }: { progress: number }) {
   );
 }
 
-export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes: Theme[] }) {
-  if (themes.length === 0) {
+export type ThemeFilter = "all" | "in-progress" | "completed";
+
+export function ThemeList({
+  catalogueId,
+  themes,
+  filter = "all",
+  emptyMessage,
+}: {
+  catalogueId?: string;
+  themes: Theme[];
+  filter?: ThemeFilter;
+  emptyMessage?: string;
+}) {
+  const filteredThemes = themes.filter((theme) => {
+    if (filter === "in-progress") {
+      return theme.progress > 0 && theme.progress < 100;
+    }
+    if (filter === "completed") {
+      return theme.progress === 100;
+    }
+    return true;
+  });
+
+  if (filteredThemes.length === 0) {
     return (
       <div className="border border-dashed border-border p-8 text-center">
-        <h2 className="font-heading text-lg font-semibold">No themes available</h2>
-        <p className="mt-2 text-sm text-muted-foreground">This catalogue does not have any themes to explore yet.</p>
+        <h2 className="font-heading text-lg font-semibold">
+          {filter === "in-progress" ? "No themes in progress" : "No themes available"}
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {emptyMessage ??
+            (filter === "in-progress"
+              ? "You do not have any themes currently in progress."
+              : "This catalogue does not have any themes to explore yet.")}
+        </p>
       </div>
     );
   }
 
   return (
     <div className="grid gap-5 md:grid-cols-2">
-      {themes.map((theme) => {
+      {filteredThemes.map((theme) => {
+        const targetCatalogueId = catalogueId ?? theme.catalogueId;
         const isAvailable = theme.availability === "available";
 
         if (!isAvailable) {
@@ -70,7 +100,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
         return (
           <Link
             className="group block h-full focus-visible:outline-none"
-            href={`/protected/learner/catalogue/${catalogueId}/theme/${theme.id}`}
+            href={`/protected/learner/catalogue/${targetCatalogueId}/theme/${theme.id}`}
             key={theme.id}
           >
             <Card className="h-full transition-transform group-hover:-translate-y-1 group-focus-visible:ring-2 group-focus-visible:ring-ring/40">
