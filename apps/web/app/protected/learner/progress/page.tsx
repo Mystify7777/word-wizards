@@ -1,9 +1,9 @@
-import { CatalogueProgressList } from "@/components/learner/progress/catalogue-progress-list";
 import { OverallProgressCard } from "@/components/learner/progress/overall-progress-card";
+import { ProgressDashboard } from "@/components/learner/progress/progress-dashboard";
 import { TodaysProgressCard } from "@/components/learner/progress/todays-progress-card";
 import { WeeklyGoalCard } from "@/components/learner/progress/weekly-goal-card";
-import { ThemeList } from "@/components/learner/theme-list";
 import { getCatalogues, getThemesByCatalogueId } from "@/lib/catalogue/service";
+import type { Theme } from "@/lib/catalogue/types";
 import {
   getCatalogueProgress,
   getOverallProgress,
@@ -20,8 +20,14 @@ export default async function ProgressPage() {
     getCatalogues(),
   ]);
 
-  const themesNested = await Promise.all(catalogues.map((cat) => getThemesByCatalogueId(cat.id)));
-  const allThemes = themesNested.flat();
+  // Build a map of catalogue ID → themes so the client component can switch instantly
+  const themeEntries = await Promise.all(
+    catalogues.map(async (cat) => {
+      const themes = await getThemesByCatalogueId(cat.id);
+      return [cat.id, themes] as [string, Theme[]];
+    }),
+  );
+  const themesByCatalogue: Record<string, Theme[]> = Object.fromEntries(themeEntries);
 
   return (
     <div className="mx-auto max-w-5xl space-y-8">
@@ -41,21 +47,7 @@ export default async function ProgressPage() {
         </div>
       </section>
 
-      <CatalogueProgressList catalogueProgress={catalogueProgress} />
-
-      <section aria-labelledby="in-progress-themes-heading" className="space-y-3">
-        <div>
-          <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Themes browser</p>
-          <h2 className="font-heading text-xl font-semibold" id="in-progress-themes-heading">
-            In-Progress Themes
-          </h2>
-        </div>
-        <ThemeList
-          emptyMessage="You do not have any themes currently in progress."
-          filter="in-progress"
-          themes={allThemes}
-        />
-      </section>
+      <ProgressDashboard catalogueProgress={catalogueProgress} themesByCatalogue={themesByCatalogue} />
     </div>
   );
 }
