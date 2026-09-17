@@ -1,78 +1,10 @@
+import { mockCatalogues, mockThemes } from "../catalogue/mock-data";
 import type { CatalogueProgress, DayStreak, OverallProgress, TodayActivity, TodaysProgress, WeeklyGoal } from "./types";
 
-export interface RawThemeItem {
-  catalogueId: string;
-  catalogueName: string;
-  id: string;
-  name: string;
-  progress: number;
-}
-
-export const rawThemeItems: RawThemeItem[] = [
-  {
-    catalogueId: "letters-and-words",
-    catalogueName: "Letters & Words",
-    id: "everyday-animals",
-    name: "Everyday Animals",
-    progress: 100,
-  },
-  {
-    catalogueId: "letters-and-words",
-    catalogueName: "Letters & Words",
-    id: "food-and-drinks",
-    name: "Food & Drinks",
-    progress: 60,
-  },
-  {
-    catalogueId: "letters-and-words",
-    catalogueName: "Letters & Words",
-    id: "daily-life",
-    name: "Daily Life",
-    progress: 0,
-  },
-  {
-    catalogueId: "phrases-and-sentences",
-    catalogueName: "Phrases & Sentences",
-    id: "daily-routines",
-    name: "Daily Routines",
-    progress: 100,
-  },
-  {
-    catalogueId: "phrases-and-sentences",
-    catalogueName: "Phrases & Sentences",
-    id: "at-the-restaurant",
-    name: "At the Restaurant",
-    progress: 35,
-  },
-  {
-    catalogueId: "phrases-and-sentences",
-    catalogueName: "Phrases & Sentences",
-    id: "making-plans",
-    name: "Making Plans",
-    progress: 0,
-  },
-  {
-    catalogueId: "conversations",
-    catalogueName: "Conversations",
-    id: "introductions",
-    name: "Introductions",
-    progress: 0,
-  },
-  {
-    catalogueId: "conversations",
-    catalogueName: "Conversations",
-    id: "shopping",
-    name: "Shopping",
-    progress: 0,
-  },
-  {
-    catalogueId: "conversations",
-    catalogueName: "Conversations",
-    id: "travel",
-    name: "Travel",
-    progress: 0,
-  },
-];
+// ─── Progress-specific mock data ─────────────────────────────────────────────
+// Only data that is genuinely unique to the Progress feature lives here.
+// Catalogue and theme data (names, IDs, progress values) are read directly
+// from lib/catalogue/mock-data so there is a single source of truth.
 
 export const rawTodayActivities: TodayActivity[] = [
   { completed: true, id: "act-1", title: "Complete Everyday Animals review" },
@@ -91,16 +23,14 @@ export const rawWeeklyDays: DayStreak[] = [
   { completed: false, date: "2026-09-20", day: "Sun" },
 ];
 
+// ─── Computed progress functions ──────────────────────────────────────────────
+
 export function getComputedOverallProgress(): OverallProgress {
-  const totalThemes = rawThemeItems.length;
-  const completedThemes = rawThemeItems.filter((item) => item.progress === 100).length;
+  const totalThemes = mockThemes.length;
+  const completedThemes = mockThemes.filter((t) => t.progress === 100).length;
   const percentage = totalThemes > 0 ? Math.round((completedThemes / totalThemes) * 100) : 0;
 
-  return {
-    completedThemes,
-    percentage,
-    totalThemes,
-  };
+  return { completedThemes, percentage, totalThemes };
 }
 
 export function getComputedTodaysProgress(): TodaysProgress {
@@ -109,12 +39,7 @@ export function getComputedTodaysProgress(): TodaysProgress {
   const totalCount = activities.length;
   const percentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
-  return {
-    activities,
-    completedCount,
-    percentage,
-    totalCount,
-  };
+  return { activities, completedCount, percentage, totalCount };
 }
 
 export function getComputedWeeklyGoal(): WeeklyGoal {
@@ -127,47 +52,24 @@ export function getComputedWeeklyGoal(): WeeklyGoal {
     if (d.completed) {
       streakCount++;
     } else {
-      if (d.isToday) {
-        break;
-      }
       break;
     }
   }
 
-  return {
-    completedDaysCount,
-    days,
-    streakCount,
-    targetDays,
-  };
+  return { completedDaysCount, days, streakCount, targetDays };
 }
 
 export function getComputedCatalogueProgress(): CatalogueProgress[] {
-  const catalogueMap = new Map<string, { id: string; name: string; items: RawThemeItem[] }>();
+  return mockCatalogues
+    .slice()
+    .sort((a, b) => a.order - b.order)
+    .map((catalogue) => {
+      const themes = mockThemes.filter((t) => t.catalogueId === catalogue.id);
+      const totalThemes = themes.length;
+      const completedThemes = themes.filter((t) => t.progress === 100).length;
+      const totalProgressSum = themes.reduce((acc, t) => acc + t.progress, 0);
+      const percentage = totalThemes > 0 ? Math.round(totalProgressSum / totalThemes) : 0;
 
-  for (const item of rawThemeItems) {
-    if (!catalogueMap.has(item.catalogueId)) {
-      catalogueMap.set(item.catalogueId, {
-        id: item.catalogueId,
-        items: [],
-        name: item.catalogueName,
-      });
-    }
-    catalogueMap.get(item.catalogueId)?.items.push(item);
-  }
-
-  return Array.from(catalogueMap.values()).map((cat) => {
-    const totalThemes = cat.items.length;
-    const completedThemes = cat.items.filter((item) => item.progress === 100).length;
-    const totalProgressSum = cat.items.reduce((acc, item) => acc + item.progress, 0);
-    const percentage = totalThemes > 0 ? Math.round(totalProgressSum / totalThemes) : 0;
-
-    return {
-      completedThemes,
-      id: cat.id,
-      name: cat.name,
-      percentage,
-      totalThemes,
-    };
-  });
+      return { completedThemes, id: catalogue.id, name: catalogue.name, percentage, totalThemes };
+    });
 }
