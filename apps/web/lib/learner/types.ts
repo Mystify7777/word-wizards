@@ -7,7 +7,9 @@ export type LearnerOverview = {
   learnerName: string;
   currentLearning: {
     catalogue: string;
+    catalogueId: string;
     theme: string;
+    themeId: string;
     lesson: string;
     progress: number;
   };

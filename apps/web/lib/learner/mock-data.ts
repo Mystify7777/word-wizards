@@ -1,12 +1,18 @@
 import type { LearnerOverview } from "./types";
 
 export const mockLearnerOverview: LearnerOverview = {
-  learnerName: "Learner",
   currentLearning: {
     catalogue: "Letters & Words",
-    theme: "Everyday Animals",
+    catalogueId: "letters-and-words",
     lesson: "Common Animal Words",
     progress: 60,
+    theme: "Everyday Animals",
+    themeId: "everyday-animals",
+  },
+  learnerName: "Learner",
+  nextUnlock: {
+    requirement: "Complete 2 more lessons in Letters & Words",
+    title: "Food & Drinks",
   },
   today: {
     completedExercises: 6,
@@ -14,11 +20,7 @@ export const mockLearnerOverview: LearnerOverview = {
   },
   weekly: {
     completedDays: 4,
-    targetDays: 5,
     streak: 4,
-  },
-  nextUnlock: {
-    title: "Food & Drinks",
-    requirement: "Complete 2 more lessons in Letters & Words",
+    targetDays: 5,
   },
 };
