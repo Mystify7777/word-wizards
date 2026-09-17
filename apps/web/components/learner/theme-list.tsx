@@ -25,7 +25,7 @@ function ProgressBar({ progress }: { progress: number }) {
   );
 }
 
-export type ThemeFilter = "all" | "in-progress" | "completed";
+export type ThemeFilter = "all" | "in-progress" | "completed" | "locked";
 
 export function ThemeList({
   catalogueId,
@@ -44,6 +44,9 @@ export function ThemeList({
     }
     if (filter === "completed") {
       return theme.progress === 100;
+    }
+    if (filter === "locked") {
+      return theme.availability === "locked";
     }
     return true;
   });
