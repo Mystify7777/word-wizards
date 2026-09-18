@@ -1,14 +1,10 @@
-import { ArrowRight, Check } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon, CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section
-      aria-labelledby="hero-heading"
-      className="relative overflow-hidden bg-[#F8F6FF]"
-      id="about"
-    >
+    <section aria-labelledby="hero-heading" className="relative overflow-hidden bg-background/70" id="about">
       <div className="relative z-10 mx-auto grid min-h-[600px] w-full max-w-[1400px] items-center gap-8 px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-6 lg:px-14 lg:py-14">
         <div className="max-w-2xl lg:pb-2">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:text-sm">
@@ -34,7 +30,7 @@ export function HeroSection() {
               href="/auth/sign-up"
             >
               Get Started
-              <ArrowRight size={18} weight="bold" />
+              <ArrowRightIcon size={18} weight="bold" />
             </Link>
 
             <a
@@ -49,7 +45,7 @@ export function HeroSection() {
             {["Learn at your own pace", "Active practice", "Immediate feedback"].map((benefit) => (
               <li className="flex items-center gap-2" key={benefit}>
                 <span className="grid size-5 place-items-center rounded-full bg-[#EAF9F0] text-green-600">
-                  <Check size={12} weight="bold" />
+                  <CheckIcon size={12} weight="bold" />
                 </span>
                 {benefit}
               </li>
@@ -58,7 +54,7 @@ export function HeroSection() {
         </div>
 
         <div className="relative mx-auto flex w-full max-w-xl flex-col items-center">
-          <div className="w-full px-2 sm:px-4">
+          {/* <div className="w-full px-2 sm:px-4">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
               Your learning path
             </p>
@@ -66,7 +62,7 @@ export function HeroSection() {
             <p className="mt-1 text-sm font-semibold text-foreground">
               From words to conversations
             </p>
-          </div>
+          </div> */}
 
           <Image
             alt="Word Wizards owl mascot"
