@@ -45,12 +45,12 @@ export function LearningPath() {
 
             return (
               <article
-                className={["px-6 py-5", index > 0 ? "border-t border-border/70 lg:border-l lg:border-t-0" : ""].join(
+                className={["px-6 py-5", index > 0 ? "border-t lg:border-l lg:border-t-0" : ""].join(
                   " ",
                 )}
                 key={stage.title}
               >
-                <div className={`grid size-11 place-items-center rounded-lg ${stage.className}`}>
+                <div className={`grid size-11 place-items-center rounded-md ${stage.className}`}>
                   <Icon size={24} weight="duotone" />
                 </div>
 
