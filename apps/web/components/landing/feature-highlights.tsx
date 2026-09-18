@@ -1,32 +1,36 @@
-import { ChartLineUp, CheckCircle, Lightning, Path } from "@phosphor-icons/react/dist/ssr";
+import { ChartLineUpIcon, GraduationCapIcon, HeartIcon, TargetIcon } from "@phosphor-icons/react/dist/ssr";
 
 const features = [
   {
+    className: "bg-secondary text-[#6C4CF6]",
     description: "A clear path that builds your skills.",
-    icon: Path,
+    icon: GraduationCapIcon,
     title: "Structured Learning",
   },
   {
-    description: "Learn by doing, with immediate feedback.",
-    icon: Lightning,
+    className: "bg-[#FFF0E3] text-primary",
+    description: "Learn by doing, with instant feedback.",
+    icon: TargetIcon,
     title: "Active Practice",
   },
   {
+    className: "bg-[#EEF4FF] text-blue-600",
     description: "See how far you've come and stay motivated.",
-    icon: ChartLineUp,
+    icon: ChartLineUpIcon,
     title: "Track Your Progress",
   },
   {
-    description: "Learning that feels practical and rewarding.",
-    icon: CheckCircle,
-    title: "Engaging Lessons",
+    className: "bg-[#FFF0F5] text-pink-600",
+    description: "Learning that feels good.",
+    icon: HeartIcon,
+    title: "Fun & Engaging",
   },
 ];
 
 export function FeatureHighlights() {
   return (
-    <section aria-labelledby="features-heading" className="bg-background">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+    <section aria-labelledby="features-heading" className="relative overflow-hidden bg-background">
+      <div className="mx-auto max-w-[1400px] px-6 py-14 sm:px-10 sm:py-18 lg:px-14">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary sm:text-sm">
             Built for learning
@@ -37,19 +41,26 @@ export function FeatureHighlights() {
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => {
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature, index) => {
             const Icon = feature.icon;
 
             return (
-              <article className="p-4 sm:p-5" key={feature.title}>
-                <div className="grid size-10 place-items-center rounded-xl bg-secondary text-primary">
-                  <Icon size={21} weight="duotone" />
+              <article
+                className={[
+                  "px-6 py-5 text-center",
+                  index > 0 ? "border-t border-border/70 sm:border-l sm:border-t-0" : "",
+                  index === 2 ? "lg:border-l" : "",
+                ].join(" ")}
+                key={feature.title}
+              >
+                <div className={`mx-auto grid size-12 place-items-center rounded-full ${feature.className}`}>
+                  <Icon size={24} weight="duotone" />
                 </div>
 
                 <h3 className="mt-4 text-base font-bold text-foreground">{feature.title}</h3>
 
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{feature.description}</p>
+                <p className="mx-auto mt-2 max-w-48 text-sm leading-5 text-muted-foreground">{feature.description}</p>
               </article>
             );
           })}

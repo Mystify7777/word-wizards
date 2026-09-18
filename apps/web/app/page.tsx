@@ -17,9 +17,10 @@ export default function HomePage() {
       </main>
 
       <footer className="border-t border-border/60 bg-card/45">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-8 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-5 px-6 py-8 sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:px-14">
           <div>
             <p className="text-sm font-semibold text-foreground">Word Wizards</p>
+
             <p className="mt-1 text-xs text-muted-foreground">Learn English, step by step.</p>
           </div>
 
