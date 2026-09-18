@@ -1,28 +1,28 @@
-import { ChartLineUp, GraduationCap, Heart, Target } from "@phosphor-icons/react/dist/ssr";
+import { ChartLineUpIcon, GraduationCapIcon, HeartIcon, TargetIcon } from "@phosphor-icons/react/dist/ssr";
 
 const features = [
   {
     className: "bg-secondary text-[#6C4CF6]",
     description: "A clear path that builds your skills.",
-    icon: GraduationCap,
+    icon: GraduationCapIcon,
     title: "Structured Learning",
   },
   {
     className: "bg-[#FFF0E3] text-primary",
     description: "Learn by doing, with instant feedback.",
-    icon: Target,
+    icon: TargetIcon,
     title: "Active Practice",
   },
   {
     className: "bg-[#EEF4FF] text-blue-600",
     description: "See how far you've come and stay motivated.",
-    icon: ChartLineUp,
+    icon: ChartLineUpIcon,
     title: "Track Your Progress",
   },
   {
     className: "bg-[#FFF0F5] text-pink-600",
     description: "Learning that feels good.",
-    icon: Heart,
+    icon: HeartIcon,
     title: "Fun & Engaging",
   },
 ];
