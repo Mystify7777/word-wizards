@@ -4,15 +4,14 @@ import Link from "next/link";
 
 export function HeroSection() {
   return (
-    <section aria-labelledby="hero-heading" className="relative overflow-hidden" id="about">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-32 -top-24 size-120 rounded-full bg-[#FFF0E3]/65 blur-3xl" />
-        <div className="absolute right-[-10%] top-[-15%] size-160 rounded-full bg-secondary/65 blur-3xl" />
-      </div>
-
-      <div className="relative z-10 mx-auto grid min-h-[620px] w-full max-w-[1400px] items-center gap-10 px-6 py-12 sm:px-10 sm:py-14 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-14 lg:py-16">
+    <section
+      aria-labelledby="hero-heading"
+      className="relative overflow-hidden bg-[#F8F6FF]"
+      id="about"
+    >
+      <div className="relative z-10 mx-auto grid min-h-[600px] w-full max-w-[1400px] items-center gap-8 px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-6 lg:px-14 lg:py-14">
         <div className="max-w-2xl lg:pb-2">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:text-sm">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:text-sm">
             Interactive language learning
           </p>
 
@@ -31,7 +30,7 @@ export function HeroSection() {
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Link
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:text-base"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:text-base"
               href="/auth/sign-up"
             >
               Get Started
@@ -39,7 +38,7 @@ export function HeroSection() {
             </Link>
 
             <a
-              className="inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-card px-6 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:text-base"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-card px-6 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:text-base"
               href="#how-it-works"
             >
               How It Works
@@ -58,54 +57,25 @@ export function HeroSection() {
           </ul>
         </div>
 
-        <div className="relative mx-auto w-full max-w-xl">
-          <div
-            aria-hidden="true"
-            className="absolute -right-8 top-8 size-28 rounded-full bg-secondary/60 blur-3xl sm:size-36"
-          />
+        <div className="relative mx-auto flex w-full max-w-xl flex-col items-center">
+          <div className="w-full px-2 sm:px-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+              Your learning path
+            </p>
 
-          <div
-            aria-hidden="true"
-            className="absolute -left-8 bottom-12 size-24 rounded-full bg-primary/8 blur-3xl sm:size-32"
-          />
-
-          <div className="relative rounded-xl border border-border/70 bg-card p-4 shadow-[0_20px_55px_rgba(17,26,70,0.08)] sm:p-5">
-            <div className="overflow-hidden rounded-lg bg-[#F3F0FF]">
-              <div className="px-5 pt-5 sm:px-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Your learning path</p>
-
-                <p className="mt-1 text-sm font-semibold text-foreground">From words to conversations</p>
-              </div>
-
-              <div className="relative flex justify-center px-4 pb-0 pt-2 sm:px-8">
-                <Image
-                  alt="Word Wizards owl mascot"
-                  className="relative z-10 h-auto w-[72%] max-w-[390px] object-contain drop-shadow-[0_16px_18px_rgba(17,26,70,0.10)]"
-                  height={500}
-                  priority
-                  src="/assets-png/mascot/mascot-main.png"
-                  width={500}
-                />
-              </div>
-            </div>
-
-            {/* <div className="mt-3 grid grid-cols-3 divide-x divide-border/70">
-              <div className="px-3 py-2 sm:px-4">
-                <p className="text-xs font-semibold text-primary">01</p>
-                <p className="mt-1 text-xs font-semibold text-foreground sm:text-sm">Words</p>
-              </div>
-
-              <div className="px-3 py-2 sm:px-4">
-                <p className="text-xs font-semibold text-primary">02</p>
-                <p className="mt-1 text-xs font-semibold text-foreground sm:text-sm">Phrases</p>
-              </div>
-
-              <div className="px-3 py-2 sm:px-4">
-                <p className="text-xs font-semibold text-green-700">03</p>
-                <p className="mt-1 text-xs font-semibold text-foreground sm:text-sm">Conversations</p>
-              </div> */}
-            {/* </div> */}
+            <p className="mt-1 text-sm font-semibold text-foreground">
+              From words to conversations
+            </p>
           </div>
+
+          <Image
+            alt="Word Wizards owl mascot"
+            className="relative z-10 mt-1 h-auto w-[82%] max-w-[430px] object-contain drop-shadow-[0_16px_18px_rgba(17,26,70,0.08)] sm:mt-0"
+            height={500}
+            priority
+            src="/assets-png/mascot/mascot-main.png"
+            width={500}
+          />
         </div>
       </div>
     </section>
