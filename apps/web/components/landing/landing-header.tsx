@@ -7,7 +7,7 @@ export function LandingHeader() {
       <div className="mx-auto flex h-18 w-full max-w-[1400px] items-center justify-between px-6 sm:px-10 lg:px-14">
         <Link
           aria-label="Word Wizards home"
-          className="shrink-0 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          className="shrink-0 rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
           href="/"
         >
           <Image
@@ -45,14 +45,14 @@ export function LandingHeader() {
           <span aria-hidden="true" className="h-6 w-px bg-border" />
 
           <Link
-            className="rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            className="rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             href="/auth/login"
           >
             Log in
           </Link>
 
           <Link
-            className="rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             href="/auth/sign-up"
           >
             Get Started
@@ -60,28 +60,28 @@ export function LandingHeader() {
         </nav>
 
         <details className="relative lg:hidden">
-          <summary className="flex cursor-pointer list-none items-center rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-center rounded-lg border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
             Menu
           </summary>
 
-          <div className="absolute right-0 top-12 w-64 rounded-xl border border-border bg-card p-3 shadow-xl">
+          <div className="absolute right-0 top-12 w-64 rounded-lg border border-border bg-card p-3 shadow-xl">
             <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
               <a
-                className="rounded-lg px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                 href="#about"
               >
                 About
               </a>
 
               <a
-                className="rounded-lg px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                 href="#how-it-works"
               >
                 How It Works
               </a>
 
               <Link
-                className="rounded-lg px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                 href="/coming-soon?feature=educators"
               >
                 For Educators
@@ -90,14 +90,14 @@ export function LandingHeader() {
               <div className="my-1 h-px bg-border" />
 
               <Link
-                className="rounded-lg border border-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                className="rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
                 href="/auth/login"
               >
                 Log in
               </Link>
 
               <Link
-                className="mt-1 rounded-xl bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="mt-1 rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                 href="/auth/sign-up"
               >
                 Get Started

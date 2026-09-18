@@ -1,36 +1,36 @@
-import { ChartLineUpIcon, GraduationCapIcon, HeartIcon, TargetIcon } from "@phosphor-icons/react/dist/ssr";
+import { ChartLineUp, GraduationCap, Heart, Target } from "@phosphor-icons/react/dist/ssr";
 
 const features = [
   {
     className: "bg-secondary text-[#6C4CF6]",
     description: "A clear path that builds your skills.",
-    icon: GraduationCapIcon,
+    icon: GraduationCap,
     title: "Structured Learning",
   },
   {
     className: "bg-[#FFF0E3] text-primary",
     description: "Learn by doing, with instant feedback.",
-    icon: TargetIcon,
+    icon: Target,
     title: "Active Practice",
   },
   {
     className: "bg-[#EEF4FF] text-blue-600",
     description: "See how far you've come and stay motivated.",
-    icon: ChartLineUpIcon,
+    icon: ChartLineUp,
     title: "Track Your Progress",
   },
   {
     className: "bg-[#FFF0F5] text-pink-600",
     description: "Learning that feels good.",
-    icon: HeartIcon,
+    icon: Heart,
     title: "Fun & Engaging",
   },
 ];
 
 export function FeatureHighlights() {
   return (
-    <section aria-labelledby="features-heading" className="relative overflow-hidden bg-background">
-      <div className="mx-auto max-w-[1400px] px-6 py-14 sm:px-10 sm:py-18 lg:px-14">
+    <section aria-labelledby="features-heading" className="bg-background">
+      <div className="mx-auto max-w-[1400px] px-6 py-12 sm:px-10 sm:py-14 lg:px-14">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary sm:text-sm">
             Built for learning
@@ -41,7 +41,7 @@ export function FeatureHighlights() {
           </h2>
         </div>
 
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => {
             const Icon = feature.icon;
 
@@ -54,8 +54,8 @@ export function FeatureHighlights() {
                 ].join(" ")}
                 key={feature.title}
               >
-                <div className={`mx-auto grid size-12 place-items-center rounded-full ${feature.className}`}>
-                  <Icon size={24} weight="duotone" />
+                <div className={`mx-auto grid size-11 place-items-center rounded-full ${feature.className}`}>
+                  <Icon size={23} weight="duotone" />
                 </div>
 
                 <h3 className="mt-4 text-base font-bold text-foreground">{feature.title}</h3>
