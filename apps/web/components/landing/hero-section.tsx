@@ -83,13 +83,13 @@ export function HeroSection() {
                   className="relative z-10 h-auto w-[72%] max-w-[390px] object-contain drop-shadow-[0_16px_18px_rgba(17,26,70,0.10)]"
                   height={500}
                   priority
-                  src="/asset-webp/mascot/mascot-main.webp"
+                  src="/assets-png/mascot/mascot-main.png"
                   width={500}
                 />
               </div>
             </div>
 
-            <div className="mt-3 grid grid-cols-3 divide-x divide-border/70">
+            {/* <div className="mt-3 grid grid-cols-3 divide-x divide-border/70">
               <div className="px-3 py-2 sm:px-4">
                 <p className="text-xs font-semibold text-primary">01</p>
                 <p className="mt-1 text-xs font-semibold text-foreground sm:text-sm">Words</p>
@@ -103,8 +103,8 @@ export function HeroSection() {
               <div className="px-3 py-2 sm:px-4">
                 <p className="text-xs font-semibold text-green-700">03</p>
                 <p className="mt-1 text-xs font-semibold text-foreground sm:text-sm">Conversations</p>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
