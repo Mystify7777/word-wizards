@@ -49,8 +49,13 @@ export function FeatureHighlights() {
               <article
                 className={[
                   "px-6 py-5 text-center",
-                  index > 0 ? "border-t border-border/70 sm:border-l sm:border-t-0" : "",
-                  index === 2 ? "lg:border-l" : "",
+                  index === 0
+                    ? ""
+                    : index === 1
+                      ? "border-t border-border/70 sm:border-l sm:border-t-0 lg:border-l"
+                      : index === 2
+                        ? "border-t border-border/70 sm:border-t lg:border-l lg:border-t-0"
+                        : "border-t border-border/70 sm:border-l lg:border-l lg:border-t-0",
                 ].join(" ")}
                 key={feature.title}
               >
