@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
+function closeMobileMenu(target: HTMLElement) {
+  target.closest("details")?.removeAttribute("open");
+}
+
 export function LandingHeader() {
   return (
     <header className="relative z-30 border-b border-border/60 bg-background/90 backdrop-blur-sm">
@@ -69,6 +73,7 @@ export function LandingHeader() {
               <a
                 className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                 href="#about"
+                onClick={(event) => closeMobileMenu(event.currentTarget)}
               >
                 About
               </a>
@@ -76,6 +81,7 @@ export function LandingHeader() {
               <a
                 className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                 href="#how-it-works"
+                onClick={(event) => closeMobileMenu(event.currentTarget)}
               >
                 How It Works
               </a>
@@ -83,6 +89,7 @@ export function LandingHeader() {
               <Link
                 className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                 href="/coming-soon?feature=educators"
+                onClick={(event) => closeMobileMenu(event.currentTarget)}
               >
                 For Educators
               </Link>
@@ -92,6 +99,7 @@ export function LandingHeader() {
               <Link
                 className="rounded-sm border border-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
                 href="/auth/login"
+                onClick={(event) => closeMobileMenu(event.currentTarget)}
               >
                 Log in
               </Link>
@@ -99,6 +107,7 @@ export function LandingHeader() {
               <Link
                 className="mt-1 rounded-md bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                 href="/auth/sign-up"
+                onClick={(event) => closeMobileMenu(event.currentTarget)}
               >
                 Get Started
               </Link>
