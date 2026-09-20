@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200">
+<path d="M31 127C17 91 35 48 72 32c37-16 84-10 120 3 42 15 91 12 120 34 29 22 30 65 0 87-28 20-77 17-116 16-42-1-77 10-112-4-30-12-42-29-53-41Z" fill="#DFF5F5"/>
+<path d="M304 36l15-19M321 54l24-8M318 76l25 8" stroke="#F5C33B" stroke-width="5" stroke-linecap="round"/>
+<text x="180" y="72" text-anchor="middle" font-family="Nunito Sans, Arial, sans-serif" font-size="23" font-weight="700" fill="#23335C">A new</text>
+<text x="180" y="102" text-anchor="middle" font-family="Nunito Sans, Arial, sans-serif" font-size="23" font-weight="700" fill="#23335C">adventure</text>
+<text x="180" y="132" text-anchor="middle" font-family="Nunito Sans, Arial, sans-serif" font-size="23" font-weight="700" fill="#23335C">awaits!</text>
+</svg>
