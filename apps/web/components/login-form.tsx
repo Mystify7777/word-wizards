@@ -1,10 +1,10 @@
 "use client";
 
+import { ArrowRightIcon, EnvelopeSimpleIcon, EyeIcon, EyeSlashIcon, LockKeyIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
-import { ArrowRightIcon, EnvelopeSimpleIcon, EyeIcon, EyeSlashIcon, LockKeyIcon } from "@phosphor-icons/react";
+import { type FormEvent, useState } from "react";
 import { toast } from "sonner";
 
 import { getFriendlyAuthError } from "@/components/auth/auth-errors";
@@ -81,7 +81,7 @@ export function LoginForm() {
         type="button"
         variant="outline"
       >
-        <Image src="/auth/google-g.svg" alt="" aria-hidden="true" width={20} height={20} />
+        <Image alt="" aria-hidden="true" height={20} src="/auth/google-g.svg" width={20} />
         {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
       </Button>
       <div aria-hidden="true" className="flex items-center gap-3">
@@ -97,7 +97,10 @@ export function LoginForm() {
               Email
             </Label>
             <div className="relative">
-              <EnvelopeSimpleIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[#94A3B8]" />
+              <EnvelopeSimpleIcon
+                aria-hidden="true"
+                className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[#94A3B8]"
+              />
               <Input
                 autoComplete="email"
                 className="h-11 rounded-md border border-[#DCE0EA] bg-white px-10 text-sm shadow-none focus-visible:border-[#6C4CF6] focus-visible:ring-[#6C4CF6]/20"
@@ -112,7 +115,10 @@ export function LoginForm() {
           </div>
           <div className="grid gap-2">
             <div className="flex items-center justify-between gap-3">
-              <Label className="normal-case tracking-normal text-sm font-medium text-[#334155]" htmlFor="login-password">
+              <Label
+                className="normal-case tracking-normal text-sm font-medium text-[#334155]"
+                htmlFor="login-password"
+              >
                 Password
               </Label>
               <Link className="text-xs font-semibold text-[#6C4CF6] hover:underline" href="/auth/forgot-password">
@@ -120,7 +126,10 @@ export function LoginForm() {
               </Link>
             </div>
             <div className="relative">
-              <LockKeyIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[#94A3B8]" />
+              <LockKeyIcon
+                aria-hidden="true"
+                className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[#94A3B8]"
+              />
               <Input
                 autoComplete="current-password"
                 className="h-11 rounded-md border border-[#DCE0EA] bg-white px-10 pr-11 text-sm shadow-none focus-visible:border-[#6C4CF6] focus-visible:ring-[#6C4CF6]/20"
@@ -136,12 +145,19 @@ export function LoginForm() {
                 onClick={() => setShowPassword((visible) => !visible)}
                 type="button"
               >
-                {showPassword ? <EyeSlashIcon aria-hidden="true" className="size-4" /> : <EyeIcon aria-hidden="true" className="size-4" />}
+                {showPassword ? (
+                  <EyeSlashIcon aria-hidden="true" className="size-4" />
+                ) : (
+                  <EyeIcon aria-hidden="true" className="size-4" />
+                )}
               </button>
             </div>
           </div>
           {error ? (
-            <p className="rounded-md border border-[#FECACA] bg-[#FFF7F7] px-3 py-2.5 text-sm leading-5 text-[#B91C1C]" role="alert">
+            <p
+              className="rounded-md border border-[#FECACA] bg-[#FFF7F7] px-3 py-2.5 text-sm leading-5 text-[#B91C1C]"
+              role="alert"
+            >
               {error}
             </p>
           ) : null}

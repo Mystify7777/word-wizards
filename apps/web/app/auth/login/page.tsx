@@ -5,7 +5,17 @@ import { LoginForm } from "@/components/login-form";
 
 export default function Page() {
   return (
-    <AuthShell mode="login" footer={<>Don&apos;t have an account?{" "}<Link className="font-semibold text-[#6C4CF6] hover:underline" href="/auth/sign-up">Create your account</Link></>}>
+    <AuthShell
+      footer={
+        <>
+          Don&apos;t have an account?{" "}
+          <Link className="font-semibold text-[#6C4CF6] hover:underline" href="/auth/sign-up">
+            Create your account
+          </Link>
+        </>
+      }
+      mode="login"
+    >
       <LoginForm />
     </AuthShell>
   );

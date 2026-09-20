@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { type FormEvent, useState } from "react";
 import { toast } from "sonner";
 
 import { getFriendlyAuthError } from "@/components/auth/auth-errors";
@@ -49,10 +49,23 @@ export function UpdatePasswordForm({ className, ...props }: React.ComponentProps
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="password">New password</Label>
-                <Input id="password" onChange={(event) => setPassword(event.target.value)} placeholder="New password" required type="password" value={password} />
+                <Input
+                  id="password"
+                  onChange={(event) => setPassword(event.target.value)}
+                  placeholder="New password"
+                  required
+                  type="password"
+                  value={password}
+                />
               </div>
-              {error ? <p className="text-sm text-red-500" role="alert">{error}</p> : null}
-              <Button className="w-full" disabled={isLoading} type="submit">{isLoading ? "Saving..." : "Save new password"}</Button>
+              {error ? (
+                <p className="text-sm text-red-500" role="alert">
+                  {error}
+                </p>
+              ) : null}
+              <Button className="w-full" disabled={isLoading} type="submit">
+                {isLoading ? "Saving..." : "Save new password"}
+              </Button>
             </div>
           </form>
         </CardContent>
