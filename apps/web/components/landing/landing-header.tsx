@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function closeMobileMenu(target: HTMLElement) {
-  target.closest("details")?.removeAttribute("open");
-}
+import { MobileNav } from "./mobile-nav";
+
 
 export function LandingHeader() {
   return (
@@ -63,57 +62,7 @@ export function LandingHeader() {
           </Link>
         </nav>
 
-        <details className="relative lg:hidden">
-          <summary className="flex cursor-pointer list-none items-center rounded-lg border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
-            Menu
-          </summary>
-
-          <div className="absolute right-0 top-12 w-64 rounded-md border border-border bg-card p-3 shadow-xl">
-            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-              <a
-                className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-                href="#about"
-                onClick={(event) => closeMobileMenu(event.currentTarget)}
-              >
-                About
-              </a>
-
-              <a
-                className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-                href="#how-it-works"
-                onClick={(event) => closeMobileMenu(event.currentTarget)}
-              >
-                How It Works
-              </a>
-
-              <Link
-                className="rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-                href="/coming-soon?feature=educators"
-                onClick={(event) => closeMobileMenu(event.currentTarget)}
-              >
-                For Educators
-              </Link>
-
-              <div className="my-1 h-px bg-border" />
-
-              <Link
-                className="rounded-sm border border-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
-                href="/auth/login"
-                onClick={(event) => closeMobileMenu(event.currentTarget)}
-              >
-                Log in
-              </Link>
-
-              <Link
-                className="mt-1 rounded-md bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                href="/auth/sign-up"
-                onClick={(event) => closeMobileMenu(event.currentTarget)}
-              >
-                Get Started
-              </Link>
-            </nav>
-          </div>
-        </details>
+<MobileNav />
       </div>
     </header>
   );
