@@ -1,15 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const itemClass =
   "rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = () => setIsOpen(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        closeMenu();
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
   const scrollToSection = (sectionId: string) => {
     closeMenu();
@@ -17,10 +42,9 @@ export function MobileNav() {
   };
 
   return (
-    <div className="relative lg:hidden">
+    <div className="relative lg:hidden" ref={menuRef}>
       <button
         aria-expanded={isOpen}
-        aria-haspopup="menu"
         className="flex cursor-pointer items-center rounded-lg border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         onClick={() => setIsOpen((open) => !open)}
         type="button"
@@ -47,8 +71,10 @@ export function MobileNav() {
               How It Works
             </button>
 
+            <div className="my-1 h-px bg-border" />
+
             <Link
-              className={itemClass}
+              className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               href="/coming-soon?feature=educators"
               onClick={closeMenu}
             >
