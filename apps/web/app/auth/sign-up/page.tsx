@@ -1,11 +1,23 @@
+import Link from "next/link";
+import { AuthShell } from "@/components/auth/auth-shell";
 import { SignUpForm } from "@/components/sign-up-form";
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <SignUpForm />
-      </div>
-    </div>
+    <AuthShell
+      description="Create your account and start building practical English skills."
+      eyebrow="Get started"
+      footer={
+        <>
+          Already have an account?{" "}
+          <Link className="font-semibold text-[#6C4CF6] hover:underline" href="/auth/login">
+            Log in
+          </Link>
+        </>
+      }
+      title="Start learning English"
+    >
+      <SignUpForm />
+    </AuthShell>
   );
 }
