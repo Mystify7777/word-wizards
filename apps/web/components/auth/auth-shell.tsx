@@ -2,73 +2,76 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type AuthShellProps = {
-  children: ReactNode;
-  eyebrow: string;
-  title: string;
-  description: string;
-  footer: ReactNode;
-};
+type AuthShellProps = { children: ReactNode; footer: ReactNode; mode: "login" | "sign-up" };
 
-export function AuthShell({ children, eyebrow, title, description, footer }: AuthShellProps) {
+export function AuthShell({ children, footer, mode }: AuthShellProps) {
+  const login = mode === "login";
+
   return (
-    <main className="min-h-svh bg-[#FFFCF7] lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)]">
-      <section className="relative hidden overflow-hidden bg-[#F8F6FF] lg:flex lg:min-h-svh lg:flex-col lg:justify-between lg:p-10 xl:p-14">
-        <Link aria-label="Word Wizards home" className="relative z-10" href="/">
-          <Image
-            alt="Word Wizards"
-            className="h-auto w-[180px]"
-            height={64}
-            priority
-            src="/asset-webp/brand/horizontal-logo.webp"
-            width={220}
-          />
-        </Link>
-        <div className="relative z-10 mx-auto flex max-w-lg flex-1 flex-col items-center justify-center text-center">
-          <Image
-            alt=""
-            className="mb-8 h-auto w-[min(68%,420px)] object-contain"
-            height={420}
-            priority
-            src="/asset-webp/mascot/mascot-main.webp"
-            width={420}
-          />
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#6C4CF6]">Learn with purpose</p>
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-[#111A46] xl:text-4xl">
-            Small steps. Real progress.
-          </h2>
-          <p className="mt-4 max-w-md text-base leading-7 text-[#64748B]">
-            Build practical English skills through structured practice, active recall, and immediate feedback.
-          </p>
-        </div>
-        <p className="relative z-10 text-sm text-[#64748B]">
-          Letters &amp; Words · Phrases &amp; Sentences · Conversations
-        </p>
-      </section>
+    <main className="min-h-svh bg-[#F4F1FF] p-3 sm:p-5 lg:p-8">
+      <div className="mx-auto grid min-h-[calc(100svh-1.5rem)] w-full max-w-6xl overflow-hidden rounded-2xl border border-[#E7E3F3] bg-white shadow-[0_24px_70px_rgba(72,52,140,0.12)] sm:min-h-[calc(100svh-2.5rem)] lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[0.92fr_1.08fr]">
+        <section className="relative overflow-hidden bg-[#FFFDF7] px-6 py-7 sm:px-10 sm:py-9 lg:flex lg:flex-col lg:px-10 lg:py-10">
+          <Link href="/" aria-label="Word Wizards home" className="relative z-10 w-fit">
+            <Image src="/asset-webp/brand/horizontal-logo.webp" alt="Word Wizards" width={220} height={64} className="h-auto w-[175px]" priority />
+          </Link>
 
-      <section className="flex min-h-svh items-center justify-center px-5 py-8 sm:px-8 lg:px-12 xl:px-20">
-        <div className="w-full max-w-md">
-          <div className="mb-8 lg:hidden">
-            <Link aria-label="Word Wizards home" href="/">
+          <div className="relative z-10 mt-6 flex flex-1 flex-col sm:mt-8 lg:mt-6">
+            <h2 className="max-w-md font-heading text-2xl font-bold leading-tight text-[#111A46] sm:text-3xl">
+              {login ? "Learn the magic of communication" : "Start your language learning adventure today"}
+            </h2>
+            <ul className="mt-5 grid gap-2.5 text-sm text-[#334155] sm:grid-cols-2 lg:grid-cols-1">
+              {(login
+                ? ["Interactive lessons", "Track your progress", "Unlock new content", "Build a brighter you"]
+                : ["Learn at your own pace", "Fun and effective", "Achieve real progress", "Join a global community"]
+              ).map((item) => (
+                <li className="flex items-start gap-2.5" key={item}>
+                  <span aria-hidden="true" className="mt-1.5 size-2 shrink-0 rounded-full bg-[#F5C33B]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-1 items-center justify-center py-6">
               <Image
-                alt="Word Wizards"
-                className="h-auto w-[160px]"
-                height={64}
+                src={login ? "/auth/login-owl-wizard.png" : "/auth/signup-learning-landscape.png"}
+                alt={login ? "Wizard owl sitting on learning books" : "Learning path leading toward a purple-roofed castle"}
+                width={900}
+                height={700}
+                className={login ? "h-auto max-h-[330px] w-full max-w-[430px] object-contain" : "h-auto max-h-[340px] w-full max-w-[560px] object-contain"}
                 priority
-                src="/asset-webp/brand/horizontal-logo.webp"
-                width={220}
               />
-            </Link>
+            </div>
+
+            <p className="mx-auto max-w-sm text-center font-heading text-sm font-semibold italic leading-6 text-[#334155] sm:text-base">
+              “{login ? "Small words create big opportunities!" : "Every learner is a wizard in the making!"}”
+            </p>
           </div>
-          <div className="mb-8">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#6C4CF6]">{eyebrow}</p>
-            <h1 className="font-heading text-3xl font-bold tracking-tight text-[#111A46] sm:text-4xl">{title}</h1>
-            <p className="mt-3 text-sm leading-6 text-[#64748B] sm:text-base">{description}</p>
+        </section>
+
+        <section className="flex items-center justify-center bg-white px-6 py-8 sm:px-10 sm:py-10 lg:px-12 xl:px-16">
+          <div className="w-full max-w-md">
+            <div className="relative mb-7 sm:mb-8">
+              <Image
+                src={login ? "/auth/login-speech-bubble.svg" : "/auth/signup-speech-bubble.svg"}
+                alt=""
+                aria-hidden="true"
+                width={180}
+                height={100}
+                className="absolute -right-2 -top-8 w-[120px] sm:-right-4 sm:-top-10 sm:w-[140px]"
+              />
+              <p className="text-sm font-medium text-[#64748B]">{login ? "Welcome back!" : null}</p>
+              <h1 className="mt-1 font-heading text-3xl font-bold tracking-tight text-[#111A46] sm:text-[2rem]">
+                {login ? "Continue your journey" : "Create your account"}
+              </h1>
+              <p className="mt-2 max-w-sm text-sm leading-6 text-[#64748B]">
+                {login ? "Sign in and pick up where you left off." : "Join Word Wizards and start learning."}
+              </p>
+            </div>
+            {children}
+            <div className="mt-6 text-center text-sm text-[#64748B]">{footer}</div>
           </div>
-          {children}
-          <div className="mt-7 text-center text-sm text-[#64748B]">{footer}</div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   );
 }
