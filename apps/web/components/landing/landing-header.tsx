@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { MobileNav } from "./mobile-nav";
 
-
 export function LandingHeader() {
   return (
     <header className="relative z-30 border-b border-border/60 bg-background/90 backdrop-blur-sm">
@@ -62,7 +61,7 @@ export function LandingHeader() {
           </Link>
         </nav>
 
-<MobileNav />
+        <MobileNav />
       </div>
     </header>
   );

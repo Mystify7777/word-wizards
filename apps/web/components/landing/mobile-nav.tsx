@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const itemClass =
-  "rounded-md px-3 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-muted";
+const itemClass = "rounded-md px-3 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-muted";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,19 +54,11 @@ export function MobileNav() {
       {isOpen ? (
         <div className="absolute right-0 top-12 w-56 rounded-md border border-border bg-card p-2 shadow-xl">
           <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-            <button
-              className={itemClass}
-              onClick={() => scrollToSection("about")}
-              type="button"
-            >
+            <button className={itemClass} onClick={() => scrollToSection("about")} type="button">
               About
             </button>
 
-            <button
-              className={itemClass}
-              onClick={() => scrollToSection("how-it-works")}
-              type="button"
-            >
+            <button className={itemClass} onClick={() => scrollToSection("how-it-works")} type="button">
               How It Works
             </button>
 
