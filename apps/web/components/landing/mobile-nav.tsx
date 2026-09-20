@@ -11,6 +11,11 @@ export function MobileNav() {
 
   const closeMenu = () => setIsOpen(false);
 
+  const scrollToSection = (sectionId: string) => {
+    closeMenu();
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="relative lg:hidden">
       <button
@@ -26,13 +31,21 @@ export function MobileNav() {
       {isOpen ? (
         <div className="absolute right-0 top-12 w-64 rounded-md border border-border bg-card p-3 shadow-xl">
           <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-            <a className={itemClass} href="#about" onClick={closeMenu}>
+            <button
+              className={itemClass}
+              onClick={() => scrollToSection("about")}
+              type="button"
+            >
               About
-            </a>
+            </button>
 
-            <a className={itemClass} href="#how-it-works" onClick={closeMenu}>
+            <button
+              className={itemClass}
+              onClick={() => scrollToSection("how-it-works")}
+              type="button"
+            >
               How It Works
-            </a>
+            </button>
 
             <Link
               className={itemClass}
