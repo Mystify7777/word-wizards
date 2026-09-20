@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const itemClass =
-  "rounded-md px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted";
+  "rounded-md px-3 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-muted";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +53,7 @@ export function MobileNav() {
       </button>
 
       {isOpen ? (
-        <div className="absolute right-0 top-12 w-64 rounded-md border border-border bg-card p-3 shadow-xl">
+        <div className="absolute right-0 top-12 w-56 rounded-md border border-border bg-card p-2 shadow-xl">
           <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
             <button
               className={itemClass}
@@ -71,10 +71,10 @@ export function MobileNav() {
               How It Works
             </button>
 
-            <div className="my-1 h-px bg-border" />
+            <div className="my-0.5 h-px bg-border" />
 
             <Link
-              className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="rounded-md px-3 py-2 text-left text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               href="/coming-soon?feature=educators"
               onClick={closeMenu}
             >
@@ -84,7 +84,7 @@ export function MobileNav() {
             <div className="my-1 h-px bg-border" />
 
             <Link
-              className="rounded-sm border border-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+              className="rounded-sm border border-border px-3 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
               href="/auth/login"
               onClick={closeMenu}
             >
@@ -92,7 +92,7 @@ export function MobileNav() {
             </Link>
 
             <Link
-              className="mt-1 rounded-md bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+              className="mt-1 rounded-md bg-primary px-3 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
               href="/auth/sign-up"
               onClick={closeMenu}
             >
