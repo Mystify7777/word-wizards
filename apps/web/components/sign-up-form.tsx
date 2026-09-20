@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -66,13 +65,11 @@ export function SignUpForm() {
           <span className="text-base font-bold text-[#4285F4]" aria-hidden="true">G</span>
           {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
         </Button>
-
         <div className="flex items-center gap-3" aria-hidden="true">
           <span className="h-px flex-1 bg-[#E5E7EB]" />
           <span className="text-xs font-medium uppercase tracking-[0.12em] text-[#94A3B8]">or</span>
           <span className="h-px flex-1 bg-[#E5E7EB]" />
         </div>
-
         <form onSubmit={handleSignUp}>
           <div className="flex flex-col gap-5">
             <div className="grid gap-2">
