@@ -55,8 +55,11 @@ export function LoginForm() {
 
     try {
       const next = safeNextPath(new URLSearchParams(window.location.search).get("next"), DEFAULT_LEARNER_ROUTE);
-      const redirectTo = \`\${window.location.origin}/auth/callback?next=\${encodeURIComponent(next)}\`;
-      const { error: authError } = await supabase.auth.signInWithOAuth({ options: { redirectTo }, provider: "google" });
+      const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
+      const { error: authError } = await supabase.auth.signInWithOAuth({
+        options: { redirectTo },
+        provider: "google",
+      });
       if (authError) {
         console.error("Google sign-in failed", authError);
         throw authError;
@@ -71,7 +74,13 @@ export function LoginForm() {
 
   return (
     <div className="space-y-5">
-      <Button className="h-12 w-full rounded-md border-[#DCE0EA] bg-white font-semibold normal-case tracking-normal text-[#111A46] shadow-none hover:bg-[#F8F6FF]" disabled={isLoading || isGoogleLoading} onClick={handleGoogleLogin} type="button" variant="outline">
+      <Button
+        className="h-12 w-full rounded-md border-[#DCE0EA] bg-white font-semibold normal-case tracking-normal text-[#111A46] shadow-none hover:bg-[#F8F6FF]"
+        disabled={isLoading || isGoogleLoading}
+        onClick={handleGoogleLogin}
+        type="button"
+        variant="outline"
+      >
         <Image src="/auth/google-g.svg" alt="" aria-hidden="true" width={20} height={20} />
         {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
       </Button>
@@ -84,31 +93,63 @@ export function LoginForm() {
       <form onSubmit={handleLogin}>
         <div className="space-y-4">
           <div className="grid gap-2">
-            <Label className="normal-case tracking-normal text-sm font-medium text-[#334155]" htmlFor="login-email">Email</Label>
+            <Label className="normal-case tracking-normal text-sm font-medium text-[#334155]" htmlFor="login-email">
+              Email
+            </Label>
             <div className="relative">
               <EnvelopeSimpleIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[#94A3B8]" />
-              <Input autoComplete="email" className="h-11 rounded-md border border-[#DCE0EA] bg-white px-10 text-sm shadow-none focus-visible:border-[#6C4CF6] focus-visible:ring-[#6C4CF6]/20" id="login-email" onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" required type="email" value={email} />
+              <Input
+                autoComplete="email"
+                className="h-11 rounded-md border border-[#DCE0EA] bg-white px-10 text-sm shadow-none focus-visible:border-[#6C4CF6] focus-visible:ring-[#6C4CF6]/20"
+                id="login-email"
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="you@example.com"
+                required
+                type="email"
+                value={email}
+              />
             </div>
           </div>
           <div className="grid gap-2">
             <div className="flex items-center justify-between gap-3">
-              <Label className="normal-case tracking-normal text-sm font-medium text-[#334155]" htmlFor="login-password">Password</Label>
-              <Link className="text-xs font-semibold text-[#6C4CF6] hover:underline" href="/auth/forgot-password">Forgot password?</Link>
+              <Label className="normal-case tracking-normal text-sm font-medium text-[#334155]" htmlFor="login-password">
+                Password
+              </Label>
+              <Link className="text-xs font-semibold text-[#6C4CF6] hover:underline" href="/auth/forgot-password">
+                Forgot password?
+              </Link>
             </div>
             <div className="relative">
               <LockKeyIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[#94A3B8]" />
-              <Input autoComplete="current-password" className="h-11 rounded-md border border-[#DCE0EA] bg-white px-10 pr-11 text-sm shadow-none focus-visible:border-[#6C4CF6] focus-visible:ring-[#6C4CF6]/20" id="login-password" onChange={(event) => setPassword(event.target.value)} required type={showPassword ? "text" : "password"} value={password} />
-              <button aria-label={showPassword ? "Hide password" : "Show password"} className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-sm text-[#94A3B8] hover:text-[#334155] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6C4CF6]" onClick={() => setShowPassword((visible) => !visible)} type="button">
+              <Input
+                autoComplete="current-password"
+                className="h-11 rounded-md border border-[#DCE0EA] bg-white px-10 pr-11 text-sm shadow-none focus-visible:border-[#6C4CF6] focus-visible:ring-[#6C4CF6]/20"
+                id="login-password"
+                onChange={(event) => setPassword(event.target.value)}
+                required
+                type={showPassword ? "text" : "password"}
+                value={password}
+              />
+              <button
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-sm text-[#94A3B8] hover:text-[#334155] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6C4CF6]"
+                onClick={() => setShowPassword((visible) => !visible)}
+                type="button"
+              >
                 {showPassword ? <EyeSlashIcon aria-hidden="true" className="size-4" /> : <EyeIcon aria-hidden="true" className="size-4" />}
               </button>
             </div>
           </div>
-          {error ? <p className="rounded-md border border-[#FECACA] bg-[#FFF7F7] px-3 py-2.5 text-sm leading-5 text-[#B91C1C]" role="alert">{error}</p> : null}
-          <label className="flex items-center gap-2 text-xs text-[#64748B]">
-            <input className="size-4 accent-[#6C4CF6]" type="checkbox" />
-            Remember me
-          </label>
-          <Button className="h-12 w-full rounded-md bg-[#6C4CF6] font-semibold normal-case tracking-normal text-white shadow-none hover:bg-[#5B3FE0]" disabled={isLoading || isGoogleLoading} type="submit">
+          {error ? (
+            <p className="rounded-md border border-[#FECACA] bg-[#FFF7F7] px-3 py-2.5 text-sm leading-5 text-[#B91C1C]" role="alert">
+              {error}
+            </p>
+          ) : null}
+          <Button
+            className="h-12 w-full rounded-md bg-[#6C4CF6] font-semibold normal-case tracking-normal text-white shadow-none hover:bg-[#5B3FE0]"
+            disabled={isLoading || isGoogleLoading}
+            type="submit"
+          >
             {isLoading ? "Signing in..." : "Continue your journey"}
             <ArrowRightIcon aria-hidden="true" className="size-4" weight="bold" />
           </Button>

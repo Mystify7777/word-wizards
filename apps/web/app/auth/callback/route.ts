@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
   const next = safeNextPath(searchParams.get("next"), "/protected/learner", origin);
 
-  if (!code) return NextResponse.redirect(\`\${origin}/auth/error?error=missing_auth_code\`);
+  if (!code) return NextResponse.redirect(`${origin}/auth/error?error=missing_auth_code`);
 
   const supabase = await createClient();
   const { error } = await supabase.auth.exchangeCodeForSession(code);
@@ -18,11 +18,11 @@ export async function GET(request: NextRequest) {
   if (error) {
     const errorCode = getAuthErrorCode(error) ?? "oauth_callback_failed";
     console.error("Auth callback failed", { code: errorCode });
-    return NextResponse.redirect(\`\${origin}/auth/error?error=\${encodeURIComponent(errorCode)}\`);
+    return NextResponse.redirect(`${origin}/auth/error?error=${encodeURIComponent(errorCode)}`);
   }
 
   const forwardedHost = request.headers.get("x-forwarded-host");
-  if (process.env.NODE_ENV === "development") return NextResponse.redirect(\`\${origin}\${next}\`);
-  if (forwardedHost) return NextResponse.redirect(\`https://\${forwardedHost}\${next}\`);
-  return NextResponse.redirect(\`\${origin}\${next}\`);
+  if (process.env.NODE_ENV === "development") return NextResponse.redirect(`${origin}${next}`);
+  if (forwardedHost) return NextResponse.redirect(`https://${forwardedHost}${next}`);
+  return NextResponse.redirect(`${origin}${next}`);
 }

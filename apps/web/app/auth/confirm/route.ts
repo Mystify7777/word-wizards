@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
   if (error) {
     const errorCode = getAuthErrorCode(error) ?? "confirmation_failed";
     console.error("Email confirmation failed", { code: errorCode });
-    redirect(\`/auth/error?error=\${encodeURIComponent(errorCode)}\`);
+    redirect(`/auth/error?error=${encodeURIComponent(errorCode)}`);
   }
 
   redirect(next);

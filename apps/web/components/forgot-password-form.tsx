@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+import { toast } from "sonner";
+
+import { getFriendlyAuthError } from "@/components/auth/auth-errors";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,21 +18,23 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleForgotPassword = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const supabase = createClient();
     setIsLoading(true);
     setError(null);
 
     try {
-      // The url which will be included in the email. This URL needs to be configured in your redirect URLs in the Supabase dashboard at https://supabase.com/dashboard/project/_/auth/url-configuration
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      const { error: authError } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth/update-password`,
       });
-      if (error) throw error;
+      if (authError) throw authError;
       setSuccess(true);
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      toast.success("Reset email sent", { description: "Check your inbox for the password reset link." });
+    } catch (authError) {
+      const message = getFriendlyAuthError(authError, "We couldn't send the reset email. Please try again.");
+      setError(message);
+      toast.error("Password reset failed", { description: message });
     } finally {
       setIsLoading(false);
     }
@@ -37,53 +42,36 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      {success ? (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Check Your Email</CardTitle>
-            <CardDescription>Password reset instructions sent</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              If you registered using your email and password, you will receive a password reset email.
-            </p>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-            <CardDescription>Type in your email and we&apos;ll send you a link to reset your password</CardDescription>
-          </CardHeader>
-          <CardContent>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">{success ? "Check Your Email" : "Reset Your Password"}</CardTitle>
+          <CardDescription>{success ? "Password reset instructions sent." : "Enter your email and we'll send you a reset link."}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {success ? (
+            <p className="text-sm text-muted-foreground">Check your inbox, then follow the link to choose a new password.</p>
+          ) : (
             <form onSubmit={handleForgotPassword}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="m@example.com"
-                    required
-                    type="email"
-                    value={email}
-                  />
+                  <Input id="email" onChange={(event) => setEmail(event.target.value)} placeholder="m@example.com" required type="email" value={email} />
                 </div>
-                {error && <p className="text-sm text-red-500">{error}</p>}
+                {error ? <p className="text-sm text-red-500" role="alert">{error}</p> : null}
                 <Button className="w-full" disabled={isLoading} type="submit">
                   {isLoading ? "Sending..." : "Send reset email"}
                 </Button>
               </div>
-              <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
-                <Link className="underline underline-offset-4" href="/auth/login">
-                  Login
-                </Link>
-              </div>
             </form>
-          </CardContent>
-        </Card>
-      )}
+          )}
+          <div className="mt-4 text-center text-sm">
+            Already have an account?{" "}
+            <Link className="underline underline-offset-4" href="/auth/login">
+              Sign in
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
