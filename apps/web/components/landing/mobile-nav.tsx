@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const itemClass =
   "rounded-md px-3 py-2 text-left text-sm font-medium text-foreground transition-colors hover:bg-muted";
@@ -10,7 +10,7 @@ export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const closeMenu = () => setIsOpen(false);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -34,7 +34,7 @@ export function MobileNav() {
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, closeMenu]);
 
   const scrollToSection = (sectionId: string) => {
     closeMenu();
