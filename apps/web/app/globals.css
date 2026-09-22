@@ -94,6 +94,37 @@
   --soft-green: #eaf9f0;
   --soft-orange: #fff0e3;
 
+  /* Word Wizards brand tokens */
+  --ww-purple: #6c4cf6;
+  --ww-purple-hover: #5b3fe0;
+  --ww-purple-soft: #ede9ff;
+  --ww-navy: #111a46;
+  --ww-slate: #334155;
+  --ww-muted: #64748b;
+  --ww-subtle: #94a3b8;
+  --ww-page: #f4f1ff;
+  --ww-cream: #fffdf7;
+  --ww-surface: #ffffff;
+  --ww-border: #e7e3f3;
+  --ww-input-border: #dce0ea;
+  --ww-input-hover: #f8f6ff;
+  --ww-divider: #e4e7ee;
+  --ww-gold: #f5c33b;
+
+  /* Word Wizards feedback */
+  --ww-success-bg: #eaf9f0;
+  --ww-success-border: #b7e4c7;
+  --ww-success-text: #166534;
+  --ww-warning-bg: #fff8e1;
+  --ww-warning-border: #f6d365;
+  --ww-warning-text: #92400e;
+  --ww-error-bg: #fff1f2;
+  --ww-error-border: #fecdd3;
+  --ww-error-text: #be123c;
+  --ww-info-bg: #f0edff;
+  --ww-info-border: #d8d0ff;
+  --ww-info-text: #5b3fe0;
+
   --radius: 0.575rem;
 }
 
@@ -129,6 +160,71 @@
   --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.553 0.013 58.071);
+}
+
+@layer components {
+  .ww-toast {
+    border-radius: var(--radius-md);
+    box-shadow: 0 14px 35px rgb(72 52 140 / 12%);
+  }
+
+  .ww-toast [data-title] {
+    font-weight: 700;
+  }
+
+  .ww-toast [data-description] {
+    opacity: 0.8;
+  }
+
+  .ww-toast-success {
+    border-color: var(--ww-success-border);
+    background: var(--ww-success-bg);
+    color: var(--ww-success-text);
+  }
+
+  .ww-toast-success [data-icon] {
+    color: var(--ww-success-text);
+  }
+
+  .ww-toast-error {
+    border-color: var(--ww-error-border);
+    background: var(--ww-error-bg);
+    color: var(--ww-error-text);
+  }
+
+  .ww-toast-error [data-icon] {
+    color: var(--ww-error-text);
+  }
+
+  .ww-toast-warning {
+    border-color: var(--ww-warning-border);
+    background: var(--ww-warning-bg);
+    color: var(--ww-warning-text);
+  }
+
+  .ww-toast-warning [data-icon] {
+    color: var(--ww-warning-text);
+  }
+
+  .ww-toast-info {
+    border-color: var(--ww-info-border);
+    background: var(--ww-info-bg);
+    color: var(--ww-info-text);
+  }
+
+  .ww-toast-info [data-icon] {
+    color: var(--ww-info-text);
+  }
+
+  .ww-toast-loading {
+    border-color: var(--ww-border);
+    background: var(--ww-surface);
+    color: var(--ww-navy);
+  }
+
+  .ww-toast-loading [data-icon] {
+    color: var(--ww-purple);
+  }
 }
 
 @layer base {

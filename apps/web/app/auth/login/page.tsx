@@ -9,7 +9,7 @@ export default function Page() {
       footer={
         <>
           Don&apos;t have an account?{" "}
-          <Link className="font-semibold text-[#6C4CF6] hover:underline" href="/auth/sign-up">
+          <Link className="font-semibold text-[var(--ww-purple)] hover:underline" href="/auth/sign-up">
             Create your account
           </Link>
         </>

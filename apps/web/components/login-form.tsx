@@ -75,7 +75,7 @@ export function LoginForm() {
   return (
     <div className="space-y-5">
       <Button
-        className="h-12 w-full rounded-md border-[#DCE0EA] bg-white font-semibold normal-case tracking-normal text-[#111A46] shadow-none hover:bg-[#F8F6FF]"
+        className="h-12 w-full rounded-md border-[var(--ww-input-border)] bg-white font-semibold normal-case tracking-normal text-[var(--ww-navy)] shadow-none hover:bg-[var(--ww-input-hover)]"
         disabled={isLoading || isGoogleLoading}
         onClick={handleGoogleLogin}
         type="button"
@@ -85,25 +85,25 @@ export function LoginForm() {
         {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
       </Button>
       <div aria-hidden="true" className="flex items-center gap-3">
-        <span className="h-px flex-1 bg-[#E4E7EE]" />
-        <span className="text-xs font-medium text-[#94A3B8]">or</span>
-        <span className="h-px flex-1 bg-[#E4E7EE]" />
+        <span className="h-px flex-1 bg-[var(--ww-divider)]" />
+        <span className="text-xs font-medium text-[var(--ww-subtle)]">or</span>
+        <span className="h-px flex-1 bg-[var(--ww-divider)]" />
       </div>
 
       <form onSubmit={handleLogin}>
         <div className="space-y-4">
           <div className="grid gap-2">
-            <Label className="normal-case tracking-normal text-sm font-medium text-[#334155]" htmlFor="login-email">
+            <Label className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]" htmlFor="login-email">
               Email
             </Label>
             <div className="relative">
               <EnvelopeSimpleIcon
                 aria-hidden="true"
-                className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[#94A3B8]"
+                className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[var(--ww-subtle)]"
               />
               <Input
                 autoComplete="email"
-                className="h-11 rounded-md border border-[#DCE0EA] bg-white px-10 text-sm shadow-none focus-visible:border-[#6C4CF6] focus-visible:ring-[#6C4CF6]/20"
+                className="h-11 rounded-md border border-[var(--ww-input-border)] bg-white px-10 text-sm shadow-none focus-visible:border-[var(--ww-purple)] focus-visible:ring-[var(--ww-purple)]/20"
                 id="login-email"
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="you@example.com"
@@ -116,23 +116,23 @@ export function LoginForm() {
           <div className="grid gap-2">
             <div className="flex items-center justify-between gap-3">
               <Label
-                className="normal-case tracking-normal text-sm font-medium text-[#334155]"
+                className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]"
                 htmlFor="login-password"
               >
                 Password
               </Label>
-              <Link className="text-xs font-semibold text-[#6C4CF6] hover:underline" href="/auth/forgot-password">
+              <Link className="text-xs font-semibold text-[var(--ww-purple)] hover:underline" href="/auth/forgot-password">
                 Forgot password?
               </Link>
             </div>
             <div className="relative">
               <LockKeyIcon
                 aria-hidden="true"
-                className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[#94A3B8]"
+                className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-[var(--ww-subtle)]"
               />
               <Input
                 autoComplete="current-password"
-                className="h-11 rounded-md border border-[#DCE0EA] bg-white px-10 pr-11 text-sm shadow-none focus-visible:border-[#6C4CF6] focus-visible:ring-[#6C4CF6]/20"
+                className="h-11 rounded-md border border-[var(--ww-input-border)] bg-white px-10 pr-11 text-sm shadow-none focus-visible:border-[var(--ww-purple)] focus-visible:ring-[var(--ww-purple)]/20"
                 id="login-password"
                 onChange={(event) => setPassword(event.target.value)}
                 required
@@ -141,7 +141,7 @@ export function LoginForm() {
               />
               <button
                 aria-label={showPassword ? "Hide password" : "Show password"}
-                className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-sm text-[#94A3B8] hover:text-[#334155] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6C4CF6]"
+                className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-sm text-[var(--ww-subtle)] hover:text-[var(--ww-slate)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ww-purple)]"
                 onClick={() => setShowPassword((visible) => !visible)}
                 type="button"
               >
@@ -155,14 +155,14 @@ export function LoginForm() {
           </div>
           {error ? (
             <p
-              className="rounded-md border border-[#FECACA] bg-[#FFF7F7] px-3 py-2.5 text-sm leading-5 text-[#B91C1C]"
+              className="rounded-md border border-[var(--ww-error-border)] bg-[var(--ww-error-bg)] px-3 py-2.5 text-sm leading-5 text-[var(--ww-error-text)]"
               role="alert"
             >
               {error}
             </p>
           ) : null}
           <Button
-            className="h-12 w-full rounded-md bg-[#6C4CF6] font-semibold normal-case tracking-normal text-white shadow-none hover:bg-[#5B3FE0]"
+            className="h-12 w-full rounded-md bg-[var(--ww-purple)] font-semibold normal-case tracking-normal text-white shadow-none hover:bg-[var(--ww-purple-hover)]"
             disabled={isLoading || isGoogleLoading}
             type="submit"
           >
