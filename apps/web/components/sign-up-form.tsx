@@ -111,9 +111,9 @@ export function SignUpForm() {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <Button
-        className="h-12 w-full rounded-md border-[var(--ww-input-border)] bg-white font-semibold normal-case tracking-normal text-[var(--ww-navy)] shadow-none hover:bg-[var(--ww-input-hover)]"
+        className="h-11 w-full rounded-md border-[var(--ww-input-border)] bg-white font-semibold normal-case tracking-normal text-[var(--ww-navy)] shadow-none hover:bg-[var(--ww-input-hover)]"
         disabled={isLoading || isGoogleLoading}
         onClick={handleGoogleSignUp}
         type="button"
@@ -129,8 +129,8 @@ export function SignUpForm() {
       </div>
 
       <form onSubmit={handleSignUp}>
-        <div className="space-y-4">
-          <div className="grid gap-2">
+        <div className="space-y-3">
+          <div className="grid gap-1.5">
             <Label className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]" htmlFor="signup-email">
               Email
             </Label>
@@ -151,7 +151,7 @@ export function SignUpForm() {
               />
             </div>
           </div>
-          <div className="grid gap-2">
+          <div className="grid gap-1.5">
             <Label className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]" htmlFor="signup-username">
               Username
             </Label>
@@ -173,7 +173,7 @@ export function SignUpForm() {
             </div>
             <p className="text-xs text-[var(--ww-subtle)]">This will be your display name.</p>
           </div>
-          <div className="grid gap-2">
+          <div className="grid gap-1.5">
             <Label className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]" htmlFor="signup-password">
               Password
             </Label>
@@ -205,7 +205,7 @@ export function SignUpForm() {
               </button>
             </div>
           </div>
-          <div className="grid gap-2">
+          <div className="grid gap-1.5">
             <Label
               className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]"
               htmlFor="signup-repeat-password"
@@ -268,7 +268,7 @@ export function SignUpForm() {
             </span>
           </label>
           <Button
-            className="h-12 w-full rounded-md bg-[var(--ww-purple)] font-semibold normal-case tracking-normal text-white shadow-none hover:bg-[var(--ww-purple-hover)]"
+            className="h-11 w-full rounded-md bg-[var(--ww-purple)] font-semibold normal-case tracking-normal text-white shadow-none hover:bg-[var(--ww-purple-hover)]"
             disabled={isLoading || isGoogleLoading}
             type="submit"
           >

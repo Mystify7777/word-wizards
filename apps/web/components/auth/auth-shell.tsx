@@ -1,70 +1,119 @@
+import {
+  BookOpenIcon,
+  ChartBarIcon,
+  GlobeIcon,
+  HeartIcon,
+  KeyIcon,
+  SparkleIcon,
+  TargetIcon,
+  UsersThreeIcon,
+} from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 type AuthShellProps = { children: ReactNode; footer: ReactNode; mode: "login" | "sign-up" };
 
+const marketingContent = {
+  login: {
+    benefits: [
+      { icon: BookOpenIcon, label: "Interactive lessons", color: "text-[#35a853]" },
+      { icon: ChartBarIcon, label: "Track your progress", color: "text-[#4b9fe8]" },
+      { icon: KeyIcon, label: "Unlock new content", color: "text-[#f5b82e]" },
+      { icon: GlobeIcon, label: "Build a brighter you", color: "text-[var(--ww-purple)]" },
+    ],
+    heading: "Learn the magic of communication",
+    image: "/auth/login-owl-wizard.png",
+    imageAlt: "Wizard owl sitting on learning books",
+    quote: "Small words create big opportunities!",
+  },
+  "sign-up": {
+    benefits: [
+      { icon: SparkleIcon, label: "Learn at your own pace", color: "text-[#f5b82e]" },
+      { icon: UsersThreeIcon, label: "Fun and effective", color: "text-[#4b9fe8]" },
+      { icon: TargetIcon, label: "Achieve real progress", color: "text-[#ef5b63]" },
+      { icon: HeartIcon, label: "Join a global community", color: "text-[#ef5b63]" },
+    ],
+    heading: "Start your language learning adventure today",
+    image: "/auth/signup-learning-landscape.png",
+    imageAlt: "Learning path leading toward a purple-roofed castle",
+    quote: "Every learner is a wizard in the making!",
+  },
+} as const;
+
 export function AuthShell({ children, footer, mode }: AuthShellProps) {
   const login = mode === "login";
+  const content = marketingContent[mode];
 
   return (
-    <main className="min-h-svh bg-[var(--ww-page)]">
-      <div className="grid min-h-svh w-full lg:grid-cols-[0.92fr_1.08fr]">
-        <section className="relative hidden min-h-svh overflow-hidden bg-[var(--ww-cream)] px-8 py-8 lg:flex lg:flex-col lg:px-10 lg:py-10 xl:px-14">
-          <Link aria-label="Word Wizards home" className="relative z-10 w-fit" href="/">
+    <main className="min-h-svh bg-[var(--ww-page)] md:p-3 lg:p-5">
+      <div className="mx-auto grid min-h-svh w-full overflow-hidden border border-[var(--ww-border)] bg-white shadow-[0_24px_70px_rgb(72_52_140_/_12%)] md:min-h-[calc(100svh-1.5rem)] md:max-w-[1440px] md:rounded-2xl lg:min-h-[calc(100svh-2.5rem)] md:grid-cols-[0.96fr_1.04fr]">
+        <section className="relative hidden min-h-0 overflow-hidden bg-[var(--ww-cream)] md:flex md:flex-col">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute -left-16 top-[28%] size-36 rounded-full bg-[var(--ww-purple-soft)]/70" />
+            <div className="absolute -right-20 bottom-[-3rem] size-56 rounded-full bg-[var(--ww-purple-soft)]/55" />
+            <div className="absolute left-[42%] top-[-5rem] h-32 w-64 rounded-full bg-white/70 blur-2xl" />
+          </div>
+
+          <Link aria-label="Word Wizards home" className="relative z-20 mx-auto mt-7 w-fit md:mt-8 lg:mt-9" href="/">
             <Image
               alt="Word Wizards"
-              className="h-auto w-[175px]"
-              height={64}
+              className="h-auto w-[145px] md:w-[165px] lg:w-[185px] xl:w-[205px]"
+              height={220}
               priority
-              src="/asset-webp/brand/horizontal-logo.webp"
-              width={220}
+              src="/asset-webp/brand/vertical-logo.webp"
+              width={180}
             />
           </Link>
 
-          <div className="relative z-10 mt-8 flex min-h-0 flex-1 flex-col">
-            <h2 className="max-w-md font-heading text-2xl font-bold leading-tight text-[var(--ww-navy)] sm:text-3xl">
-              {login ? "Learn the magic of communication" : "Start your language learning adventure today"}
+          <div className="relative z-20 mx-auto mt-3 w-full max-w-[340px] px-6 text-center md:mt-2 lg:mt-3 lg:max-w-[390px]">
+            <h2 className="font-heading text-xl font-extrabold leading-tight text-[var(--ww-navy)] md:text-2xl lg:text-[1.7rem]">
+              {content.heading}
             </h2>
 
-            <ul className="mt-5 grid gap-2.5 text-sm text-[var(--ww-slate)]">
-              {(login
-                ? ["Interactive lessons", "Track your progress", "Unlock new content", "Build a brighter you"]
-                : ["Learn at your own pace", "Fun and effective", "Achieve real progress", "Join a global community"]
-              ).map((item) => (
-                <li className="flex items-start gap-2.5" key={item}>
-                  <span aria-hidden="true" className="mt-1.5 size-2 shrink-0 rounded-full bg-[var(--ww-gold)]" />
-                  {item}
+            <ul className="mx-auto mt-4 grid w-fit gap-2.5 text-left text-sm text-[var(--ww-slate)] lg:mt-5 lg:gap-3">
+              {content.benefits.map(({ color, icon: Icon, label }) => (
+                <li className="flex items-center gap-3" key={label}>
+                  <Icon aria-hidden="true" className={`size-6 shrink-0 ${color}`} weight="duotone" />
+                  <span>{label}</span>
                 </li>
               ))}
             </ul>
+          </div>
 
-            <div className="flex min-h-0 flex-1 items-center justify-center py-6 xl:py-8">
-              <Image
-                alt={
-                  login ? "Wizard owl sitting on learning books" : "Learning path leading toward a purple-roofed castle"
-                }
-                className={
-                  login
-                    ? "h-auto max-h-[330px] w-full max-w-[430px] object-contain"
-                    : "h-auto max-h-[340px] w-full max-w-[560px] object-contain"
-                }
-                height={700}
-                priority
-                src={login ? "/auth/login-owl-wizard.png" : "/auth/signup-learning-landscape.png"}
-                width={900}
-              />
-            </div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[58%]">
+            <Image
+              alt={content.imageAlt}
+              className={
+                login
+                  ? "absolute bottom-[-1.5rem] right-[-1rem] h-auto w-[76%] max-w-[520px] object-contain lg:right-[-0.5rem] lg:w-[74%] xl:w-[72%]"
+                  : "absolute bottom-[-0.5rem] left-1/2 h-auto w-[108%] max-w-[700px] -translate-x-1/2 object-contain"
+              }
+              height={700}
+              priority
+              src={content.image}
+              width={900}
+            />
+          </div>
 
-            <p className="mx-auto max-w-sm text-center font-heading text-sm font-semibold italic leading-6 text-[var(--ww-slate)] sm:text-base">
-              “{login ? "Small words create big opportunities!" : "Every learner is a wizard in the making!"}”
+          <div
+            className={
+              login
+                ? "absolute bottom-8 left-7 z-20 max-w-[190px] -rotate-2 text-left lg:bottom-9 lg:left-9"
+                : "absolute bottom-[29%] right-8 z-20 max-w-[175px] rotate-[-3deg] text-left lg:right-10"
+            }
+          >
+            <SparkleIcon aria-hidden="true" className="mb-1 size-5 text-[var(--ww-gold)]" weight="fill" />
+            <p className="font-heading text-sm font-bold italic leading-5 text-[var(--ww-navy)] lg:text-[15px]">
+              “{content.quote}”
             </p>
+            <span aria-hidden="true" className="mt-1 block h-1 w-16 -rotate-2 rounded-full bg-[var(--ww-purple)]/70" />
           </div>
         </section>
 
-        <section className="flex min-h-svh items-center justify-center bg-[var(--ww-surface)] px-5 py-8 sm:px-8 sm:py-10 lg:min-h-0 lg:px-12 lg:py-10 xl:px-16">
-          <div className="w-full max-w-md">
-            <Link aria-label="Word Wizards home" className="mb-7 block w-fit lg:hidden" href="/">
+        <section className="flex min-h-svh items-center justify-center bg-[var(--ww-surface)] px-5 py-7 sm:px-8 sm:py-9 md:min-h-0 md:px-8 md:py-8 lg:px-10 lg:py-9 xl:px-14">
+          <div className="w-full max-w-[460px]">
+            <Link aria-label="Word Wizards home" className="mb-6 block w-fit md:hidden" href="/">
               <Image
                 alt="Word Wizards"
                 className="h-auto w-[155px]"
@@ -75,19 +124,19 @@ export function AuthShell({ children, footer, mode }: AuthShellProps) {
               />
             </Link>
 
-            <div className="relative mb-7 sm:mb-8">
+            <div className="relative mb-5 sm:mb-6">
               <Image
                 alt=""
                 aria-hidden="true"
-                className="absolute -right-2 -top-9 hidden w-[120px] lg:block sm:-right-4 sm:-top-10 sm:w-[140px]"
+                className="absolute -right-4 -top-11 hidden w-[150px] md:block lg:-right-6 lg:-top-12 lg:w-[170px]"
                 height={100}
                 src={login ? "/auth/login-speech-bubble.svg" : "/auth/signup-speech-bubble.svg"}
                 width={180}
               />
-              <h1 className="font-heading text-3xl font-bold tracking-tight text-[var(--ww-navy)] sm:text-[2rem]">
+              <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[var(--ww-navy)] sm:text-[2rem]">
                 {login ? "Welcome back!" : "Create your account"}
               </h1>
-              <p className="mt-2 max-w-sm text-sm leading-6 text-[var(--ww-muted)]">
+              <p className="mt-1.5 max-w-sm text-sm leading-5 text-[var(--ww-muted)]">
                 {login
                   ? "Glad you're here. Sign in to continue your learning journey."
                   : "Join Word Wizards and start learning."}
@@ -96,7 +145,7 @@ export function AuthShell({ children, footer, mode }: AuthShellProps) {
 
             {children}
 
-            <div className="mt-6 text-center text-sm text-[var(--ww-muted)]">{footer}</div>
+            <div className="mt-5 text-center text-sm text-[var(--ww-muted)]">{footer}</div>
           </div>
         </section>
       </div>
