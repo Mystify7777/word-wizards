@@ -177,9 +177,9 @@
   }
 
   .ww-toast-success {
-    border-color: var(--ww-success-border);
-    background: var(--ww-success-bg);
     color: var(--ww-success-text);
+    background: var(--ww-success-bg);
+    border-color: var(--ww-success-border);
   }
 
   .ww-toast-success [data-icon] {
@@ -187,9 +187,9 @@
   }
 
   .ww-toast-error {
-    border-color: var(--ww-error-border);
-    background: var(--ww-error-bg);
     color: var(--ww-error-text);
+    background: var(--ww-error-bg);
+    border-color: var(--ww-error-border);
   }
 
   .ww-toast-error [data-icon] {
@@ -197,9 +197,9 @@
   }
 
   .ww-toast-warning {
-    border-color: var(--ww-warning-border);
-    background: var(--ww-warning-bg);
     color: var(--ww-warning-text);
+    background: var(--ww-warning-bg);
+    border-color: var(--ww-warning-border);
   }
 
   .ww-toast-warning [data-icon] {
@@ -207,9 +207,9 @@
   }
 
   .ww-toast-info {
-    border-color: var(--ww-info-border);
-    background: var(--ww-info-bg);
     color: var(--ww-info-text);
+    background: var(--ww-info-bg);
+    border-color: var(--ww-info-border);
   }
 
   .ww-toast-info [data-icon] {
@@ -217,9 +217,9 @@
   }
 
   .ww-toast-loading {
-    border-color: var(--ww-border);
-    background: var(--ww-surface);
     color: var(--ww-navy);
+    background: var(--ww-surface);
+    border-color: var(--ww-border);
   }
 
   .ww-toast-loading [data-icon] {

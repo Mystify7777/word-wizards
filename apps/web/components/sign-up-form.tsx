@@ -131,7 +131,10 @@ export function SignUpForm() {
       <form onSubmit={handleSignUp}>
         <div className="space-y-3">
           <div className="grid gap-1.5">
-            <Label className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]" htmlFor="signup-email">
+            <Label
+              className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]"
+              htmlFor="signup-email"
+            >
               Email
             </Label>
             <div className="relative">
@@ -152,7 +155,10 @@ export function SignUpForm() {
             </div>
           </div>
           <div className="grid gap-1.5">
-            <Label className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]" htmlFor="signup-username">
+            <Label
+              className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]"
+              htmlFor="signup-username"
+            >
               Username
             </Label>
             <div className="relative">
@@ -174,7 +180,10 @@ export function SignUpForm() {
             <p className="text-xs text-[var(--ww-subtle)]">This will be your display name.</p>
           </div>
           <div className="grid gap-1.5">
-            <Label className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]" htmlFor="signup-password">
+            <Label
+              className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]"
+              htmlFor="signup-password"
+            >
               Password
             </Label>
             <div className="relative">

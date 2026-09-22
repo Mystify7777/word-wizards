@@ -17,10 +17,10 @@ type AuthShellProps = { children: ReactNode; footer: ReactNode; mode: "login" | 
 const marketingContent = {
   login: {
     benefits: [
-      { icon: BookOpenIcon, label: "Interactive lessons", color: "text-[#35a853]" },
-      { icon: ChartBarIcon, label: "Track your progress", color: "text-[#4b9fe8]" },
-      { icon: KeyIcon, label: "Unlock new content", color: "text-[#f5b82e]" },
-      { icon: GlobeIcon, label: "Build a brighter you", color: "text-[var(--ww-purple)]" },
+      { color: "text-[#35a853]", icon: BookOpenIcon, label: "Interactive lessons" },
+      { color: "text-[#4b9fe8]", icon: ChartBarIcon, label: "Track your progress" },
+      { color: "text-[#f5b82e]", icon: KeyIcon, label: "Unlock new content" },
+      { color: "text-[var(--ww-purple)]", icon: GlobeIcon, label: "Build a brighter you" },
     ],
     heading: "Learn the magic of communication",
     image: "/auth/login-owl-wizard.png",
@@ -29,10 +29,10 @@ const marketingContent = {
   },
   "sign-up": {
     benefits: [
-      { icon: SparkleIcon, label: "Learn at your own pace", color: "text-[#f5b82e]" },
-      { icon: UsersThreeIcon, label: "Fun and effective", color: "text-[#4b9fe8]" },
-      { icon: TargetIcon, label: "Achieve real progress", color: "text-[#ef5b63]" },
-      { icon: HeartIcon, label: "Join a global community", color: "text-[#ef5b63]" },
+      { color: "text-[#f5b82e]", icon: SparkleIcon, label: "Learn at your own pace" },
+      { color: "text-[#4b9fe8]", icon: UsersThreeIcon, label: "Fun and effective" },
+      { color: "text-[#ef5b63]", icon: TargetIcon, label: "Achieve real progress" },
+      { color: "text-[#ef5b63]", icon: HeartIcon, label: "Join a global community" },
     ],
     heading: "Start your language learning adventure today",
     image: "/auth/signup-learning-landscape.png",

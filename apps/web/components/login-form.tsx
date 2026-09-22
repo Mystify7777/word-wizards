@@ -93,7 +93,10 @@ export function LoginForm() {
       <form onSubmit={handleLogin}>
         <div className="space-y-3.5">
           <div className="grid gap-1.5">
-            <Label className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]" htmlFor="login-email">
+            <Label
+              className="normal-case tracking-normal text-sm font-medium text-[var(--ww-slate)]"
+              htmlFor="login-email"
+            >
               Email
             </Label>
             <div className="relative">
@@ -121,7 +124,10 @@ export function LoginForm() {
               >
                 Password
               </Label>
-              <Link className="text-xs font-semibold text-[var(--ww-purple)] hover:underline" href="/auth/forgot-password">
+              <Link
+                className="text-xs font-semibold text-[var(--ww-purple)] hover:underline"
+                href="/auth/forgot-password"
+              >
                 Forgot password?
               </Link>
             </div>

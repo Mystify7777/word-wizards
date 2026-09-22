@@ -59,7 +59,10 @@ export function UpdatePasswordForm({ className, ...props }: React.ComponentProps
                 />
               </div>
               {error ? (
-                <p className="rounded-md border border-[var(--ww-error-border)] bg-[var(--ww-error-bg)] px-3 py-2 text-sm text-[var(--ww-error-text)]" role="alert">
+                <p
+                  className="rounded-md border border-[var(--ww-error-border)] bg-[var(--ww-error-bg)] px-3 py-2 text-sm text-[var(--ww-error-text)]"
+                  role="alert"
+                >
                   {error}
                 </p>
               ) : null}
