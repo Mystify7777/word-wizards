@@ -52,8 +52,12 @@ export function AuthShell({ children, footer, mode }: AuthShellProps) {
       <div className="mx-auto grid min-h-svh w-full overflow-hidden border border-[var(--ww-border)] bg-white shadow-[0_24px_70px_rgb(72_52_140_/_12%)] md:min-h-[calc(100svh-1.5rem)] md:max-w-[1440px] md:rounded-2xl lg:min-h-[calc(100svh-2.5rem)] md:grid-cols-[0.96fr_1.04fr]">
         <section className="relative hidden min-h-0 overflow-hidden bg-[var(--ww-cream)] md:flex md:flex-col">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute -left-16 top-[28%] size-36 rounded-full bg-[var(--ww-purple-soft)]/70" />
-            <div className="absolute -right-20 bottom-[-3rem] size-56 rounded-full bg-[var(--ww-purple-soft)]/55" />
+            <div className="absolute -left-16 top-[28%] size-36 rounded-full bg-[var(--ww-purple-soft)]/65" />
+            <div className="absolute -left-10 top-[24%] size-20 rounded-full bg-[var(--ww-purple-soft)]/45" />
+            <div className="absolute left-8 top-[31%] size-14 rounded-full bg-white/70" />
+            <div className="absolute -right-20 bottom-[-3rem] size-56 rounded-full bg-[var(--ww-purple-soft)]/50" />
+            <div className="absolute -right-4 bottom-10 size-24 rounded-full bg-white/55" />
+            <div className="absolute right-16 bottom-[-1rem] size-16 rounded-full bg-[var(--ww-purple-soft)]/35" />
             <div className="absolute left-[42%] top-[-5rem] h-32 w-64 rounded-full bg-white/70 blur-2xl" />
           </div>
 
@@ -88,8 +92,8 @@ export function AuthShell({ children, footer, mode }: AuthShellProps) {
               alt={content.imageAlt}
               className={
                 login
-                  ? "absolute bottom-[-1.5rem] right-[-1rem] h-auto w-[76%] max-w-[520px] object-contain lg:right-[-0.5rem] lg:w-[74%] xl:w-[72%]"
-                  : "absolute bottom-[-0.5rem] left-1/2 h-auto w-[108%] max-w-[700px] -translate-x-1/2 object-contain"
+                  ? "absolute bottom-[-1.5rem] right-[-1rem] h-auto w-[76%] max-w-[520px] object-contain lg:bottom-[-0.75rem] lg:right-2 lg:w-[59%] lg:max-w-[420px] xl:right-[-0.5rem] xl:w-[62%] xl:max-w-[450px]"
+                  : "absolute bottom-[-0.5rem] left-1/2 h-auto w-[108%] max-w-[700px] -translate-x-1/2 object-contain lg:w-[88%] lg:max-w-[590px] xl:w-[92%] xl:max-w-[630px]"
               }
               height={700}
               priority
@@ -101,8 +105,8 @@ export function AuthShell({ children, footer, mode }: AuthShellProps) {
           <div
             className={
               login
-                ? "absolute bottom-8 left-7 z-20 max-w-[190px] -rotate-2 text-left lg:bottom-9 lg:left-9"
-                : "absolute bottom-[29%] right-8 z-20 max-w-[175px] rotate-[-3deg] text-left lg:right-10"
+                ? "absolute bottom-7 left-7 z-20 max-w-[190px] -rotate-2 text-left md:bottom-8 md:left-7 lg:bottom-8 lg:left-8"
+                : "absolute bottom-[25%] right-6 z-20 max-w-[175px] rotate-[-3deg] text-left md:bottom-[24%] md:right-6 lg:bottom-[22%] lg:right-9"
             }
           >
             <SparkleIcon aria-hidden="true" className="mb-1 size-5 text-[var(--ww-gold)]" weight="fill" />
@@ -130,7 +134,7 @@ export function AuthShell({ children, footer, mode }: AuthShellProps) {
               <Image
                 alt=""
                 aria-hidden="true"
-                className="absolute -right-4 -top-11 hidden w-[150px] md:block lg:-right-6 lg:-top-12 lg:w-[170px]"
+                className="absolute -right-1 -top-9 hidden w-[125px] md:block lg:-right-5 lg:-top-12 lg:w-[165px]"
                 height={100}
                 src={login ? "/auth/login-speech-bubble.svg" : "/auth/signup-speech-bubble.svg"}
                 width={180}
