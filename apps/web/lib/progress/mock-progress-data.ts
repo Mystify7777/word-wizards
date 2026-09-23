@@ -29,7 +29,6 @@ export function getComputedOverallProgress(): OverallProgress {
   const totalThemes = mockThemes.length;
   const completedThemes = mockThemes.filter((t) => t.progress === 100).length;
   const percentage = totalThemes > 0 ? Math.round((completedThemes / totalThemes) * 100) : 0;
-
   return { completedThemes, percentage, totalThemes };
 }
 
@@ -51,11 +50,10 @@ export function getComputedWeeklyGoal(): WeeklyGoal {
   for (const d of days) {
     if (d.completed) {
       streakCount++;
-    } else {
+    } else if (!d.isToday) {
       break;
     }
   }
-
   return { completedDaysCount, days, streakCount, targetDays };
 }
 
@@ -69,7 +67,6 @@ export function getComputedCatalogueProgress(): CatalogueProgress[] {
       const completedThemes = themes.filter((t) => t.progress === 100).length;
       const totalProgressSum = themes.reduce((acc, t) => acc + t.progress, 0);
       const percentage = totalThemes > 0 ? Math.round(totalProgressSum / totalThemes) : 0;
-
       return { completedThemes, id: catalogue.id, name: catalogue.name, percentage, totalThemes };
     });
 }
