@@ -1,5 +1,5 @@
-import { LearnerPlaceholder } from "@/components/learner/learner-placeholder";
+import { AchievementsDashboard } from "@/components/learner/achievements/achievement-dashboard";
 
 export default function AchievementsPage() {
-  return <LearnerPlaceholder title="Achievements" />;
+  return <AchievementsDashboard />;
 }
