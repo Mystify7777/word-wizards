@@ -28,10 +28,12 @@ const Toaster = ({ ...props }: ToasterProps) => {
       theme={theme as ToasterProps["theme"]}
       toastOptions={{
         classNames: {
+          description: "ww-toast-description",
           error: "ww-toast-error",
           info: "ww-toast-info",
           loading: "ww-toast-loading",
           success: "ww-toast-success",
+          title: "ww-toast-title",
           toast: "ww-toast",
           warning: "ww-toast-warning",
         },
