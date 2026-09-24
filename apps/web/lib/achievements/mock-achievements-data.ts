@@ -35,7 +35,7 @@ export const MOCK_ACHIEVEMENTS: Achievement[] = [
     description: "Complete 10 themes",
     icon: "Globe",
     id: "polyglot",
-    status: "locked",
+    status: "unlocked",
     title: "Polyglot",
   },
   {

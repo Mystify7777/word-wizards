@@ -14,7 +14,11 @@ export function AchievementsDashboard() {
   const [filter, setFilter] = useState<AchievementFilter>("all");
 
   useEffect(() => {
-    getAchievements().then(setAchievements);
+    getAchievements()
+      .then(setAchievements)
+      .catch((err) => {
+        console.error("Failed to load achievements:", err);
+      });
   }, []);
 
   const visible = useMemo(() => {
@@ -37,7 +41,14 @@ export function AchievementsDashboard() {
 
         <div className="mb-4 flex items-center justify-between">
           <AchievementFilterTabs active={filter} onChange={setFilter} />
-          <span className="text-sm text-slate-400">{visible.length} achievements</span>
+          <button
+            className="flex items-center gap-1 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900"
+            onClick={() => setFilter("all")}
+            type="button"
+          >
+            <span>{achievements.length} achievements</span>
+            <span aria-hidden="true">&gt;</span>
+          </button>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

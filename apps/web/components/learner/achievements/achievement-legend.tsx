@@ -1,4 +1,4 @@
-import { CheckCircleIcon, CircleNotchIcon, LockKeyIcon, LockKeyOpenIcon } from "@phosphor-icons/react";
+import { CheckCircleIcon, CircleNotchIcon, LockKeyIcon, LockKeyOpenIcon } from "@phosphor-icons/react/dist/ssr";
 
 const LEGEND = [
   {

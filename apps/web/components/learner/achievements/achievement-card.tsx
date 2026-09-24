@@ -52,7 +52,7 @@ function StatusIcon({ status }: { status: Achievement["status"] }) {
     case "unlocked":
       return <LockKeyOpenIcon className="size-5 text-sky-500" weight="bold" />;
     case "in-progress":
-      return <CircleNotchIcon className="size-5 animate-spin text-amber-500" weight="bold" />;
+      return <CircleNotchIcon className="size-5 text-amber-500" weight="bold" />;
     case "completed":
       return <CheckCircleIcon className="size-5 text-emerald-500" weight="fill" />;
   }
