@@ -94,6 +94,37 @@
   --soft-green: #eaf9f0;
   --soft-orange: #fff0e3;
 
+  /* Word Wizards brand tokens */
+  --ww-purple: #6c4cf6;
+  --ww-purple-hover: #5b3fe0;
+  --ww-purple-soft: #ede9ff;
+  --ww-navy: #111a46;
+  --ww-slate: #334155;
+  --ww-muted: #64748b;
+  --ww-subtle: #94a3b8;
+  --ww-page: #f4f1ff;
+  --ww-cream: #fffdf7;
+  --ww-surface: #ffffff;
+  --ww-border: #e7e3f3;
+  --ww-input-border: #dce0ea;
+  --ww-input-hover: #f8f6ff;
+  --ww-divider: #e4e7ee;
+  --ww-gold: #f5c33b;
+
+  /* Word Wizards feedback */
+  --ww-success-bg: #eaf9f0;
+  --ww-success-border: #b7e4c7;
+  --ww-success-text: #166534;
+  --ww-warning-bg: #fff8e1;
+  --ww-warning-border: #f6d365;
+  --ww-warning-text: #92400e;
+  --ww-error-bg: #fff1f2;
+  --ww-error-border: #fecdd3;
+  --ww-error-text: #be123c;
+  --ww-info-bg: #f0edff;
+  --ww-info-border: #d8d0ff;
+  --ww-info-text: #5b3fe0;
+
   --radius: 0.575rem;
 }
 
@@ -129,6 +160,67 @@
   --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.553 0.013 58.071);
+}
+
+@layer components {
+  .ww-toast {
+    color: var(--ww-navy) !important;
+    background: var(--ww-surface) !important;
+    border: 1px solid var(--ww-border) !important;
+    border-left-width: 4px !important;
+    border-radius: var(--radius-md);
+    box-shadow: 0 14px 35px rgb(72 52 140 / 12%);
+  }
+
+  .ww-toast-title {
+    font-weight: 700;
+    color: var(--ww-navy) !important;
+  }
+
+  .ww-toast-description {
+    color: var(--ww-slate) !important;
+    opacity: 1 !important;
+  }
+
+  .ww-toast-success {
+    border-left: 4px solid var(--ww-success-text) !important;
+  }
+
+  .ww-toast-success [data-icon] {
+    color: var(--ww-success-text) !important;
+  }
+
+  .ww-toast-error {
+    border-left: 4px solid var(--ww-error-text) !important;
+  }
+
+  .ww-toast-error [data-icon] {
+    color: var(--ww-error-text) !important;
+  }
+
+  .ww-toast-warning {
+    border-left: 4px solid var(--ww-warning-text) !important;
+  }
+
+  .ww-toast-warning [data-icon] {
+    color: var(--ww-warning-text) !important;
+  }
+
+  .ww-toast-info {
+    border-left: 4px solid var(--ww-info-text) !important;
+  }
+
+  .ww-toast-info [data-icon] {
+    color: var(--ww-info-text) !important;
+  }
+
+  .ww-toast-loading {
+    border-left: 4px solid var(--ww-purple) !important;
+  }
+
+  .ww-toast-loading [data-icon] {
+    color: var(--ww-purple) !important;
+  }
 }
 
 @layer base {
