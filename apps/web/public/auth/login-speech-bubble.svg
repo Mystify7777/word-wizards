@@ -1,0 +1,7 @@
+<svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg" >
+<title>Glad you’re here!</title>
+<path d="M34 112C18 78 36 38 76 25c39-13 83-4 119 10 43 17 89 15 118 35 28 19 30 57 4 76-27 20-76 17-115 17-39 0-76 10-111-3-31-12-45-35-57-48Z" fill="#DFF5F5"/>
+<path d="M302 34l13-18M320 51l25-7M317 73l24 8" stroke="#F5C33B" stroke-linecap="round" stroke-width="5" />
+<text fill="#23335C" font-family="Comic Sans MS, Comic Sans, cursive" font-size="25" font-weight="700" text-anchor="middle" x="180" y="76" >Glad</text>
+<text fill="#23335C" font-family="Comic Sans MS, Comic Sans, cursive" font-size="25" font-weight="700" text-anchor="middle" x="180" y="108" >you’re here!</text>
+</svg>

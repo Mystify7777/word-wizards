@@ -8,6 +8,8 @@ type ComingSoonPageProps = {
 
 const featureNames: Record<string, string> = {
   educators: "The educator experience",
+  privacy: "The Privacy Policy",
+  terms: "The Terms of Service",
 };
 
 export default async function ComingSoonPage({ searchParams }: ComingSoonPageProps) {

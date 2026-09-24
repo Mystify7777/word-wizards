@@ -19,16 +19,23 @@ const Toaster = ({ ...props }: ToasterProps) => {
       }}
       style={
         {
-          "--border-radius": "var(--radius)",
-          "--normal-bg": "var(--popover)",
-          "--normal-border": "var(--border)",
-          "--normal-text": "var(--popover-foreground)",
+          "--border-radius": "var(--radius-md)",
+          "--normal-bg": "var(--ww-surface)",
+          "--normal-border": "var(--ww-border)",
+          "--normal-text": "var(--ww-navy)",
         } as React.CSSProperties
       }
       theme={theme as ToasterProps["theme"]}
       toastOptions={{
         classNames: {
-          toast: "cn-toast",
+          description: "ww-toast-description",
+          error: "ww-toast-error",
+          info: "ww-toast-info",
+          loading: "ww-toast-loading",
+          success: "ww-toast-success",
+          title: "ww-toast-title",
+          toast: "ww-toast",
+          warning: "ww-toast-warning",
         },
       }}
       {...props}
