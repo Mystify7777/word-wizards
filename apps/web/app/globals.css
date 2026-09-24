@@ -164,64 +164,63 @@
 
 @layer components {
   .ww-toast {
+    border: 1px solid var(--ww-border) !important;
+    border-left-width: 4px !important;
     border-radius: var(--radius-md);
-    border: 1px solid var(--ww-border);
-    border-left-width: 4px;
-    background: var(--ww-surface);
-    color: var(--ww-navy);
+    background: var(--ww-surface) !important;
+    color: var(--ww-navy) !important;
     box-shadow: 0 14px 35px rgb(72 52 140 / 12%);
   }
 
-  .ww-toast [data-title] {
-    color: var(--ww-navy);
+  .ww-toast-title {
+    color: var(--ww-navy) !important;
     font-weight: 700;
   }
 
-  .ww-toast [data-description] {
-    color: var(--ww-slate);
-    opacity: 1;
+  .ww-toast-description {
+    color: var(--ww-slate) !important;
+    opacity: 1 !important;
   }
 
   .ww-toast-success {
-    border-left-color: var(--ww-success-text);
+    border-left: 4px solid var(--ww-success-text) !important;
   }
 
   .ww-toast-success [data-icon] {
-    color: var(--ww-success-text);
+    color: var(--ww-success-text) !important;
   }
 
   .ww-toast-error {
-    border-left-color: var(--ww-error-text);
+    border-left: 4px solid var(--ww-error-text) !important;
   }
 
   .ww-toast-error [data-icon] {
-    color: var(--ww-error-text);
+    color: var(--ww-error-text) !important;
   }
 
   .ww-toast-warning {
-    border-left-color: var(--ww-warning-text);
+    border-left: 4px solid var(--ww-warning-text) !important;
   }
 
   .ww-toast-warning [data-icon] {
-    color: var(--ww-warning-text);
+    color: var(--ww-warning-text) !important;
   }
 
   .ww-toast-info {
-    border-left-color: #3b82f6;
+    border-left: 4px solid var(--ww-info-text) !important;
   }
 
   .ww-toast-info [data-icon] {
-    color: #2563eb;
+    color: var(--ww-info-text) !important;
   }
 
   .ww-toast-loading {
-    border-left-color: var(--ww-purple);
+    border-left: 4px solid var(--ww-purple) !important;
   }
 
   .ww-toast-loading [data-icon] {
-    color: var(--ww-purple);
+    color: var(--ww-purple) !important;
   }
-
 }
 
 @layer base {
