@@ -73,7 +73,10 @@ export function AuthShell({ children, footer, mode }: AuthShellProps) {
           </Link>
 
           <div className="relative z-20 mx-auto mt-3 w-full max-w-[340px] px-6 text-center md:mt-2 lg:mt-3 lg:max-w-[390px]">
-            <div aria-hidden="true" className="pointer-events-none absolute inset-x-4 top-[-0.75rem] -z-10 h-[15rem] rounded-[40%] bg-[var(--ww-cream)]/80 blur-xl" />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-4 top-[-0.75rem] -z-10 h-[15rem] rounded-[40%] bg-[var(--ww-cream)]/80 blur-xl"
+            />
             <h2 className="font-heading text-xl font-extrabold leading-tight text-[var(--ww-navy)] md:text-2xl lg:text-[1.7rem]">
               {content.heading}
             </h2>

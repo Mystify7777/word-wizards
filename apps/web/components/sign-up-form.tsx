@@ -112,8 +112,6 @@ export function SignUpForm() {
 
   return (
     <div className="space-y-4">
-
-
       <form onSubmit={handleSignUp}>
         <div className="space-y-3">
           <div className="grid gap-1.5">
@@ -252,11 +250,14 @@ export function SignUpForm() {
             />
             <span>
               I agree to the{" "}
-              <Link className="font-semibold text-[var(--ww-purple)] hover:underline" href="/terms">
+              <Link className="font-semibold text-[var(--ww-purple)] hover:underline" href="/coming-soon?feature=terms">
                 Terms of Service
               </Link>{" "}
               and{" "}
-              <Link className="font-semibold text-[var(--ww-purple)] hover:underline" href="/privacy">
+              <Link
+                className="font-semibold text-[var(--ww-purple)] hover:underline"
+                href="/coming-soon?feature=privacy"
+              >
                 Privacy Policy
               </Link>
               .
@@ -273,7 +274,11 @@ export function SignUpForm() {
         </div>
       </form>
 
-      <div aria-hidden="true" className="flex items-center gap-3"><span className="h-px flex-1 bg-[var(--ww-divider)]" /><span className="text-xs font-medium text-[var(--ww-subtle)]">or</span><span className="h-px flex-1 bg-[var(--ww-divider)]" /></div>
+      <div aria-hidden="true" className="flex items-center gap-3">
+        <span className="h-px flex-1 bg-[var(--ww-divider)]" />
+        <span className="text-xs font-medium text-[var(--ww-subtle)]">or</span>
+        <span className="h-px flex-1 bg-[var(--ww-divider)]" />
+      </div>
       <Button
         className="h-11 w-full rounded-md border-[var(--ww-input-border)] bg-white font-semibold normal-case tracking-normal text-[var(--ww-navy)] shadow-none hover:bg-[var(--ww-input-hover)]"
         disabled={isLoading || isGoogleLoading}

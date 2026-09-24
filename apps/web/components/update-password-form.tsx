@@ -27,7 +27,7 @@ export function UpdatePasswordForm({ className, ...props }: React.ComponentProps
       const { error: authError } = await supabase.auth.updateUser({ password });
       if (authError) throw authError;
       toast.success("Password updated", { description: "Your new password is ready to use." });
-      router.push("/protected");
+      router.push("/protected/learner");
     } catch (authError) {
       const message = getFriendlyAuthError(authError, "We couldn't update your password. Please try again.");
       setError(message);

@@ -74,8 +74,6 @@ export function LoginForm() {
 
   return (
     <div className="space-y-4">
-
-
       <form onSubmit={handleLogin}>
         <div className="space-y-3.5">
           <div className="grid gap-1.5">
@@ -164,8 +162,18 @@ export function LoginForm() {
         </div>
       </form>
 
-      <div aria-hidden="true" className="flex items-center gap-3"><span className="h-px flex-1 bg-[var(--ww-divider)]" /><span className="text-xs font-medium text-[var(--ww-subtle)]">or</span><span className="h-px flex-1 bg-[var(--ww-divider)]" /></div>
-      <Button className="h-11 w-full rounded-md border-[var(--ww-input-border)] bg-white font-semibold normal-case tracking-normal text-[var(--ww-navy)] shadow-none hover:bg-[var(--ww-input-hover)]" disabled={isLoading || isGoogleLoading} onClick={handleGoogleLogin} type="button" variant="outline">
+      <div aria-hidden="true" className="flex items-center gap-3">
+        <span className="h-px flex-1 bg-[var(--ww-divider)]" />
+        <span className="text-xs font-medium text-[var(--ww-subtle)]">or</span>
+        <span className="h-px flex-1 bg-[var(--ww-divider)]" />
+      </div>
+      <Button
+        className="h-11 w-full rounded-md border-[var(--ww-input-border)] bg-white font-semibold normal-case tracking-normal text-[var(--ww-navy)] shadow-none hover:bg-[var(--ww-input-hover)]"
+        disabled={isLoading || isGoogleLoading}
+        onClick={handleGoogleLogin}
+        type="button"
+        variant="outline"
+      >
         <Image alt="" aria-hidden="true" height={20} src="/auth/google-g.svg" width={20} />
         {isGoogleLoading ? "Connecting to Google..." : "Continue with Google"}
       </Button>

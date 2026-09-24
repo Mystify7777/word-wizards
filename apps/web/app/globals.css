@@ -164,17 +164,17 @@
 
 @layer components {
   .ww-toast {
+    color: var(--ww-navy) !important;
+    background: var(--ww-surface) !important;
     border: 1px solid var(--ww-border) !important;
     border-left-width: 4px !important;
     border-radius: var(--radius-md);
-    background: var(--ww-surface) !important;
-    color: var(--ww-navy) !important;
     box-shadow: 0 14px 35px rgb(72 52 140 / 12%);
   }
 
   .ww-toast-title {
-    color: var(--ww-navy) !important;
     font-weight: 700;
+    color: var(--ww-navy) !important;
   }
 
   .ww-toast-description {
