@@ -1,9 +1,9 @@
 import type { ContentUnlock, LearnerOverview, LearnerProfile, LearnerWallet } from "./types";
 
 export const mockLearnerProfile: LearnerProfile = {
-  id: "learner-1",
   displayName: "Learner",
   email: "learner@example.com",
+  id: "learner-1",
   username: "Learner4827",
 };
 

@@ -22,8 +22,6 @@ export async function getContentUnlock(
   contentId: string,
 ): Promise<ContentUnlock | null> {
   return (
-    mockContentUnlocks.find(
-      (unlock) => unlock.contentType === contentType && unlock.contentId === contentId,
-    ) ?? null
+    mockContentUnlocks.find((unlock) => unlock.contentType === contentType && unlock.contentId === contentId) ?? null
   );
 }

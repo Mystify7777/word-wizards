@@ -8,9 +8,7 @@ export async function getExercisesByLessonId(lessonId: string): Promise<Exercise
 }
 
 export async function getExerciseById(lessonId: string, exerciseId: string): Promise<Exercise | null> {
-  return (
-    (await getExercisesByLessonId(lessonId)).find((exercise) => exercise.id === exerciseId) ?? null
-  );
+  return (await getExercisesByLessonId(lessonId)).find((exercise) => exercise.id === exerciseId) ?? null;
 }
 
 export async function getExerciseAttempts(exerciseId: string): Promise<ExerciseAttempt[]> {
@@ -19,11 +17,6 @@ export async function getExerciseAttempts(exerciseId: string): Promise<ExerciseA
     .sort((a, b) => a.startedAt.localeCompare(b.startedAt));
 }
 
-export async function getExerciseAttemptById(
-  exerciseId: string,
-  attemptId: string,
-): Promise<ExerciseAttempt | null> {
-  return (
-    (await getExerciseAttempts(exerciseId)).find((attempt) => attempt.id === attemptId) ?? null
-  );
+export async function getExerciseAttemptById(exerciseId: string, attemptId: string): Promise<ExerciseAttempt | null> {
+  return (await getExerciseAttempts(exerciseId)).find((attempt) => attempt.id === attemptId) ?? null;
 }

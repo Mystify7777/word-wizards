@@ -1,10 +1,6 @@
 import type { ContentStatus } from "@/lib/catalogue/types";
 
-export type ExerciseType =
-  | "direct_manipulation"
-  | "multiple_choice"
-  | "recognition"
-  | "spelling";
+export type ExerciseType = "direct_manipulation" | "multiple_choice" | "recognition" | "spelling";
 
 export type Exercise = {
   id: string;
