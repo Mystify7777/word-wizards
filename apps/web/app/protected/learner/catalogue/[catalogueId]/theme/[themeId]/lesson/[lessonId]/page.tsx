@@ -12,7 +12,7 @@ export default async function LessonPage({
   const [catalogue, theme, lesson] = await Promise.all([
     getCatalogueById(catalogueId),
     getThemeById(catalogueId, themeId),
-    getLearnerLessonById(themeId, lessonId),
+    getLearnerLessonById(catalogueId, themeId, lessonId),
   ]);
 
   if (!catalogue || !theme || !lesson) {
