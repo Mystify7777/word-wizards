@@ -17,7 +17,7 @@ export default async function ThemePage({
   }
 
   const isAvailable = theme.availability === "available";
-  const lessons = isAvailable ? await getLearnerLessonsByThemeId(theme.id) : [];
+  const lessons = isAvailable ? await getLearnerLessonsByThemeId(catalogue.id, theme.id) : [];
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
