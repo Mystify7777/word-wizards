@@ -4,7 +4,6 @@ export const mockLearnerProfile: LearnerProfile = {
   displayName: "Learner",
   email: "learner@example.com",
   id: "learner-1",
-  username: "Learner4827",
 };
 
 export const mockLearnerWallet: LearnerWallet = {
