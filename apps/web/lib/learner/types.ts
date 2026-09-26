@@ -6,7 +6,6 @@ export type LearnerNavItem = {
 export type LearnerProfile = {
   id: string;
   displayName: string;
-  username: string;
   email: string;
   avatarUrl?: string;
 };
