@@ -40,7 +40,9 @@ export default async function LessonPage({
               <LockKeyIcon size={20} />
               Lesson locked
             </CardTitle>
-            <CardDescription>This lesson is represented in the mock learner data but is not available yet.</CardDescription>
+            <CardDescription>
+              This lesson is represented in the mock learner data but is not available yet.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Link
@@ -88,7 +90,9 @@ export default async function LessonPage({
             )}
             {progressLabel}
           </CardTitle>
-          <CardDescription>The interactive lesson experience will be implemented in the next learning phase.</CardDescription>
+          <CardDescription>
+            The interactive lesson experience will be implemented in the next learning phase.
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
           <div className="space-y-2">
@@ -111,7 +115,8 @@ export default async function LessonPage({
           <div className="border border-dashed border-border bg-muted/40 p-5">
             <p className="text-sm font-medium">Lesson selection complete.</p>
             <p className="mt-1 text-sm text-muted-foreground">
-              This route establishes the boundary for the future lesson player without introducing exercise or completion logic.
+              This route establishes the boundary for the future lesson player without introducing exercise or
+              completion logic.
             </p>
           </div>
 

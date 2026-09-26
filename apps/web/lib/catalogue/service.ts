@@ -6,9 +6,7 @@ const mockLessonAvailability: Record<string, LessonAvailability> = {
 };
 
 export async function getCatalogues(): Promise<Catalogue[]> {
-  return mockCatalogues
-    .filter((catalogue) => catalogue.status === "published")
-    .sort((a, b) => a.order - b.order);
+  return mockCatalogues.filter((catalogue) => catalogue.status === "published").sort((a, b) => a.order - b.order);
 }
 
 export async function getCatalogueById(id: string): Promise<Catalogue | null> {
@@ -52,10 +50,9 @@ export async function getLearnerLessonsByThemeId(themeId: string): Promise<Learn
   return Promise.all(
     lessons.map(async (lesson) => ({
       ...lesson,
-      availability:
-        theme?.availability === "locked" ? "locked" : (mockLessonAvailability[lesson.id] ?? "available"),
+      availability: theme?.availability === "locked" ? "locked" : (mockLessonAvailability[lesson.id] ?? "available"),
       progress: await getLessonProgress(lesson.id),
-    }))
+    })),
   );
 }
 

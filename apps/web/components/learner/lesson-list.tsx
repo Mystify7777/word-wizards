@@ -107,7 +107,7 @@ export function LessonList({
         return (
           <Link
             className="group block focus-visible:outline-none"
-            href={"/protected/learner/catalogue/" + catalogueId + "/theme/" + themeId + "/lesson/" + lesson.id}
+            href={`/protected/learner/catalogue/${catalogueId}/theme/${themeId}/lesson/${lesson.id}`}
             key={lesson.id}
           >
             <Card className="transition-transform group-hover:-translate-y-0.5 group-focus-visible:ring-2 group-focus-visible:ring-ring/40">
