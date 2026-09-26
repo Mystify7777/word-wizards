@@ -1,4 +1,9 @@
-import { mockContentUnlocks, mockLearnerOverview, mockLearnerProfile, mockLearnerWallet } from "./mock-data";
+import {
+  mockContentUnlocks,
+  mockLearnerOverview,
+  mockLearnerProfile,
+  mockLearnerWallet,
+} from "./mock-data";
 import type { ContentUnlock, LearnerOverview, LearnerProfile, LearnerWallet } from "./types";
 
 export async function getLearnerProfile(): Promise<LearnerProfile> {
@@ -22,6 +27,8 @@ export async function getContentUnlock(
   contentId: string,
 ): Promise<ContentUnlock | null> {
   return (
-    mockContentUnlocks.find((unlock) => unlock.contentType === contentType && unlock.contentId === contentId) ?? null
+    mockContentUnlocks.find(
+      (unlock) => unlock.contentType === contentType && unlock.contentId === contentId,
+    ) ?? null
   );
 }
