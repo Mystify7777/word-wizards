@@ -43,19 +43,34 @@ export async function getLessonProgress(lessonId: string): Promise<LessonProgres
   );
 }
 
-export async function getLearnerLessonsByThemeId(themeId: string): Promise<LearnerLesson[]> {
-  const theme = mockThemes.find((item) => item.id === themeId);
+export async function getLearnerLessonsByThemeId(catalogueId: string, themeId: string): Promise<LearnerLesson[]> {
+  const theme = await getThemeById(catalogueId, themeId);
+
+  if (!theme) {
+    return [];
+  }
+
   const lessons = await getLessonsByThemeId(themeId);
 
   return Promise.all(
     lessons.map(async (lesson) => ({
       ...lesson,
-      availability: theme?.availability === "locked" ? "locked" : (mockLessonAvailability[lesson.id] ?? "available"),
+      availability: theme.availability === "locked" ? "locked" : (mockLessonAvailability[lesson.id] ?? "available"),
       progress: await getLessonProgress(lesson.id),
     })),
   );
 }
 
-export async function getLearnerLessonById(themeId: string, lessonId: string): Promise<LearnerLesson | null> {
-  return (await getLearnerLessonsByThemeId(themeId)).find((lesson) => lesson.id === lessonId) ?? null;
+export async function getLearnerLessonById(
+  catalogueId: string,
+  themeId: string,
+  lessonId: string,
+): Promise<LearnerLesson | null> {
+  const theme = await getThemeById(catalogueId, themeId);
+
+  if (!theme) {
+    return null;
+  }
+
+  return (await getLearnerLessonsByThemeId(catalogueId, themeId)).find((lesson) => lesson.id === lessonId) ?? null;
 }
