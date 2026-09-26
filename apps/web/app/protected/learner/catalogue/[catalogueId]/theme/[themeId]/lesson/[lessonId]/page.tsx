@@ -75,7 +75,9 @@ export default async function LessonPage({
           <ArrowRightIcon className="rotate-180" size={14} />
           {theme.name}
         </Link>
-        <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Lesson {lesson.order}</p>
+        <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
+          {lesson.type} {lesson.order}
+        </p>
         <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">{lesson.title}</h1>
         <p className="max-w-xl text-muted-foreground">{lesson.description}</p>
       </section>
@@ -83,6 +85,7 @@ export default async function LessonPage({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
+            {lesson.type === "lab" ? "Lab" : "Tutorial"} ·{" "}
             {lesson.progress.status === "completed" ? (
               <CheckCircleIcon className="text-primary" size={20} />
             ) : (
