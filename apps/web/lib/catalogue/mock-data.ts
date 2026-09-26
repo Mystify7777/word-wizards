@@ -1,4 +1,4 @@
-import type { Catalogue, Theme } from "./types";
+import type { Catalogue, Lesson, LessonProgress, Theme } from "./types";
 
 export const mockCatalogues: Catalogue[] = [
   {
@@ -6,6 +6,8 @@ export const mockCatalogues: Catalogue[] = [
     id: "letters-and-words",
     name: "Letters & Words",
     order: 1,
+    slug: "letters-and-words",
+    status: "published",
     visual: "Aa",
   },
   {
@@ -13,6 +15,8 @@ export const mockCatalogues: Catalogue[] = [
     id: "phrases-and-sentences",
     name: "Phrases & Sentences",
     order: 2,
+    slug: "phrases-and-sentences",
+    status: "published",
     visual: "Aa.",
   },
   {
@@ -20,6 +24,8 @@ export const mockCatalogues: Catalogue[] = [
     id: "conversations",
     name: "Conversations",
     order: 3,
+    slug: "conversations",
+    status: "published",
     visual: "…",
   },
 ];
@@ -33,6 +39,8 @@ export const mockThemes: Theme[] = [
     name: "Everyday Animals",
     order: 1,
     progress: 60,
+    slug: "everyday-animals",
+    status: "published",
     visual: "🐾",
   },
   {
@@ -43,6 +51,8 @@ export const mockThemes: Theme[] = [
     name: "Food & Drinks",
     order: 2,
     progress: 20,
+    slug: "food-and-drinks",
+    status: "published",
     visual: "🍎",
   },
   {
@@ -53,6 +63,8 @@ export const mockThemes: Theme[] = [
     name: "Daily Life",
     order: 3,
     progress: 0,
+    slug: "daily-life",
+    status: "published",
     visual: "☀️",
   },
   {
@@ -63,6 +75,8 @@ export const mockThemes: Theme[] = [
     name: "Daily Routines",
     order: 1,
     progress: 35,
+    slug: "daily-routines",
+    status: "published",
     visual: "🕘",
   },
   {
@@ -73,6 +87,8 @@ export const mockThemes: Theme[] = [
     name: "At the Restaurant",
     order: 2,
     progress: 0,
+    slug: "at-the-restaurant",
+    status: "published",
     visual: "🍽️",
   },
   {
@@ -83,6 +99,8 @@ export const mockThemes: Theme[] = [
     name: "Making Plans",
     order: 3,
     progress: 0,
+    slug: "making-plans",
+    status: "published",
     visual: "📅",
   },
   {
@@ -93,6 +111,8 @@ export const mockThemes: Theme[] = [
     name: "Introductions",
     order: 1,
     progress: 0,
+    slug: "introductions",
+    status: "published",
     visual: "👋",
   },
   {
@@ -103,6 +123,8 @@ export const mockThemes: Theme[] = [
     name: "Shopping",
     order: 2,
     progress: 0,
+    slug: "shopping",
+    status: "published",
     visual: "🛍️",
   },
   {
@@ -113,6 +135,156 @@ export const mockThemes: Theme[] = [
     name: "Travel",
     order: 3,
     progress: 0,
+    slug: "travel",
+    status: "published",
     visual: "🧳",
+  },
+];
+
+export const mockLessons: Lesson[] = [
+  {
+    description: "Learn the names of familiar animals and build your first animal vocabulary set.",
+    id: "animal-names",
+    order: 1,
+    status: "published",
+    themeId: "everyday-animals",
+    title: "Animal Names",
+  },
+  {
+    description: "Recognize common animal sounds and connect them with the right words.",
+    id: "animal-sounds",
+    order: 2,
+    status: "published",
+    themeId: "everyday-animals",
+    title: "Animal Sounds",
+  },
+  {
+    description: "Use simple words to describe animals by size, appearance, and behavior.",
+    id: "describing-animals",
+    order: 3,
+    status: "published",
+    themeId: "everyday-animals",
+    title: "Describing Animals",
+  },
+  {
+    description: "Expand your vocabulary with animals you may encounter in the wild.",
+    id: "wild-animals",
+    order: 4,
+    status: "published",
+    themeId: "everyday-animals",
+    title: "Wild Animals",
+  },
+  {
+    description: "Learn common words for meals, ingredients, and everyday food choices.",
+    id: "food-basics",
+    order: 1,
+    status: "published",
+    themeId: "food-and-drinks",
+    title: "Food Basics",
+  },
+  {
+    description: "Build a practical vocabulary for drinks and simple preferences.",
+    id: "drinks",
+    order: 2,
+    status: "published",
+    themeId: "food-and-drinks",
+    title: "Drinks",
+  },
+  {
+    description: "Talk about common daily activities using simple, useful phrases.",
+    id: "daily-activities",
+    order: 1,
+    status: "published",
+    themeId: "daily-life",
+    title: "Daily Activities",
+  },
+  {
+    description: "Build simple phrases for talking about your routine.",
+    id: "talking-about-routines",
+    order: 1,
+    status: "published",
+    themeId: "daily-routines",
+    title: "Talking About Routines",
+  },
+  {
+    description: "Practice useful phrases for ordering food and making simple requests.",
+    id: "ordering-food",
+    order: 1,
+    status: "published",
+    themeId: "at-the-restaurant",
+    title: "Ordering Food",
+  },
+  {
+    description: "Practice introductions and simple questions when meeting someone new.",
+    id: "meeting-people",
+    order: 1,
+    status: "published",
+    themeId: "introductions",
+    title: "Meeting People",
+  },
+];
+
+export const mockLessonProgress: LessonProgress[] = [
+  {
+    attemptCount: 2,
+    lessonId: "animal-names",
+    progress: 100,
+    score: 92,
+    status: "completed",
+  },
+  {
+    attemptCount: 1,
+    lessonId: "animal-sounds",
+    progress: 60,
+    score: 78,
+    status: "in_progress",
+  },
+  {
+    attemptCount: 0,
+    lessonId: "describing-animals",
+    progress: 0,
+    status: "not_started",
+  },
+  {
+    attemptCount: 0,
+    lessonId: "wild-animals",
+    progress: 0,
+    status: "not_started",
+  },
+  {
+    attemptCount: 0,
+    lessonId: "food-basics",
+    progress: 0,
+    status: "not_started",
+  },
+  {
+    attemptCount: 0,
+    lessonId: "drinks",
+    progress: 0,
+    status: "not_started",
+  },
+  {
+    attemptCount: 0,
+    lessonId: "daily-activities",
+    progress: 0,
+    status: "not_started",
+  },
+  {
+    attemptCount: 0,
+    lessonId: "talking-about-routines",
+    progress: 0,
+    status: "not_started",
+  },
+  {
+    attemptCount: 0,
+    lessonId: "ordering-food",
+    progress: 0,
+    status: "not_started",
+  },
+  {
+    attemptCount: 0,
+    lessonId: "meeting-people",
+    progress: 0,
+    status: "not_started",
   },
 ];
