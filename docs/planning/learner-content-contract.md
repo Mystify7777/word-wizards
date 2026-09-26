@@ -1,8 +1,6 @@
 # Learner Content Contract
 
-This document defines the content data the learner catalogue flow consumes for Issue #40.
-
-The current implementation uses mock data behind the frontend catalogue service. The contract is intentionally shaped around the planned database model so the UI can move to a backend source without changing its content hierarchy.
+This document defines the temporary frontend data contract for the learner experience. Mock data sits behind service functions today so the learner UI can move to Supabase-backed sources later without changing its content hierarchy or component boundaries.
 
 ## Learning hierarchy
 
@@ -51,7 +49,7 @@ Required learner-facing fields:
 | display_order | integer | Ordering within the catalogue |
 | status | enum | Publication state |
 
-The existing frontend also keeps presentation metadata such as the current visual marker and mock learner progress.
+The frontend also keeps presentation metadata such as the current visual marker and mock learner progress.
 
 ## Lesson
 
@@ -76,11 +74,49 @@ Lesson types currently supported by the learner flow:
 - `tutorial`: teaches the concepts and skills represented by a theme.
 - `lab`: provides a separate application/practice activity.
 
-The current mock flow only models the distinction in content and presentation. Key costs, unlock transactions, lab prerequisites, and completion rules are out of scope for Issue #40.
+## Exercise
 
-## Learner lesson state
+An exercise is the smallest learner-facing activity inside a lesson.
 
-Learner state is separate from content.
+Required learner-facing fields:
+
+| Field | Type | Purpose |
+| --- | --- | --- |
+| id | uuid/string | Unique identifier |
+| lesson_id | uuid/string | Parent lesson |
+| type | enum | Renderer/evaluation category |
+| title | string | Display title |
+| display_order | integer | Ordering within the lesson |
+| status | enum | Publication state |
+
+Current frontend exercise types are:
+
+- `recognition`
+- `spelling`
+- `multiple_choice`
+- `direct_manipulation`
+
+The exercise contract intentionally does not define answer payloads, evaluation rules, hints, feedback, or rendering configuration yet.
+
+## Learner profile
+
+The profile represents application-level learner information. Authentication remains owned by Supabase Auth.
+
+| Field | Type | Purpose |
+| --- | --- | --- |
+| id | uuid/string | Learner identifier |
+| display_name | string | Learner-facing name |
+| username | string | Learner-facing username |
+| email | string | Account email |
+| avatar_url | string/null | Optional profile image |
+
+Service:
+
+- `getLearnerProfile()`
+
+## Learner state
+
+Learner state remains separate from content.
 
 ```
 Lesson
@@ -90,7 +126,7 @@ LessonProgress
 LearnerLesson
 ```
 
-Current learner-facing progress fields:
+Current lesson progress fields:
 
 | Field | Type | Purpose |
 | --- | --- | --- |
@@ -98,41 +134,90 @@ Current learner-facing progress fields:
 | status | enum | not_started, in_progress, completed |
 | progress | integer | Completion percentage |
 | score | integer | Optional lesson score |
-| attempt_count | integer | Optional attempt count |
+| attempt_count | integer | Optional aggregate attempt count |
 
-The eventual database record may also contain learner identity and timestamps. Those persistence fields are not required by the current UI.
+The eventual persistence model may also include learner identity and timestamps.
 
-## Availability
+## Exercise attempts
 
-Availability is a learner-facing projection, not a permanent property of the lesson content.
+An exercise attempt represents a learner's historical interaction with an exercise.
 
-```
-Content
-  +
-learner eligibility / unlock state
-  ↓
-available | locked
-```
+| Field | Type | Purpose |
+| --- | --- | --- |
+| id | uuid/string | Attempt identifier |
+| learner_id | uuid/string | Learner who made the attempt |
+| exercise_id | uuid/string | Exercise attempted |
+| status | enum | in_progress or completed |
+| score | integer/null | Result when available |
+| started_at | timestamp | Attempt start time |
+| completed_at | timestamp/null | Completion time |
 
-Issue #40 uses mock availability only. Real eligibility and unlocking rules are explicitly out of scope.
+Service:
 
-A locked lesson must not be treated as a navigable lesson by the learner UI.
+- `getExerciseAttempts(exerciseId)`
+- `getExerciseAttemptById(exerciseId, attemptId)`
+
+Attempt history is separate from progress aggregates. The current mock progress data may still expose `attemptCount` as a UI-friendly aggregate.
+
+## Keys
+
+The temporary learner state exposes a wallet-like key balance:
+
+| Field | Type | Purpose |
+| --- | --- | --- |
+| learner_id | uuid/string | Learner who owns the balance |
+| key_balance | integer | Current mock key balance |
+
+Service:
+
+- `getLearnerWallet()`
+
+This is intentionally a read-only mock projection. Key earning, spending, transaction history, and anti-farming rules are out of scope.
+
+## Content unlocks
+
+An unlock represents content that a learner has already unlocked.
+
+| Field | Type | Purpose |
+| --- | --- | --- |
+| id | uuid/string | Unlock record identifier |
+| learner_id | uuid/string | Learner who unlocked the content |
+| content_id | uuid/string | Unlocked content identifier |
+| content_type | enum | theme or lesson |
+| unlocked_at | timestamp | When the mock unlock occurred |
+
+Service:
+
+- `getContentUnlocks()`
+- `getContentUnlock(contentType, contentId)`
+
+Unlock rules, key transactions, qualification tests, and server-side authorization are out of scope.
 
 ## Service boundary
 
-The learner UI consumes content through the catalogue service:
+Learner UI consumes data through domain service functions:
 
 ```
 UI
  ↓
-Catalogue service
+service layer
  ↓
-Mock data today
+mock data today
  ↓
-Backend source later
+Supabase-backed source later
 ```
 
-Current service operations include:
+Current service boundaries include:
+
+### Learner
+
+- `getLearnerProfile()`
+- `getLearnerOverview()`
+- `getLearnerWallet()`
+- `getContentUnlocks()`
+- `getContentUnlock()`
+
+### Catalogue
 
 - `getCatalogues()`
 - `getCatalogueById()`
@@ -144,20 +229,66 @@ Current service operations include:
 - `getLearnerLessonsByThemeId()`
 - `getLearnerLessonById()`
 
-The UI must not import mock data directly.
+### Learning
 
-## Out of scope for this contract
+- `getExercisesByLessonId()`
+- `getExerciseById()`
+- `getExerciseAttempts()`
+- `getExerciseAttemptById()`
 
-This flow does not define:
+### Progress
 
-- exercise schemas
-- exercise evaluation
-- lesson completion persistence
+- `getOverallProgress()`
+- `getTodaysProgress()`
+- `getWeeklyGoal()`
+- `getCatalogueProgress()`
+
+### Achievements
+
+- `getAchievements()`
+
+Components and route handlers should not import mock-data modules directly.
+
+## Backend replacement boundary
+
+The eventual Supabase implementation should preserve the service-facing shapes wherever possible.
+
+The service layer is responsible for:
+
+- querying the backend source
+- normalizing backend field names into frontend types
+- filtering unpublished content
+- preserving parent-child relationships
+- returning learner-facing state
+
+The UI is responsible for:
+
+- rendering data
+- handling interaction
+- presenting loading, empty, locked, and error states
+
+The backend is responsible for:
+
+- authentication
+- persistence
+- authorization
+- progress mutation
 - key transactions
-- content unlock transactions
+- unlock rules
+- publication state
+
+## Out of scope
+
+This contract does not implement:
+
+- Supabase queries
+- database migrations
+- exercise answer schemas
+- exercise evaluation
+- lesson completion workflows
+- progress mutation
+- key transactions or economy rules
+- unlock transactions or eligibility rules
 - qualification tests
 - authoring workflows
-- database migrations
-- Supabase queries
-
-Those belong to later implementation phases.
+- server-side enforcement of learner state

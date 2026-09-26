@@ -1,4 +1,47 @@
-import type { LearnerOverview } from "./types";
+import type { ContentUnlock, LearnerOverview, LearnerProfile, LearnerWallet } from "./types";
+
+export const mockLearnerProfile: LearnerProfile = {
+  id: "learner-1",
+  displayName: "Learner",
+  email: "learner@example.com",
+  username: "Learner4827",
+};
+
+export const mockLearnerWallet: LearnerWallet = {
+  keyBalance: 120,
+  learnerId: mockLearnerProfile.id,
+};
+
+export const mockContentUnlocks: ContentUnlock[] = [
+  {
+    contentId: "everyday-animals",
+    contentType: "theme",
+    id: "unlock-1",
+    learnerId: mockLearnerProfile.id,
+    unlockedAt: "2026-09-20T10:00:00.000Z",
+  },
+  {
+    contentId: "food-and-drinks",
+    contentType: "theme",
+    id: "unlock-2",
+    learnerId: mockLearnerProfile.id,
+    unlockedAt: "2026-09-23T10:00:00.000Z",
+  },
+  {
+    contentId: "daily-routines",
+    contentType: "theme",
+    id: "unlock-3",
+    learnerId: mockLearnerProfile.id,
+    unlockedAt: "2026-09-24T10:00:00.000Z",
+  },
+  {
+    contentId: "introductions",
+    contentType: "theme",
+    id: "unlock-4",
+    learnerId: mockLearnerProfile.id,
+    unlockedAt: "2026-09-25T10:00:00.000Z",
+  },
+];
 
 export const mockLearnerOverview: LearnerOverview = {
   currentLearning: {
