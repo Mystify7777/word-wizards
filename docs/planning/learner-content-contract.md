@@ -105,8 +105,7 @@ The profile represents application-level learner information. Authentication rem
 | Field | Type | Purpose |
 | --- | --- | --- |
 | id | uuid/string | Learner identifier |
-| display_name | string | Learner-facing name |
-| username | string | Learner-facing username |
+| display_name | string | Learner-facing name and identifier |
 | email | string | Account email |
 | avatar_url | string/null | Optional profile image |
 
@@ -154,8 +153,8 @@ An exercise attempt represents a learner's historical interaction with an exerci
 
 Service:
 
-- `getExerciseAttempts(exerciseId)`
-- `getExerciseAttemptById(exerciseId, attemptId)`
+- `getExerciseAttempts(learnerId, exerciseId)`
+- `getExerciseAttemptById(learnerId, exerciseId, attemptId)`
 
 Attempt history is separate from progress aggregates. The current mock progress data may still expose `attemptCount` as a UI-friendly aggregate.
 
