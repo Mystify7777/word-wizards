@@ -73,7 +73,9 @@ export function LessonList({
     return (
       <div className="border border-dashed border-border p-8 text-center">
         <h2 className="font-heading text-lg font-semibold">No learning activities available</h2>
-        <p className="mt-2 text-sm text-muted-foreground">This theme does not have any published learning activities yet.</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          This theme does not have any published learning activities yet.
+        </p>
       </div>
     );
   }
@@ -86,8 +88,8 @@ export function LessonList({
       {tutorials.length > 0 && (
         <LessonGroup
           catalogueId={catalogueId}
-          heading="Tutorials"
           description="Learn the concepts and build the skills needed for this theme."
+          heading="Tutorials"
           lessons={tutorials}
           themeId={themeId}
         />
@@ -96,8 +98,8 @@ export function LessonList({
       {labs.length > 0 && (
         <LessonGroup
           catalogueId={catalogueId}
-          heading="Labs"
           description="Apply what you have learned in practical theme activities."
+          heading="Labs"
           lessons={labs}
           themeId={themeId}
         />
@@ -153,9 +155,7 @@ function LessonGroup({
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ProgressBar progress={lesson.progress.progress} />
-                  <p className="text-xs text-muted-foreground">
-                    This {lesson.type} is not available yet.
-                  </p>
+                  <p className="text-xs text-muted-foreground">This {lesson.type} is not available yet.</p>
                 </CardContent>
               </Card>
             );
