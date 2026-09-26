@@ -3,6 +3,28 @@ export type LearnerNavItem = {
   href: string;
 };
 
+export type LearnerProfile = {
+  id: string;
+  displayName: string;
+  email: string;
+  avatarUrl?: string;
+};
+
+export type LearnerWallet = {
+  learnerId: string;
+  keyBalance: number;
+};
+
+export type UnlockableContentType = "theme" | "lesson";
+
+export type ContentUnlock = {
+  id: string;
+  learnerId: string;
+  contentId: string;
+  contentType: UnlockableContentType;
+  unlockedAt: string;
+};
+
 export type LearnerOverview = {
   learnerName: string;
   currentLearning: {
