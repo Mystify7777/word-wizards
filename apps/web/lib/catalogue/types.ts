@@ -25,9 +25,12 @@ export type Theme = {
   visual: string;
 };
 
+export type LessonType = "tutorial" | "lab";
+
 export type Lesson = {
   id: string;
   themeId: string;
+  type: LessonType;
   title: string;
   description: string;
   order: number;
