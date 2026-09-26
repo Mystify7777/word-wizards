@@ -45,10 +45,10 @@ export default async function ThemePage({
             >
               {theme.visual}
             </div>
-            <CardTitle className="mt-2">{isAvailable ? "Your lessons" : "Theme unavailable"}</CardTitle>
+            <CardTitle className="mt-2">{isAvailable ? "Your learning path" : "Theme unavailable"}</CardTitle>
             <CardDescription>
               {isAvailable
-                ? `${lessons.length} lessons in this theme. Complete lessons to build your progress.`
+                ? `${lessons.length} learning activities in this theme. Tutorials build skills; labs apply them.`
                 : "This theme is represented in the catalogue, but it is not available to start yet."}
             </CardDescription>
           </CardHeader>
@@ -80,17 +80,7 @@ export default async function ThemePage({
         </Card>
       </section>
 
-      {isAvailable && (
-        <section aria-labelledby="lessons-heading" className="space-y-4">
-          <div>
-            <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Learning path</p>
-            <h2 className="font-heading text-2xl font-semibold" id="lessons-heading">
-              Lessons
-            </h2>
-          </div>
-          <LessonList catalogueId={catalogue.id} lessons={lessons} themeId={theme.id} />
-        </section>
-      )}
+      {isAvailable && <LessonList catalogueId={catalogue.id} lessons={lessons} themeId={theme.id} />}
 
       <Link
         className="inline-flex h-10 items-center justify-center gap-1.5 border border-border px-6 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
