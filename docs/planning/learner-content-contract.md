@@ -63,12 +63,20 @@ Required learner-facing fields:
 | --- | --- | --- |
 | id | uuid/string | Unique identifier |
 | theme_id | uuid/string | Parent theme |
+| type | enum | tutorial or lab |
 | title | string | Display title |
 | description | string | Short learner-facing description |
 | display_order | integer | Ordering within the theme |
 | status | enum | Publication state |
 
 The frontend currently represents `display_order` as `order`.
+
+Lesson types currently supported by the learner flow:
+
+- `tutorial`: teaches the concepts and skills represented by a theme.
+- `lab`: provides a separate application/practice activity.
+
+The current mock flow only models the distinction in content and presentation. Key costs, unlock transactions, lab prerequisites, and completion rules are out of scope for Issue #40.
 
 ## Learner lesson state
 
