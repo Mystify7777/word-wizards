@@ -114,7 +114,7 @@ export const mockExerciseAttempts: ExerciseAttempt[] = [
     exerciseId: "animal-sounds-choice",
     id: "attempt-3",
     learnerId: "learner-1",
-    score: ,
+    score: undefined,
     startedAt: "2026-09-26T09:00:00.000Z",
     status: "in_progress",
   },
