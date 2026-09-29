@@ -22,7 +22,7 @@ export const mockCatalogues: Catalogue[] = [
   {
     description: "Put your language skills into natural situations and everyday conversations.",
     id: "conversations",
-    name: "Conversations",
+    name: "Comprehensions & Conversations",
     order: 3,
     slug: "conversations",
     status: "published",

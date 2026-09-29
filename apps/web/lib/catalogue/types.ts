@@ -10,6 +10,14 @@ export type Catalogue = {
   visual: string;
 };
 
+export type CatalogueAvailability = "available" | "locked";
+
+export type LearnerCatalogue = Catalogue & {
+  availability: CatalogueAvailability;
+  progress: number;
+  requirement?: string;
+};
+
 export type ThemeAvailability = "available" | "locked";
 
 export type Theme = {

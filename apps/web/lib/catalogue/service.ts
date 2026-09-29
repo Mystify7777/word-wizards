@@ -1,16 +1,68 @@
 import { mockCatalogues, mockLessonProgress, mockLessons, mockThemes } from "./mock-data";
-import type { Catalogue, LearnerLesson, Lesson, LessonAvailability, LessonProgress, Theme } from "./types";
+import type {
+  Catalogue,
+  LearnerCatalogue,
+  LearnerLesson,
+  Lesson,
+  LessonAvailability,
+  LessonProgress,
+  Theme,
+} from "./types";
 
 const mockLessonAvailability: Record<string, LessonAvailability> = {
   "wild-animals": "locked",
 };
 
+const mockCataloguePresentation: Record<
+  string,
+  Pick<LearnerCatalogue, "availability" | "requirement">
+> = {
+  conversations: {
+    availability: "locked",
+    requirement: "This catalogue is locked in the current mock experience. Unlock rules will be connected later.",
+  },
+  "letters-and-words": {
+    availability: "available",
+  },
+  "phrases-and-sentences": {
+    availability: "available",
+  },
+};
+
+function getMockCatalogueProgress(catalogueId: string): number {
+  const themes = mockThemes.filter((theme) => theme.catalogueId === catalogueId && theme.status === "published");
+
+  if (themes.length === 0) {
+    return 0;
+  }
+
+  const totalProgress = themes.reduce((sum, theme) => sum + theme.progress, 0);
+  return Math.round(totalProgress / themes.length);
+}
+
 export async function getCatalogues(): Promise<Catalogue[]> {
-  return mockCatalogues.filter((catalogue) => catalogue.status === "published").sort((a, b) => a.order - b.order);
+  return mockCatalogues
+    .filter((catalogue) => catalogue.status === "published")
+    .sort((a, b) => a.order - b.order);
 }
 
 export async function getCatalogueById(id: string): Promise<Catalogue | null> {
   return (await getCatalogues()).find((catalogue) => catalogue.id === id) ?? null;
+}
+
+export async function getLearnerCatalogues(): Promise<LearnerCatalogue[]> {
+  const catalogues = await getCatalogues();
+
+  return catalogues.map((catalogue) => ({
+    ...catalogue,
+    availability: mockCataloguePresentation[catalogue.id]?.availability ?? "available",
+    progress: getMockCatalogueProgress(catalogue.id),
+    requirement: mockCataloguePresentation[catalogue.id]?.requirement,
+  }));
+}
+
+export async function getLearnerCatalogueById(id: string): Promise<LearnerCatalogue | null> {
+  return (await getLearnerCatalogues()).find((catalogue) => catalogue.id === id) ?? null;
 }
 
 export async function getThemesByCatalogueId(catalogueId: string): Promise<Theme[]> {
@@ -43,7 +95,10 @@ export async function getLessonProgress(lessonId: string): Promise<LessonProgres
   );
 }
 
-export async function getLearnerLessonsByThemeId(catalogueId: string, themeId: string): Promise<LearnerLesson[]> {
+export async function getLearnerLessonsByThemeId(
+  catalogueId: string,
+  themeId: string,
+): Promise<LearnerLesson[]> {
   const theme = await getThemeById(catalogueId, themeId);
 
   if (!theme) {
@@ -55,7 +110,8 @@ export async function getLearnerLessonsByThemeId(catalogueId: string, themeId: s
   return Promise.all(
     lessons.map(async (lesson) => ({
       ...lesson,
-      availability: theme.availability === "locked" ? "locked" : (mockLessonAvailability[lesson.id] ?? "available"),
+      availability:
+        theme.availability === "locked" ? "locked" : (mockLessonAvailability[lesson.id] ?? "available"),
       progress: await getLessonProgress(lesson.id),
     })),
   );
