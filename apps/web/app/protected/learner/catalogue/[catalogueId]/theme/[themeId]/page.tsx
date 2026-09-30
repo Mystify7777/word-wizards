@@ -97,7 +97,10 @@ export default async function ThemePage({
                 className="h-2 overflow-hidden rounded-full bg-muted"
                 role="progressbar"
               >
-                <div className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out" style={{ width: `${theme.progress}%` }} />
+                <div
+                  className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
+                  style={{ width: `${theme.progress}%` }}
+                />
               </div>
             </div>
 

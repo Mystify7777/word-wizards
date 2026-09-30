@@ -31,9 +31,7 @@ export function CatalogueRequirementsDialog({
         <div className="space-y-6 p-6 sm:p-7">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 space-y-1.5">
-              <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-                Requirements
-              </p>
+              <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Requirements</p>
               <h2 className="font-heading text-xl font-semibold leading-tight" id={titleId}>
                 {catalogueName}
               </h2>

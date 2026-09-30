@@ -27,7 +27,10 @@ function ProgressBar({ progress }: { progress: number }) {
         className="h-2 overflow-hidden rounded-full bg-muted"
         role="progressbar"
       >
-        <div className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out" style={{ width: progress + "%" }} />
+        <div
+          className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
+          style={{ width: progress + "%" }}
+        />
       </div>
     </div>
   );
@@ -81,7 +84,10 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
               {artwork ? (
                 <Image
                   alt=""
-                  className={"object-cover transition-transform duration-300 ease-out " + (!isLocked ? "group-hover:scale-[1.02]" : "")}
+                  className={
+                    "object-cover transition-transform duration-300 ease-out " +
+                    (!isLocked ? "group-hover:scale-[1.02]" : "")
+                  }
                   fill
                   priority={catalogue.order <= 3}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
@@ -118,10 +124,7 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
               <ProgressBar progress={catalogue.progress} />
               {isLocked ? (
                 catalogue.requirement ? (
-                  <CatalogueRequirementsDialog
-                    catalogueName={catalogue.name}
-                    requirement={catalogue.requirement}
-                  />
+                  <CatalogueRequirementsDialog catalogueName={catalogue.name} requirement={catalogue.requirement} />
                 ) : null
               ) : (
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest text-primary uppercase">
