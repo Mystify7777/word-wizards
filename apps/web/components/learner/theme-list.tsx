@@ -56,17 +56,17 @@ function ProgressBar({ progress }: { progress: number }) {
     <div className="space-y-2">
       <div className="flex justify-between text-xs text-muted-foreground">
         <span>Progress</span>
-        <span>{progress}%</span>
+        <span className="font-medium text-foreground">{progress}%</span>
       </div>
       <div
         aria-label={progress + "% complete"}
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={progress}
-        className="h-2 overflow-hidden bg-muted"
+        className="h-2 overflow-hidden rounded-full bg-muted"
         role="progressbar"
       >
-        <div className="h-full bg-primary transition-[width]" style={{ width: progress + "%" }} />
+        <div className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out" style={{ width: progress + "%" }} />
       </div>
     </div>
   );
@@ -79,15 +79,17 @@ function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }
   const card = (
     <Card
       className={
-        "h-full overflow-hidden transition-transform " +
-        (isLocked ? "opacity-70" : "group-hover:-translate-y-1")
+        "h-full overflow-hidden rounded-xl py-0 transition-[transform,box-shadow] duration-200 ease-out " +
+        (isLocked
+          ? "bg-muted/30 ring-1 ring-border/70"
+          : "group-hover:-translate-y-1 group-hover:shadow-lg group-hover:ring-1 group-hover:ring-primary/15")
       }
     >
       <div className="relative aspect-[16/9] overflow-hidden bg-muted">
         {artwork ? (
           <Image
             alt=""
-            className={"object-cover " + (isLocked ? "grayscale" : "")}
+            className={"object-cover transition-transform duration-300 ease-out " + (!isLocked ? "group-hover:scale-[1.02]" : "")}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             src={artwork}
@@ -97,12 +99,12 @@ function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }
         )}
         <div className="absolute right-3 top-3">
           {isLocked ? (
-            <span className="inline-flex items-center gap-1.5 border border-border bg-background/90 px-2.5 py-1 text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/95 px-2.5 py-1 text-[10px] font-semibold tracking-widest text-muted-foreground uppercase shadow-sm">
               <LockKeyIcon size={13} />
               Locked
             </span>
           ) : theme.progress === 100 ? (
-            <span className="inline-flex items-center gap-1.5 border border-primary/30 bg-background/90 px-2.5 py-1 text-[10px] font-semibold tracking-widest text-primary uppercase">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-background/95 px-2.5 py-1 text-[10px] font-semibold tracking-widest text-primary uppercase shadow-sm">
               <CheckCircleIcon size={13} />
               Complete
             </span>
@@ -110,15 +112,15 @@ function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }
         </div>
       </div>
 
-      <CardHeader>
-        <CardTitle>{theme.name}</CardTitle>
-        <CardDescription>{theme.description}</CardDescription>
+      <CardHeader className="gap-2 pt-6">
+        <CardTitle className="leading-snug">{theme.name}</CardTitle>
+        <CardDescription className="leading-6">{theme.description}</CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 pb-6">
         <ProgressBar progress={theme.progress} />
         {isLocked ? (
-          <p className="text-xs text-muted-foreground">This theme is not available yet.</p>
+          <p className="text-xs leading-5 text-muted-foreground">This theme is not available yet.</p>
         ) : (
           <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest text-primary uppercase">
             {theme.progress > 0 ? "Continue theme" : "Start theme"}
@@ -139,7 +141,7 @@ function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }
 
   return (
     <Link
-      className="group block h-full rounded-sm focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
+      className="group block h-full rounded-xl focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
       href={"/protected/learner/catalogue/" + catalogueId + "/theme/" + theme.id}
     >
       {card}
@@ -168,23 +170,25 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
     }
   };
 
+  const hasAvailableThemes = themes.some((theme) => theme.availability === "available");
+
   return (
-    <div className="grid gap-8 lg:grid-cols-[13rem_minmax(0,1fr)]">
+    <div className="grid gap-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-10">
       <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start" aria-label="Theme filters">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
+        <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+          <div className="mb-3 flex items-center gap-2">
             <FunnelIcon className="text-primary" size={16} />
             <h3 className="text-sm font-semibold">Browse themes</h3>
           </div>
           <nav aria-label="Theme status">
-            <div className="flex gap-1 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
+            <div className="flex gap-1.5 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
               {filters.map((item) => (
                 <button
                   aria-pressed={filter === item.value}
                   className={
-                    "shrink-0 px-3 py-2 text-left text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 " +
+                    "shrink-0 rounded-md px-3 py-2.5 text-left text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 " +
                     (filter === item.value
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-primary text-primary-foreground shadow-sm"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground")
                   }
                   key={item.value}
@@ -199,14 +203,10 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
         </div>
 
         <button
-          aria-label={themes.some((theme) => theme.availability === "available") ? "Choose a random available theme" : "No themes are currently available for Surprise Me"}
-          className="inline-flex min-h-10 w-full items-center justify-center gap-2 border border-primary/30 px-3 py-2.5 text-xs font-semibold tracking-wide text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50"
-          disabled={!themes.some((theme) => theme.availability === "available")}
-          title={
-            themes.some((theme) => theme.availability === "available")
-              ? "Open a random available theme"
-              : "No available themes"
-          }
+          aria-label={hasAvailableThemes ? "Choose a random available theme" : "No themes are currently available for Surprise Me"}
+          className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-3 py-2.5 text-xs font-semibold tracking-wide text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50"
+          disabled={!hasAvailableThemes}
+          title={hasAvailableThemes ? "Open a random available theme" : "No available themes"}
           onClick={handleSurpriseMe}
           type="button"
         >
@@ -215,8 +215,8 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
         </button>
       </aside>
 
-      <div className="min-w-0 space-y-5">
-        <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="min-w-0 space-y-6">
+        <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-3 shadow-sm sm:flex-row">
           <label className="relative min-w-0 flex-1">
             <span className="sr-only">Search themes</span>
             <MagnifyingGlassIcon
@@ -225,7 +225,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
               size={17}
             />
             <input
-              className="h-10 w-full border border-border bg-background pl-10 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-2 focus:ring-ring/20"
+              className="h-10 w-full rounded-md border border-border bg-background pl-10 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-2 focus:ring-ring/20"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search themes..."
               type="search"
@@ -236,7 +236,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
           <label className="relative sm:w-48">
             <span className="sr-only">Sort themes</span>
             <select
-              className="h-10 w-full min-h-10 appearance-none border border-border bg-background px-3 pr-9 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+              className="h-10 w-full min-h-10 appearance-none rounded-md border border-border bg-background px-3 pr-9 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
               onChange={(event) => setSort(event.target.value as ThemeSort)}
               value={sort}
             >
@@ -255,18 +255,18 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
         </div>
 
         {visibleThemes.length === 0 ? (
-          <div className="border border-dashed border-border p-8 text-center">
+          <div className="rounded-lg border border-dashed border-border bg-card/60 p-8 text-center">
             <h2 className="font-heading text-lg font-semibold">
               {query.trim() ? "No themes match your search" : "No themes in this view"}
             </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted-foreground">
               {query.trim()
                 ? "Try a different search term."
                 : "There are no themes matching the selected status."}
             </p>
           </div>
         ) : (
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {visibleThemes.map((theme) => (
               <ThemeCard catalogueId={catalogueId} key={theme.id} theme={theme} />
             ))}

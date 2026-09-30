@@ -17,8 +17,8 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
   const otherCatalogues = catalogues.filter((item) => item.id !== catalogue.id);
 
   return (
-    <div className="mx-auto max-w-6xl space-y-8">
-      <section className="space-y-3">
+    <div className="mx-auto max-w-6xl space-y-10">
+      <section className="space-y-4">
         <Link
           className="inline-flex min-h-10 items-center gap-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
           href="/protected/learner/catalogue"
@@ -26,24 +26,24 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
           <ArrowRightIcon className="rotate-180" size={14} />
           All catalogues
         </Link>
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-5 rounded-xl border border-border bg-card p-5 shadow-sm sm:flex-row sm:items-start sm:justify-between sm:p-6">
           <div className="min-w-0 space-y-2">
-            <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Catalogue</p>
+            <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">Catalogue</p>
             <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">{catalogue.name}</h1>
-            <p className="max-w-2xl text-muted-foreground">{catalogue.description}</p>
+            <p className="max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">{catalogue.description}</p>
           </div>
           <div
             aria-hidden="true"
-            className="flex size-16 shrink-0 items-center justify-center border border-border bg-muted font-heading text-xl font-bold text-primary"
+            className="flex size-16 shrink-0 items-center justify-center rounded-lg border border-primary/15 bg-primary/5 font-heading text-xl font-bold text-primary"
           >
             {catalogue.visual}
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="themes-heading" className="space-y-4">
-        <div>
-          <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Choose a theme</p>
+      <section aria-labelledby="themes-heading" className="space-y-5">
+        <div className="space-y-1">
+          <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">Choose a theme</p>
           <h2 className="font-heading text-2xl font-semibold" id="themes-heading">
             Themes
           </h2>
@@ -52,8 +52,8 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
       </section>
 
       {otherCatalogues.length > 0 && (
-        <section aria-labelledby="other-catalogues-heading" className="space-y-4 border-t border-border pt-8">
-          <div>
+        <section aria-labelledby="other-catalogues-heading" className="space-y-5 border-t border-border pt-10">
+          <div className="space-y-1">
             <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Keep exploring</p>
             <h2 className="font-heading text-2xl font-semibold" id="other-catalogues-heading">
               Other catalogues
@@ -62,7 +62,7 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
           <div className="flex flex-wrap gap-2">
             {otherCatalogues.map((item) => (
               <Link
-                className="inline-flex min-h-10 items-center border border-border px-4 py-2.5 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+                className="inline-flex min-h-10 items-center rounded-md border border-border bg-card px-4 py-2.5 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
                 href={`/protected/learner/catalogue/${item.id}`}
                 key={item.id}
               >
