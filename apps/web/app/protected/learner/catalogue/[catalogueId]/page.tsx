@@ -17,17 +17,17 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
   const otherCatalogues = catalogues.filter((item) => item.id !== catalogue.id);
 
   return (
-    <div className="mx-auto max-w-5xl space-y-8">
+    <div className="mx-auto max-w-6xl space-y-8">
       <section className="space-y-3">
         <Link
-          className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground"
+          className="inline-flex min-h-10 items-center gap-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
           href="/protected/learner/catalogue"
         >
           <ArrowRightIcon className="rotate-180" size={14} />
           All catalogues
         </Link>
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-          <div className="space-y-2">
+          <div className="min-w-0 space-y-2">
             <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">Catalogue</p>
             <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">{catalogue.name}</h1>
             <p className="max-w-2xl text-muted-foreground">{catalogue.description}</p>
@@ -62,7 +62,7 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
           <div className="flex flex-wrap gap-2">
             {otherCatalogues.map((item) => (
               <Link
-                className="border border-border px-4 py-2.5 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
+                className="inline-flex min-h-10 items-center border border-border px-4 py-2.5 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:outline-none"
                 href={`/protected/learner/catalogue/${item.id}`}
                 key={item.id}
               >

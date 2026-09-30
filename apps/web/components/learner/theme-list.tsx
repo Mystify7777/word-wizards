@@ -139,7 +139,7 @@ function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }
 
   return (
     <Link
-      className="group block h-full focus-visible:outline-none"
+      className="group block h-full rounded-sm focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
       href={"/protected/learner/catalogue/" + catalogueId + "/theme/" + theme.id}
     >
       {card}
@@ -199,8 +199,14 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
         </div>
 
         <button
-          className="inline-flex w-full items-center justify-center gap-2 border border-primary/30 px-3 py-2.5 text-xs font-semibold tracking-wide text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50"
+          aria-label={themes.some((theme) => theme.availability === "available") ? "Choose a random available theme" : "No themes are currently available for Surprise Me"}
+          className="inline-flex min-h-10 w-full items-center justify-center gap-2 border border-primary/30 px-3 py-2.5 text-xs font-semibold tracking-wide text-primary transition-colors hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={!themes.some((theme) => theme.availability === "available")}
+          title={
+            themes.some((theme) => theme.availability === "available")
+              ? "Open a random available theme"
+              : "No available themes"
+          }
           onClick={handleSurpriseMe}
           type="button"
         >
@@ -230,7 +236,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
           <label className="relative sm:w-48">
             <span className="sr-only">Sort themes</span>
             <select
-              className="h-10 w-full appearance-none border border-border bg-background px-3 pr-9 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+              className="h-10 w-full min-h-10 appearance-none border border-border bg-background px-3 pr-9 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
               onChange={(event) => setSort(event.target.value as ThemeSort)}
               value={sort}
             >

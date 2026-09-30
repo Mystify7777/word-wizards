@@ -102,7 +102,7 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
 
             <CardHeader>
               <div className="flex items-start justify-between gap-4">
-                <div className="space-y-1">
+                <div className="min-w-0 space-y-1">
                   <CardTitle>{catalogue.name}</CardTitle>
                   <CardDescription>{catalogue.description}</CardDescription>
                 </div>
@@ -141,7 +141,8 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
 
         return (
           <Link
-            className="group block h-full focus-visible:outline-none"
+            aria-label={`${actionLabel} ${catalogue.name}`}
+            className="group block h-full rounded-sm focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
             href={"/protected/learner/catalogue/" + catalogue.id}
             key={catalogue.id}
           >
