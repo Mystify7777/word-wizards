@@ -1,10 +1,23 @@
 import { ArrowRightIcon, LockKeyIcon } from "@phosphor-icons/react/dist/ssr";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { LessonList } from "@/components/learner/lesson-list";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getCatalogueById, getLearnerLessonsByThemeId, getThemeById } from "@/lib/catalogue/service";
+
+const themeArtwork: Record<string, string> = {
+  "at-the-restaurant": "/themes/theme-at-the-restaurant.webp",
+  "daily-life": "/themes/theme-daily-life.webp",
+  "daily-routines": "/themes/theme-daily-routines.webp",
+  "everyday-animals": "/themes/theme-everyday-animals.webp",
+  "food-and-drinks": "/themes/theme-food-and-drinks.webp",
+  introductions: "/themes/theme-introductions.webp",
+  "making-plans": "/themes/theme-making-plans.webp",
+  shopping: "/themes/theme-shopping.webp",
+  travel: "/themes/theme-travel.webp",
+};
 
 export default async function ThemePage({
   params,
@@ -18,6 +31,7 @@ export default async function ThemePage({
 
   const isAvailable = theme.availability === "available";
   const lessons = isAvailable ? await getLearnerLessonsByThemeId(catalogue.id, theme.id) : [];
+  const artwork = themeArtwork[theme.id];
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
@@ -39,11 +53,26 @@ export default async function ThemePage({
       <section className="space-y-4">
         <Card>
           <CardHeader>
-            <div
-              aria-hidden="true"
-              className="flex size-20 items-center justify-center border border-border bg-muted text-3xl"
-            >
-              {theme.visual}
+            <div className="relative aspect-[16/9] w-full overflow-hidden border border-border bg-muted">
+              {artwork ? (
+                <Image
+                  alt=""
+                  className={`object-cover ${!isAvailable ? "grayscale" : ""}`}
+                  fill
+                  sizes="(min-width: 768px) 768px, 100vw"
+                  src={artwork}
+                />
+              ) : (
+                <div aria-hidden="true" className="flex h-full items-center justify-center text-5xl">
+                  {theme.visual}
+                </div>
+              )}
+              {!isAvailable && (
+                <div className="absolute right-3 top-3 inline-flex items-center gap-1.5 border border-border bg-background/90 px-2.5 py-1 text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
+                  <LockKeyIcon size={13} />
+                  Locked
+                </div>
+              )}
             </div>
             <CardTitle className="mt-2">{isAvailable ? "Your learning path" : "Theme unavailable"}</CardTitle>
             <CardDescription>
