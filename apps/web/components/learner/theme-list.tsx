@@ -38,17 +38,17 @@ const themeArtwork: Record<string, string> = {
 };
 
 const filters: { value: ThemeFilter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "not-started", label: "Not started" },
-  { value: "in-progress", label: "In progress" },
-  { value: "completed", label: "Completed" },
+  { label: "All", value: "all" },
+  { label: "Not started", value: "not-started" },
+  { label: "In progress", value: "in-progress" },
+  { label: "Completed", value: "completed" },
 ];
 
 const sorts: { value: ThemeSort; label: string }[] = [
-  { value: "recommended", label: "Recommended" },
-  { value: "a-z", label: "A–Z" },
-  { value: "z-a", label: "Z–A" },
-  { value: "progress", label: "Progress" },
+  { label: "Recommended", value: "recommended" },
+  { label: "A–Z", value: "a-z" },
+  { label: "Z–A", value: "z-a" },
+  { label: "Progress", value: "progress" },
 ];
 
 function ProgressBar({ progress }: { progress: number }) {
@@ -66,13 +66,16 @@ function ProgressBar({ progress }: { progress: number }) {
         className="h-2 overflow-hidden rounded-full bg-muted"
         role="progressbar"
       >
-        <div className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out" style={{ width: progress + "%" }} />
+        <div
+          className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
+          style={{ width: progress + "%" }}
+        />
       </div>
     </div>
   );
 }
 
-function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }) {
+export function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }) {
   const isLocked = theme.availability === "locked";
   const artwork = themeArtwork[theme.id];
 
@@ -89,7 +92,9 @@ function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }
         {artwork ? (
           <Image
             alt=""
-            className={"object-cover transition-transform duration-300 ease-out " + (!isLocked ? "group-hover:scale-[1.02]" : "")}
+            className={
+              "object-cover transition-transform duration-300 ease-out " + (!isLocked ? "group-hover:scale-[1.02]" : "")
+            }
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             src={artwork}
@@ -164,9 +169,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
     const theme = getRandomAvailableTheme(themes);
 
     if (theme) {
-      router.push(
-        "/protected/learner/catalogue/" + catalogueId + "/theme/" + theme.id,
-      );
+      router.push("/protected/learner/catalogue/" + catalogueId + "/theme/" + theme.id);
     }
   };
 
@@ -174,7 +177,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
 
   return (
     <div className="grid gap-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-10">
-      <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start" aria-label="Theme filters">
+      <aside aria-label="Theme filters" className="space-y-5 lg:sticky lg:top-6 lg:self-start">
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
           <div className="mb-3 flex items-center gap-2">
             <FunnelIcon className="text-primary" size={16} />
@@ -203,11 +206,13 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
         </div>
 
         <button
-          aria-label={hasAvailableThemes ? "Choose a random available theme" : "No themes are currently available for Surprise Me"}
+          aria-label={
+            hasAvailableThemes ? "Choose a random available theme" : "No themes are currently available for Surprise Me"
+          }
           className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-3 py-2.5 text-xs font-semibold tracking-wide text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={!hasAvailableThemes}
-          title={hasAvailableThemes ? "Open a random available theme" : "No available themes"}
           onClick={handleSurpriseMe}
+          title={hasAvailableThemes ? "Open a random available theme" : "No available themes"}
           type="button"
         >
           <ShuffleIcon size={15} />
@@ -260,9 +265,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
               {query.trim() ? "No themes match your search" : "No themes in this view"}
             </h2>
             <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted-foreground">
-              {query.trim()
-                ? "Try a different search term."
-                : "There are no themes matching the selected status."}
+              {query.trim() ? "Try a different search term." : "There are no themes matching the selected status."}
             </p>
           </div>
         ) : (

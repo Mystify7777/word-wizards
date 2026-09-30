@@ -3,14 +3,17 @@
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 
-import { type ThemeFilter, ThemeList } from "@/components/learner/theme-list";
+import { ThemeCard } from "@/components/learner/theme-list";
+import type { ThemeFilter } from "@/lib/catalogue/theme-service";
 import type { Theme } from "@/lib/catalogue/types";
 import type { CatalogueProgress } from "@/lib/progress/types";
 import { cn } from "@/lib/utils";
 
 import { CatalogueProgressList } from "./catalogue-progress-list";
 
-const FILTER_OPTIONS: { label: string; value: ThemeFilter }[] = [
+type ProgressThemeFilter = ThemeFilter | "locked";
+
+const FILTER_OPTIONS: { label: string; value: ProgressThemeFilter }[] = [
   { label: "In Progress", value: "in-progress" },
   { label: "Completed", value: "completed" },
   { label: "Locked", value: "locked" },
@@ -32,16 +35,30 @@ export function ProgressDashboard({
   const [selectedCatalogueId, setSelectedCatalogueId] = useState<string>(
     catalogueProgress.length > 0 ? catalogueProgress[0].id : "",
   );
-  const [activeFilter, setActiveFilter] = useState<ThemeFilter>("in-progress");
+  const [activeFilter, setActiveFilter] = useState<ProgressThemeFilter>("in-progress");
   const [searchQuery, setSearchQuery] = useState("");
 
   const selectedCatalogue = catalogueProgress.find((c) => c.id === selectedCatalogueId);
 
-  // Apply search on top of the full catalogue theme list; ThemeList handles filter internally.
   const allThemes = themesByCatalogue[selectedCatalogueId] ?? [];
   const searchedThemes = searchQuery.trim()
     ? allThemes.filter((t) => t.name.toLowerCase().includes(searchQuery.trim().toLowerCase()))
     : allThemes;
+
+  const filteredThemes = searchedThemes.filter((theme) => {
+    switch (activeFilter) {
+      case "in-progress":
+        return theme.availability === "available" && theme.progress > 0 && theme.progress < 100;
+      case "completed":
+        return theme.availability === "available" && theme.progress === 100;
+      case "locked":
+        return theme.availability === "locked";
+      case "all":
+        return true;
+      default:
+        return true;
+    }
+  });
 
   const handleCatalogueSelect = (id: string) => {
     setSelectedCatalogueId(id);
@@ -105,12 +122,20 @@ export function ProgressDashboard({
           </div>
 
           {/* Theme grid */}
-          <ThemeList
-            catalogueId={selectedCatalogueId}
-            emptyMessage={`No themes match your search in ${selectedCatalogue.name}.`}
-            filter={activeFilter}
-            themes={searchedThemes}
-          />
+          {filteredThemes.length === 0 ? (
+            <div className="rounded-lg border border-dashed border-border bg-card/60 p-8 text-center">
+              <h3 className="font-heading text-lg font-semibold">No themes match your current filters.</h3>
+              <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted-foreground">
+                Try another filter or search term.
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2">
+              {filteredThemes.map((theme) => (
+                <ThemeCard catalogueId={selectedCatalogueId} key={theme.id} theme={theme} />
+              ))}
+            </div>
+          )}
         </section>
       )}
     </>

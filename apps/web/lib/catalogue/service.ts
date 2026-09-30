@@ -13,10 +13,7 @@ const mockLessonAvailability: Record<string, LessonAvailability> = {
   "wild-animals": "locked",
 };
 
-const mockCataloguePresentation: Record<
-  string,
-  Pick<LearnerCatalogue, "availability" | "requirement">
-> = {
+const mockCataloguePresentation: Record<string, Pick<LearnerCatalogue, "availability" | "requirement">> = {
   conversations: {
     availability: "locked",
     requirement: "This catalogue is locked in the current mock experience. Unlock rules will be connected later.",
@@ -41,9 +38,7 @@ function getMockCatalogueProgress(catalogueId: string): number {
 }
 
 export async function getCatalogues(): Promise<Catalogue[]> {
-  return mockCatalogues
-    .filter((catalogue) => catalogue.status === "published")
-    .sort((a, b) => a.order - b.order);
+  return mockCatalogues.filter((catalogue) => catalogue.status === "published").sort((a, b) => a.order - b.order);
 }
 
 export async function getCatalogueById(id: string): Promise<Catalogue | null> {
@@ -95,10 +90,7 @@ export async function getLessonProgress(lessonId: string): Promise<LessonProgres
   );
 }
 
-export async function getLearnerLessonsByThemeId(
-  catalogueId: string,
-  themeId: string,
-): Promise<LearnerLesson[]> {
+export async function getLearnerLessonsByThemeId(catalogueId: string, themeId: string): Promise<LearnerLesson[]> {
   const theme = await getThemeById(catalogueId, themeId);
 
   if (!theme) {
@@ -110,8 +102,7 @@ export async function getLearnerLessonsByThemeId(
   return Promise.all(
     lessons.map(async (lesson) => ({
       ...lesson,
-      availability:
-        theme.availability === "locked" ? "locked" : (mockLessonAvailability[lesson.id] ?? "available"),
+      availability: theme.availability === "locked" ? "locked" : (mockLessonAvailability[lesson.id] ?? "available"),
       progress: await getLessonProgress(lesson.id),
     })),
   );
