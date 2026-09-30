@@ -17,7 +17,7 @@ export function CatalogueRequirementsDialog({
     <>
       <button
         aria-haspopup="dialog"
-        className="inline-flex min-h-10 items-center justify-center border border-border px-4 py-2.5 text-xs font-semibold tracking-widest text-foreground uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
+        className="inline-flex min-h-10 items-center justify-center rounded-md border border-border bg-background px-4 py-2.5 text-xs font-semibold tracking-widest text-foreground uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
         onClick={() => dialogRef.current?.showModal()}
         type="button"
       >
@@ -25,22 +25,22 @@ export function CatalogueRequirementsDialog({
       </button>
       <dialog
         aria-labelledby={titleId}
-        className="m-auto w-[min(92vw,32rem)] border border-border bg-background p-0 text-foreground shadow-2xl backdrop:bg-black/30"
+        className="m-auto w-[min(92vw,32rem)] rounded-xl border border-border bg-background p-0 text-foreground shadow-2xl backdrop:bg-black/30"
         ref={dialogRef}
       >
-        <div className="space-y-5 p-6">
+        <div className="space-y-6 p-6 sm:p-7">
           <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0 space-y-1">
+            <div className="min-w-0 space-y-1.5">
               <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
                 Requirements
               </p>
-              <h2 className="font-heading text-xl font-semibold" id={titleId}>
+              <h2 className="font-heading text-xl font-semibold leading-tight" id={titleId}>
                 {catalogueName}
               </h2>
             </div>
             <button
               aria-label={`Close requirements for ${catalogueName}`}
-              className="inline-flex size-10 shrink-0 items-center justify-center border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
+              className="inline-flex size-10 shrink-0 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
               onClick={() => dialogRef.current?.close()}
               type="button"
             >
@@ -49,7 +49,7 @@ export function CatalogueRequirementsDialog({
           </div>
           <p className="text-sm leading-6 text-muted-foreground">{requirement}</p>
           <button
-            className="inline-flex min-h-10 w-full items-center justify-center border border-border px-4 py-2.5 text-xs font-semibold tracking-widest uppercase transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
+            className="inline-flex min-h-10 w-full items-center justify-center rounded-md bg-primary px-4 py-2.5 text-xs font-semibold tracking-widest text-primary-foreground uppercase transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:outline-none"
             onClick={() => dialogRef.current?.close()}
             type="button"
           >

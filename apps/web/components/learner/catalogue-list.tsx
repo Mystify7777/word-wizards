@@ -17,17 +17,17 @@ function ProgressBar({ progress }: { progress: number }) {
     <div className="space-y-2">
       <div className="flex justify-between text-xs text-muted-foreground">
         <span>Progress</span>
-        <span>{progress}%</span>
+        <span className="font-medium text-foreground">{progress}%</span>
       </div>
       <div
         aria-label={progress + "% complete"}
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={progress}
-        className="h-2 overflow-hidden bg-muted"
+        className="h-2 overflow-hidden rounded-full bg-muted"
         role="progressbar"
       >
-        <div className="h-full bg-primary transition-[width]" style={{ width: progress + "%" }} />
+        <div className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out" style={{ width: progress + "%" }} />
       </div>
     </div>
   );
@@ -52,9 +52,9 @@ function getActionLabel(catalogue: LearnerCatalogue) {
 export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }) {
   if (catalogues.length === 0) {
     return (
-      <div className="border border-dashed border-border p-8 text-center">
+      <div className="rounded-lg border border-dashed border-border bg-card/60 p-8 text-center">
         <h2 className="font-heading text-lg font-semibold">No catalogues available</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted-foreground">
           There is no learning content available right now.
         </p>
       </div>
@@ -62,7 +62,7 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
   }
 
   return (
-    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {catalogues.map((catalogue) => {
         const artwork = catalogueArtwork[catalogue.id];
         const isLocked = catalogue.availability === "locked";
@@ -71,15 +71,17 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
         const card = (
           <Card
             className={
-              "h-full overflow-hidden transition-transform " +
-              (isLocked ? "opacity-75" : "group-hover:-translate-y-1")
+              "h-full overflow-hidden rounded-xl py-0 transition-[transform,box-shadow,opacity] duration-200 ease-out " +
+              (isLocked
+                ? "bg-muted/30 ring-1 ring-border/70"
+                : "group-hover:-translate-y-1 group-hover:shadow-lg group-hover:ring-1 group-hover:ring-primary/15")
             }
           >
             <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
               {artwork ? (
                 <Image
                   alt=""
-                  className="object-cover"
+                  className={"object-cover transition-transform duration-300 ease-out " + (!isLocked ? "group-hover:scale-[1.02]" : "")}
                   fill
                   priority={catalogue.order <= 3}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
@@ -92,7 +94,7 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
               )}
               {isLocked && (
                 <div className="absolute inset-0 flex items-center justify-center bg-background/45">
-                  <span className="inline-flex items-center gap-1.5 border border-border bg-background/90 px-3 py-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/95 px-3 py-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase shadow-sm">
                     <LockKeyIcon size={14} />
                     Locked
                   </span>
@@ -100,19 +102,19 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
               )}
             </div>
 
-            <CardHeader>
+            <CardHeader className="gap-2 pt-6">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0 space-y-1">
-                  <CardTitle>{catalogue.name}</CardTitle>
-                  <CardDescription>{catalogue.description}</CardDescription>
+                  <CardTitle className="leading-snug">{catalogue.name}</CardTitle>
+                  <CardDescription className="leading-6">{catalogue.description}</CardDescription>
                 </div>
-                <span className="shrink-0 text-xs font-semibold text-muted-foreground">
+                <span className="shrink-0 rounded-full bg-muted px-2 py-1 text-xs font-semibold text-muted-foreground">
                   {catalogue.progress}%
                 </span>
               </div>
             </CardHeader>
 
-            <CardContent className="space-y-5">
+            <CardContent className="space-y-5 pb-6">
               <ProgressBar progress={catalogue.progress} />
               {isLocked ? (
                 catalogue.requirement ? (
@@ -142,7 +144,7 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
         return (
           <Link
             aria-label={`${actionLabel} ${catalogue.name}`}
-            className="group block h-full rounded-sm focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
+            className="group block h-full rounded-xl focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
             href={"/protected/learner/catalogue/" + catalogue.id}
             key={catalogue.id}
           >
