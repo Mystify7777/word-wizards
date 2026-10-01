@@ -14,22 +14,22 @@ const catalogueArtwork: Record<string, string> = {
 
 function ProgressBar({ progress }: { progress: number }) {
   return (
-    <div className="space-y-2">
-      <div className="flex justify-between text-xs text-muted-foreground">
-        <span>Progress</span>
-        <span className="font-medium text-foreground">{progress}%</span>
+    <div className="space-y-2.5">
+      <div className="flex items-center justify-between text-xs text-muted-foreground">
+        <span>Overall progress</span>
+        <span className="font-semibold text-foreground">{progress}%</span>
       </div>
       <div
-        aria-label={progress + "% complete"}
+        aria-label={`${progress}% complete`}
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={progress}
-        className="h-2 overflow-hidden rounded-full bg-muted"
+        className="h-2.5 overflow-hidden rounded-full bg-muted"
         role="progressbar"
       >
         <div
           className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
-          style={{ width: progress + "%" }}
+          style={{ width: `${progress}%` }}
         />
       </div>
     </div>
@@ -55,7 +55,7 @@ function getActionLabel(catalogue: LearnerCatalogue) {
 export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }) {
   if (catalogues.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-border bg-card/60 p-8 text-center">
+      <div className="rounded-2xl border border-dashed border-border bg-card p-8 text-center">
         <h2 className="font-heading text-lg font-semibold">No catalogues available</h2>
         <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted-foreground">
           There is no learning content available right now.
@@ -65,7 +65,7 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       {catalogues.map((catalogue) => {
         const artwork = catalogueArtwork[catalogue.id];
         const isLocked = catalogue.availability === "locked";
@@ -74,19 +74,19 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
         const card = (
           <Card
             className={
-              "h-full overflow-hidden rounded-xl py-0 transition-[transform,box-shadow,opacity] duration-200 ease-out " +
+              "h-full overflow-hidden rounded-2xl border-border/80 bg-card py-0 shadow-sm transition-[transform,box-shadow,border-color] duration-200 ease-out " +
               (isLocked
-                ? "bg-muted/30 ring-1 ring-border/70"
-                : "group-hover:-translate-y-1 group-hover:shadow-lg group-hover:ring-1 group-hover:ring-primary/15")
+                ? "bg-muted/20"
+                : "group-hover:-translate-y-0.5 group-hover:border-primary/30 group-hover:shadow-md")
             }
           >
-            <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/50">
               {artwork ? (
                 <Image
                   alt=""
                   className={
                     "object-cover transition-transform duration-300 ease-out " +
-                    (!isLocked ? "group-hover:scale-[1.02]" : "")
+                    (!isLocked ? "group-hover:scale-[1.025]" : "")
                   }
                   fill
                   priority={catalogue.order <= 3}
@@ -98,38 +98,40 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
                   {catalogue.visual}
                 </div>
               )}
+
               {isLocked && (
-                <div className="absolute inset-0 flex items-center justify-center bg-background/45">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/95 px-3 py-1.5 text-xs font-semibold tracking-widest text-muted-foreground uppercase shadow-sm">
-                    <LockKeyIcon size={14} />
+                <div className="absolute inset-0 flex items-center justify-center bg-background/50">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/95 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-sm">
+                    <LockKeyIcon size={14} weight="bold" />
                     Locked
                   </span>
                 </div>
               )}
             </div>
 
-            <CardHeader className="gap-2 pt-6">
-              <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0 space-y-1">
-                  <CardTitle className="leading-snug">{catalogue.name}</CardTitle>
-                  <CardDescription className="leading-6">{catalogue.description}</CardDescription>
-                </div>
-                <span className="shrink-0 rounded-full bg-muted px-2 py-1 text-xs font-semibold text-muted-foreground">
-                  {catalogue.progress}%
-                </span>
-              </div>
+            <CardHeader className="gap-2 px-5 pt-5">
+              <CardTitle className="text-lg leading-snug">{catalogue.name}</CardTitle>
+              <CardDescription className="min-h-12 leading-6">{catalogue.description}</CardDescription>
             </CardHeader>
 
-            <CardContent className="space-y-5 pb-6">
+            <CardContent className="space-y-5 px-5 pb-5">
               <ProgressBar progress={catalogue.progress} />
+
               {isLocked ? (
                 catalogue.requirement ? (
-                  <CatalogueRequirementsDialog catalogueName={catalogue.name} requirement={catalogue.requirement} />
-                ) : null
+                  <CatalogueRequirementsDialog
+                    catalogueName={catalogue.name}
+                    requirement={catalogue.requirement}
+                  />
+                ) : (
+                  <span className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-md border border-border bg-muted/50 px-4 py-2.5 text-xs font-semibold text-muted-foreground">
+                    Currently locked
+                  </span>
+                )
               ) : (
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest text-primary uppercase">
+                <span className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-xs font-semibold tracking-wide text-primary-foreground transition-opacity group-hover:opacity-90">
                   {actionLabel}
-                  <ArrowRightIcon size={15} />
+                  <ArrowRightIcon size={15} weight="bold" />
                 </span>
               )}
             </CardContent>
@@ -147,8 +149,8 @@ export function CatalogueList({ catalogues }: { catalogues: LearnerCatalogue[] }
         return (
           <Link
             aria-label={`${actionLabel} ${catalogue.name}`}
-            className="group block h-full rounded-xl focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
-            href={"/protected/learner/catalogue/" + catalogue.id}
+            className="group block h-full rounded-2xl focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
+            href={`/protected/learner/catalogue/${catalogue.id}`}
             key={catalogue.id}
           >
             {card}
