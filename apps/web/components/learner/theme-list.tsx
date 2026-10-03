@@ -88,12 +88,12 @@ export function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: 
           : "group-hover:-translate-y-1 group-hover:shadow-lg group-hover:ring-1 group-hover:ring-primary/15")
       }
     >
-      <div className="relative aspect-[16/9] overflow-hidden bg-muted">
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted/60">
         {artwork ? (
           <Image
             alt=""
             className={
-              "object-cover transition-transform duration-300 ease-out " + (!isLocked ? "group-hover:scale-[1.02]" : "")
+              "object-contain p-3 transition-transform duration-300 ease-out sm:p-4 " + (!isLocked ? "group-hover:scale-[1.02]" : "")
             }
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
@@ -176,23 +176,23 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
   const hasAvailableThemes = themes.some((theme) => theme.availability === "available");
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-10">
-      <aside aria-label="Theme filters" className="space-y-5 lg:sticky lg:top-6 lg:self-start">
-        <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-          <div className="mb-3 flex items-center gap-2">
+    <div className="space-y-6">
+      <div className="space-y-4">
+        <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-2 text-sm font-semibold">
             <FunnelIcon className="text-primary" size={16} />
-            <h3 className="text-sm font-semibold">Browse themes</h3>
+            <span>Browse themes</span>
           </div>
           <nav aria-label="Theme status">
-            <div className="flex gap-1.5 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
+            <div className="flex gap-1.5 overflow-x-auto pb-1">
               {filters.map((item) => (
                 <button
                   aria-pressed={filter === item.value}
                   className={
-                    "shrink-0 rounded-md px-3 py-2.5 text-left text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 " +
+                    "shrink-0 rounded-full border px-3.5 py-2 text-left text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 " +
                     (filter === item.value
-                      ? "bg-primary text-primary-foreground shadow-sm"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground")
+                      ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                      : "border-transparent text-muted-foreground hover:border-border hover:bg-muted hover:text-foreground")
                   }
                   key={item.value}
                   onClick={() => setFilter(item.value)}
@@ -209,7 +209,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
           aria-label={
             hasAvailableThemes ? "Choose a random available theme" : "No themes are currently available for Surprise Me"
           }
-          className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-3 py-2.5 text-xs font-semibold tracking-wide text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-2.5 text-xs font-semibold tracking-wide text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={!hasAvailableThemes}
           onClick={handleSurpriseMe}
           title={hasAvailableThemes ? "Open a random available theme" : "No available themes"}
@@ -218,10 +218,11 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
           <ShuffleIcon size={15} />
           Surprise Me
         </button>
-      </aside>
+        </div>
+      </div>
 
       <div className="min-w-0 space-y-6">
-        <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-3 shadow-sm sm:flex-row">
+        <div className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm sm:flex-row">
           <label className="relative min-w-0 flex-1">
             <span className="sr-only">Search themes</span>
             <MagnifyingGlassIcon
@@ -230,7 +231,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
               size={17}
             />
             <input
-              className="h-10 w-full rounded-md border border-border bg-background pl-10 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-2 focus:ring-ring/20"
+              className="h-11 w-full rounded-full border border-border bg-background pl-10 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-2 focus:ring-ring/20"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search themes..."
               type="search"
@@ -241,7 +242,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
           <label className="relative sm:w-48">
             <span className="sr-only">Sort themes</span>
             <select
-              className="h-10 w-full min-h-10 appearance-none rounded-md border border-border bg-background px-3 pr-9 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+              className="h-11 w-full min-h-10 appearance-none rounded-full border border-border bg-background px-4 pr-9 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
               onChange={(event) => setSort(event.target.value as ThemeSort)}
               value={sort}
             >
@@ -260,7 +261,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
         </div>
 
         {visibleThemes.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-border bg-card/60 p-8 text-center">
+          <div className="rounded-2xl border border-dashed border-border bg-card/60 p-10 text-center">
             <h2 className="font-heading text-lg font-semibold">
               {query.trim() ? "No themes match your search" : "No themes in this view"}
             </h2>
@@ -269,7 +270,7 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
             </p>
           </div>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {visibleThemes.map((theme) => (
               <ThemeCard catalogueId={catalogueId} key={theme.id} theme={theme} />
             ))}
