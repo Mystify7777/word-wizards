@@ -75,14 +75,18 @@ function ProgressBar({ progress }: { progress: number }) {
   );
 }
 
-export function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: Theme }) {
+export type ThemeCardData = Theme & {
+  lessonCount: number;
+};
+
+export function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: ThemeCardData }) {
   const isLocked = theme.availability === "locked";
   const artwork = themeArtwork[theme.id];
 
   const card = (
     <Card
       className={
-        "h-full overflow-hidden rounded-xl py-0 transition-[transform,box-shadow] duration-200 ease-out " +
+        "h-full overflow-hidden rounded-2xl py-0 transition-[transform,box-shadow] duration-200 ease-out " +
         (isLocked
           ? "bg-muted/30 ring-1 ring-border/70"
           : "group-hover:-translate-y-1 group-hover:shadow-lg group-hover:ring-1 group-hover:ring-primary/15")
@@ -123,6 +127,12 @@ export function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: 
       </CardHeader>
 
       <CardContent className="space-y-4 pb-6">
+        <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
+          <span>
+            {theme.lessonCount} {theme.lessonCount === 1 ? "lesson" : "lessons"}
+          </span>
+          <span>{theme.progress === 100 ? "Completed" : theme.progress > 0 ? "In progress" : "Not started"}</span>
+        </div>
         <ProgressBar progress={theme.progress} />
         {isLocked ? (
           <p className="text-xs leading-5 text-muted-foreground">This theme is not available yet.</p>
@@ -154,7 +164,7 @@ export function ThemeCard({ catalogueId, theme }: { catalogueId: string; theme: 
   );
 }
 
-export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes: Theme[] }) {
+export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes: ThemeCardData[] }) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<ThemeFilter>("all");
@@ -218,7 +228,6 @@ export function ThemeList({ catalogueId, themes }: { catalogueId: string; themes
           <ShuffleIcon size={15} />
           Surprise Me
         </button>
-        </div>
       </div>
 
       <div className="min-w-0 space-y-6">
