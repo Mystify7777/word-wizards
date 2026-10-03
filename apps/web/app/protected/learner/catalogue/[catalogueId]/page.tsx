@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ThemeList } from "@/components/learner/theme-list";
-import { getCatalogueById, getCatalogues, getThemesByCatalogueId } from "@/lib/catalogue/service";
+import { getCatalogueById, getCatalogues, getLessonsByThemeId, getThemesByCatalogueId } from "@/lib/catalogue/service";
 
 export default async function CatalogueDetailPage({ params }: PageProps<"/protected/learner/catalogue/[catalogueId]">) {
   const { catalogueId } = await params;
@@ -14,6 +14,12 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
   }
 
   const themes = await getThemesByCatalogueId(catalogue.id);
+  const themesWithLessonCounts = await Promise.all(
+    themes.map(async (theme) => ({
+      ...theme,
+      lessonCount: (await getLessonsByThemeId(theme.id)).length,
+    })),
+  );
   const otherCatalogues = catalogues.filter((item) => item.id !== catalogue.id);
 
   return (
@@ -42,13 +48,16 @@ export default async function CatalogueDetailPage({ params }: PageProps<"/protec
       </section>
 
       <section aria-labelledby="themes-heading" className="space-y-5">
-        <div className="space-y-1">
+        <div className="space-y-2">
           <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">Choose a theme</p>
           <h2 className="font-heading text-2xl font-semibold" id="themes-heading">
-            Themes
+            Explore themes
           </h2>
+          <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
+            Browse the themes in this catalogue, then choose a lesson path that fits where you are.
+          </p>
         </div>
-        <ThemeList catalogueId={catalogue.id} themes={themes} />
+        <ThemeList catalogueId={catalogue.id} themes={themesWithLessonCounts} />
       </section>
 
       {otherCatalogues.length > 0 && (
