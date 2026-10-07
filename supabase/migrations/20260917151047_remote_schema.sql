@@ -559,6 +559,26 @@ GRANT SELECT ON TABLE
     "public"."user_roles"
     TO "authenticated";
 
+GRANT ALL ON TABLE
+    "public"."catalogues",
+    "public"."themes",
+    "public"."lessons",
+    "public"."exercises",
+    "public"."user_profiles",
+    "public"."user_roles"
+    TO "service_role";
+
+GRANT ALL ON SEQUENCE
+    "public"."catalogue_id_seq",
+    "public"."catalogue_display_order_seq",
+    "public"."themes_id_seq",
+    "public"."themes_display_order_seq",
+    "public"."lessons_id_seq",
+    "public"."lessons_display_order_seq",
+    "public"."exercises_id_seq",
+    "public"."exercises_display_order_seq"
+    TO "service_role";
+
 
 
 
