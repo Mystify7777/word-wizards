@@ -532,6 +532,24 @@ GRANT USAGE ON SCHEMA "public" TO "postgres";
 GRANT USAGE ON SCHEMA "public" TO "authenticated";
 GRANT USAGE ON SCHEMA "public" TO "service_role";
 
+REVOKE ALL ON TABLE
+    "public"."catalogues",
+    "public"."themes",
+    "public"."lessons",
+    "public"."exercises",
+    "public"."user_profiles",
+    "public"."user_roles"
+    FROM "anon";
+
+REVOKE ALL ON TABLE
+    "public"."catalogues",
+    "public"."themes",
+    "public"."lessons",
+    "public"."exercises",
+    "public"."user_profiles",
+    "public"."user_roles"
+    FROM "authenticated";
+
 GRANT SELECT ON TABLE
     "public"."catalogues",
     "public"."themes",
@@ -719,7 +737,8 @@ GRANT SELECT ON TABLE
 
 
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON SEQUENCES TO "postgres";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" REVOKE ALL ON SEQUENCES FROM "anon", "authenticated", "service_role";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" REVOKE ALL ON SEQUENCES FROM "anon", "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON SEQUENCES TO "service_role";
 
 
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON FUNCTIONS TO "postgres";
