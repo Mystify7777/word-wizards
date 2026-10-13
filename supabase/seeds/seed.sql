@@ -71,3 +71,9 @@ VALUES                        (
                               8, '2026-09-20 21:04:18.680941+00', '2026-09-20 21:04:18.680941+00', 'Shopping',          'shopping',          'Use practical conversation patterns for prices, choices, and simple questions.', 2, NULL, FALSE, 3, 'published', '🛍️'     ),
                               (
                               9, '2026-09-20 21:05:00.72136+00',  '2026-09-20 21:05:00.72136+00',  'Travel',            'travel',            'Build conversation confidence for common travel situations.',                    3, NULL, FALSE, 3, 'draft',     '🧳'      );
+
+-- Keep identity sequences ahead of the explicit development fixtures.
+SELECT pg_catalog.setval('"public"."catalogue_id_seq"', 3, true);
+SELECT pg_catalog.setval('"public"."catalogue_display_order_seq"', 3, true);
+SELECT pg_catalog.setval('"public"."themes_id_seq"', 9, true);
+SELECT pg_catalog.setval('"public"."themes_display_order_seq"', 3, true);

@@ -462,27 +462,46 @@ ALTER TABLE ONLY "public"."user_roles"
 
 
 
-CREATE POLICY "Enable read access for all users" ON "public"."catalogues" FOR SELECT TO "authenticated" USING (true);
+CREATE POLICY "Authenticated users can read published catalogues"
+    ON "public"."catalogues"
+    FOR SELECT
+    TO "authenticated"
+    USING ("status" = 'published' AND NOT "is_deleted");
 
 
-
-CREATE POLICY "Enable read access for all users" ON "public"."exercises" FOR SELECT TO "authenticated" USING (true);
-
-
-
-CREATE POLICY "Enable read access for all users" ON "public"."lessons" FOR SELECT TO "authenticated" USING (true);
-
+CREATE POLICY "Authenticated users can read published themes"
+    ON "public"."themes"
+    FOR SELECT
+    TO "authenticated"
+    USING ("status" = 'published' AND NOT "is_deleted");
 
 
-CREATE POLICY "Enable read access for all users" ON "public"."themes" FOR SELECT TO "authenticated" USING (true);
+CREATE POLICY "Authenticated users can read published lessons"
+    ON "public"."lessons"
+    FOR SELECT
+    TO "authenticated"
+    USING ("status" = 'published' AND NOT "is_deleted");
 
 
+CREATE POLICY "Authenticated users can read published exercises"
+    ON "public"."exercises"
+    FOR SELECT
+    TO "authenticated"
+    USING ("status" = 'published' AND NOT "is_deleted");
 
-CREATE POLICY "Enable read access for all users" ON "public"."user_profiles" FOR SELECT TO "authenticated" USING (true);
+
+CREATE POLICY "Users can read their own profile"
+    ON "public"."user_profiles"
+    FOR SELECT
+    TO "authenticated"
+    USING ("id" = (SELECT "auth"."uid"()));
 
 
-
-CREATE POLICY "Enable read access for all users" ON "public"."user_roles" FOR SELECT TO "authenticated" USING (true);
+CREATE POLICY "Users can read their own roles"
+    ON "public"."user_roles"
+    FOR SELECT
+    TO "authenticated"
+    USING ("id" = (SELECT "auth"."uid"()));
 
 
 
@@ -512,6 +531,53 @@ ALTER PUBLICATION "supabase_realtime" OWNER TO "postgres";
 GRANT USAGE ON SCHEMA "public" TO "postgres";
 GRANT USAGE ON SCHEMA "public" TO "authenticated";
 GRANT USAGE ON SCHEMA "public" TO "service_role";
+
+REVOKE ALL ON TABLE
+    "public"."catalogues",
+    "public"."themes",
+    "public"."lessons",
+    "public"."exercises",
+    "public"."user_profiles",
+    "public"."user_roles"
+    FROM "anon";
+
+REVOKE ALL ON TABLE
+    "public"."catalogues",
+    "public"."themes",
+    "public"."lessons",
+    "public"."exercises",
+    "public"."user_profiles",
+    "public"."user_roles"
+    FROM "authenticated";
+
+GRANT SELECT ON TABLE
+    "public"."catalogues",
+    "public"."themes",
+    "public"."lessons",
+    "public"."exercises",
+    "public"."user_profiles",
+    "public"."user_roles"
+    TO "authenticated";
+
+GRANT ALL ON TABLE
+    "public"."catalogues",
+    "public"."themes",
+    "public"."lessons",
+    "public"."exercises",
+    "public"."user_profiles",
+    "public"."user_roles"
+    TO "service_role";
+
+GRANT ALL ON SEQUENCE
+    "public"."catalogue_id_seq",
+    "public"."catalogue_display_order_seq",
+    "public"."themes_id_seq",
+    "public"."themes_display_order_seq",
+    "public"."lessons_id_seq",
+    "public"."lessons_display_order_seq",
+    "public"."exercises_id_seq",
+    "public"."exercises_display_order_seq"
+    TO "service_role";
 
 
 
@@ -691,25 +757,16 @@ GRANT USAGE ON SCHEMA "public" TO "service_role";
 
 
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON SEQUENCES TO "postgres";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT UPDATE ON SEQUENCES TO "authenticated";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT UPDATE ON SEQUENCES TO "service_role";
-
-
-
-
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" REVOKE ALL ON SEQUENCES FROM "anon", "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON SEQUENCES TO "service_role";
 
 
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON FUNCTIONS TO "postgres";
 
 
-
-
-
-
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "postgres";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT REFERENCES,TRIGGER,TRUNCATE,MAINTAIN ON TABLES TO "anon";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT REFERENCES,TRIGGER,TRUNCATE,MAINTAIN ON TABLES TO "authenticated";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT REFERENCES,TRIGGER,TRUNCATE,MAINTAIN ON TABLES TO "service_role";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" REVOKE ALL ON TABLES FROM "anon", "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "service_role";
 
 
 
